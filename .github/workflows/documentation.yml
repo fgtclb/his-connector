@@ -1,0 +1,40 @@
+name: "Documentation & composer"
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+
+  documentation:
+    name: "render documentation"
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: "Checkout"
+        uses: actions/checkout@v6
+
+      - name: "Render documentation"
+        run: "Build/Scripts/runTests.sh -s renderDocumentation"
+
+      - name: "Upload rendered documentation"
+        uses: actions/upload-artifact@v6
+        with:
+          name: documentation-${{ github.event.pull_request.number }}-${{ github.run_id }}
+          path: Documentation-GENERATED-temp/
+          compression-level: 9
+          if-no-files-found: error
+          retention-days: 5
+          include-hidden-files: true
+          overwrite: true
+
+  composer-validate:
+    name: "composer validate"
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: "Checkout"
+        uses: actions/checkout@v6
+
+      - name: "Validate composer.json"
+        run: "Build/Scripts/runTests.sh -s composerValidate"
