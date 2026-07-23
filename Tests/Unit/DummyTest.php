@@ -15,4 +15,10 @@ final class DummyTest extends UnitTestCase
     {
         $this->assertSame('his_connector', (new Dummy())->getExtensionKey());
     }
+
+    #[Test]
+    public function getPackageNameReturnsComposerPackageName(): void
+    {
+        $this->assertSame('fgtclb/his-connector', (new Dummy())->getPackageName());
+    }
 }
