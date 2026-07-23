@@ -28,4 +28,9 @@ final class Dummy
     {
         return 'his_connector';
     }
+
+    public function getPackageName(): string
+    {
+        return 'fgtclb/his-connector';
+    }
 }
