@@ -199,6 +199,7 @@ Options:
             - phpstan: phpstan analyze
             - phpstanGenerateBaseline: regenerate phpstan baseline, handy after phpstan updates
             - renderDocumentation: render the extension documentation into Documentation-GENERATED-temp
+            - generateClientFromWsdl: (re-)generate PHP client based on WSDL
             - unit (default): PHP unit tests
             - unitRandom: PHP unit tests in random order, "-o <number>" to use a specific seed
 
@@ -632,6 +633,11 @@ case ${TEST_SUITE} in
     renderDocumentation)
         cleanRenderedDocumentationFiles
         ${CONTAINER_BIN} run ${DOCUMENTATION_COMMON_PARAMS} --name render-documentation-${SUFFIX} ${IMAGE_DOCS} --no-progress --fail-on-error --config=Documentation Documentation
+        SUITE_EXIT_CODE=$?
+        ;;
+    generateClientFromWsdl)
+        COMMAND=(Build/Scripts/generateClientFromWsdl.php "$@")
+        ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name generate-client-from-wsdl-${SUFFIX} ${XDEBUG_MODE} -e XDEBUG_CONFIG="${XDEBUG_CONFIG}" ${IMAGE_PHP} "${COMMAND[@]}"
         SUITE_EXIT_CODE=$?
         ;;
     unit)
