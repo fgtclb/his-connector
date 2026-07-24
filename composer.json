@@ -48,7 +48,7 @@
     "autoload": {
         "psr-4": {
             "FGTCLB\\HisConnector\\": "Classes/",
-            "FGTCLB\\HisClient\\": "Library/PHP/HisClient"
+            "FGTCLB\\HisClient\\": "Library/PHP/HisClient/"
         }
     },
     "autoload-dev": {
