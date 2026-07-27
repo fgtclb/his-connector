@@ -53,6 +53,7 @@ return (new Config())
                 __DIR__ . '/../../Classes',
                 __DIR__ . '/../../Configuration',
                 __DIR__ . '/../../Tests',
+                __DIR__ . '/../../Library/PHP/HisClientFacade',
                 __DIR__ . '/../../Build',
             ])
             ->exclude([

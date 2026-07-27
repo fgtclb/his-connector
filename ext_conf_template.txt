@@ -1,0 +1,21 @@
+soap {
+    # cat=SOAP; type=string; label=Password to access SOAP services
+    urlPrefix = https://example.com/qisserver/services2/
+
+    # cat=SOAP; type=string; label=Username to access SOAP services
+    username = admin
+
+    # cat=SOAP; type=string; label=Password to access SOAP services
+    password = admin!
+}
+
+his {
+    # cat=HIS; type=string; label=HIS language key to fetch data in
+    language = de
+
+    # cat=HIS; type=string; label=Fetch persons with one of these roles
+    relevantRoles = 3, 69
+
+    # cat=HIS; type=string; label=HIS key for person picture document
+    pictureKey = 4
+}
