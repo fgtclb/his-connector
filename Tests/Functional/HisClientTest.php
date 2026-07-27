@@ -19,5 +19,7 @@ final class HisClientTest extends AbstractHisConnectorTestCase
     public function verifyHisClientCanBeUsed(string $className): void
     {
         $this->assertTrue(class_exists($className));
+        $this->assertTrue($this->has($className));
+        $this->assertInstanceOf($className, $this->get($className));
     }
 }
