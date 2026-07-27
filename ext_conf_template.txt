@@ -1,0 +1,10 @@
+soap {
+    # cat=SOAP; type=string; label=Password to access SOAP services
+    urlPrefix = https://example.com/qisserver/services2/
+
+    # cat=SOAP; type=string; label=Username to access SOAP services
+    username = admin
+
+    # cat=SOAP; type=string; label=Password to access SOAP services
+    password = admin!
+}
