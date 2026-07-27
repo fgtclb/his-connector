@@ -24,4 +24,14 @@ return static function (
         'FGTCLB\\HisConnector\\',
         __DIR__ . '/../Classes/*',
     );
+
+    $services->load(
+        'FGTCLB\\HisClient\\',
+        __DIR__ . '/../Library/PHP/HisClient/*',
+    )
+        ->exclude([
+            __DIR__ . '/../Library/PHP/HisClient/*/ClassMap.php',
+            __DIR__ . '/../Library/PHP/HisClient/*/Struct/*',
+        ])
+        ->public();
 };
