@@ -12,6 +12,8 @@ use FGTCLB\HisClient\PersonService\Struct\Gender;
 use FGTCLB\HisClient\PersonService\Struct\PersonAttributeDto;
 use FGTCLB\HisClient\PersonService\Struct\PersoninfoDto;
 use FGTCLB\HisClient\PersonService\Struct\Title;
+use FGTCLB\HisClientFacade\Collection\ContactDetailsCollection;
+use FGTCLB\HisClientFacade\Collection\PersonFunctionCollection;
 
 final readonly class Person
 {
@@ -34,11 +36,11 @@ final readonly class Person
         public ?PersoninfoDto $personInfo,
         public ?string $createdAt,
         public ?string $updatedAt,
-        /** @var \Closure(): ContactDetails[] */
+        /** @var \Closure(): ContactDetailsCollection */
         private \Closure $fetchContactDetailsClosure,
         /** @var \Closure(int): Mimedata[] */
         private \Closure $fetchPicturesClosure,
-        /** @var \Closure(): PersonFunction[] */
+        /** @var \Closure(): PersonFunctionCollection */
         private \Closure $fetchFunctionsClosure,
         /** @var \Closure(): CompleteAccount[] */
         private \Closure $fetchAccountsClosure,
@@ -46,10 +48,7 @@ final readonly class Person
         private \Closure $fetchAttributesClosure,
     ) {}
 
-    /**
-     * @return ContactDetails[]
-     */
-    public function getContactDetails(): array
+    public function getContactDetails(): ContactDetailsCollection
     {
         // TODO cache result? Use proper lazy object?
         return ($this->fetchContactDetailsClosure)();
@@ -64,10 +63,7 @@ final readonly class Person
         return ($this->fetchPicturesClosure)($hisKey);
     }
 
-    /**
-     * @return PersonFunction[]
-     */
-    public function getFunctions(): array
+    public function getFunctions(): PersonFunctionCollection
     {
         // TODO cache result? Use proper lazy object?
         return ($this->fetchFunctionsClosure)();
