@@ -3,7 +3,7 @@
 
 declare(strict_types=1);
 
-use FGTCLB\HisClientFacade\Soap\AbstractSoapClient;
+use FGTCLB\HisClientFacade\Soap\AbstractSoapService;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -59,7 +59,7 @@ $application
                 ->setArraysFolder('Array')
                 ->setGenerateTutorialFile(false)
                 ->setSrcDirname('')
-                ->setSoapClientClass(AbstractSoapClient::class);
+                ->setSoapClientClass(AbstractSoapService::class);
             $generator = new Generator($options);
             $output->writeln(sprintf(
                 'Generating PHP code for endpoint "%s" in "%s" ...',
