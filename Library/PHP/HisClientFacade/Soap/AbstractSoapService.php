@@ -7,7 +7,7 @@ namespace FGTCLB\HisClientFacade\Soap;
 use WsdlToPhp\PackageBase\AbstractSoapClientBase;
 use WsdlToPhp\PackageBase\SoapClientInterface;
 
-abstract class AbstractSoapClient extends AbstractSoapClientBase
+abstract class AbstractSoapService extends AbstractSoapClientBase
 {
     /**
      * By default, the used SOAP library catches all SOAP exceptions and collects them

@@ -5,22 +5,22 @@ declare(strict_types=1);
 namespace FGTCLB\HisClient\PersonAddressService\Service;
 
 use SoapFault;
-use FGTCLB\HisClientFacade\Soap\AbstractSoapClient;
+use FGTCLB\HisClientFacade\Soap\AbstractSoapService;
 
 /**
  * This class stands for all operations
  * @subpackage Services
  */
-class Service extends AbstractSoapClient
+class Service extends AbstractSoapService
 {
     /**
      * Method to call the operation originally named assignAddressToNotification
      * Meta information extracted from the WSDL
      * - documentation: Assign an address to given notification category. This will consider both your rightsparameters and current address configurations and may fail accordingly. SECURED BY [(cs.psv.person.ASSIGN_PURPOSE_TO_ADDRESS or
      * cs.psv.self.CHANGE_ADDRESS_OF_PURPOSE) and (cs.psv.person.ASSIGN_PURPOSE_TO_ADDRESS or cs.psv.self.CHANGE_ADDRESS_OF_PURPOSE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\AssignAddressToNotification $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\AssignAddressToNotificationResponse|bool
      */
@@ -43,9 +43,9 @@ class Service extends AbstractSoapClient
      * Meta information extracted from the WSDL
      * - documentation: Assign an address to given notification category. An email address can only be assigned if the address is verified - An unverified email address will cause an exception. This will consider both your rightsparameters and current
      * address configurations and may fail accordingly. SECURED BY [(cs.psv.person.ASSIGN_PURPOSE_TO_ADDRESS or cs.psv.self.CHANGE_ADDRESS_OF_PURPOSE) and (cs.psv.person.ASSIGN_PURPOSE_TO_ADDRESS or cs.psv.self.CHANGE_ADDRESS_OF_PURPOSE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\AssignAddressToNotification202506 $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\AssignAddressToNotification202506Response|bool
      */
@@ -67,9 +67,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named createEmail
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.CREATE_EADDRESS_EMAIL or cs.psv.self.CREATE_EADDRESS_EMAIL) and (cs.psv.person.ASSIGN_PURPOSE_TO_ADDRESS or cs.psv.self.CHANGE_ADDRESS_OF_PURPOSE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\CreateEmail $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\CreateEmailResponse|bool
      */
@@ -92,9 +92,9 @@ class Service extends AbstractSoapClient
      * Meta information extracted from the WSDL
      * - documentation: Creates a new email address. Allows to mark the new email address as verified if the webservice user role has the right 'cs.psv.person.MARK_EADDRESS_EMAIL_VERIFIED'. SECURED BY [(cs.psv.person.CREATE_EADDRESS_EMAIL or
      * cs.psv.self.CREATE_EADDRESS_EMAIL) and (cs.psv.person.ASSIGN_PURPOSE_TO_ADDRESS or cs.psv.self.CHANGE_ADDRESS_OF_PURPOSE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\CreateEmail202506 $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\CreateEmail202506Response|bool
      */
@@ -116,9 +116,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named createHyperlink
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.CREATE_EADDRESS_HYPERLINK or cs.psv.self.CREATE_EADDRESS_HYPERLINK) and (cs.psv.person.ASSIGN_PURPOSE_TO_ADDRESS or cs.psv.self.CHANGE_ADDRESS_OF_PURPOSE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\CreateHyperlink $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\CreateHyperlinkResponse|bool
      */
@@ -140,9 +140,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named createMessenger
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.CREATE_EADDRESS_MESSENGER or cs.psv.self.CREATE_EADDRESS_MESSENGER) and (cs.psv.person.ASSIGN_PURPOSE_TO_ADDRESS or cs.psv.self.CHANGE_ADDRESS_OF_PURPOSE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\CreateMessenger $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\CreateMessengerResponse|bool
      */
@@ -164,9 +164,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named createPhone
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.CREATE_EADDRESS_PHONE or cs.psv.self.CREATE_EADDRESS_PHONE) and (cs.psv.person.ASSIGN_PURPOSE_TO_ADDRESS or cs.psv.self.CHANGE_ADDRESS_OF_PURPOSE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\CreatePhone $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\CreatePhoneResponse|bool
      */
@@ -188,9 +188,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named createPostaddress
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.CREATE_PERSON_POSTADDRESS or cs.psv.self.CREATE_POSTADDRESS) and (cs.psv.person.ASSIGN_PURPOSE_TO_ADDRESS or cs.psv.self.CHANGE_ADDRESS_OF_PURPOSE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\CreatePostaddress $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\CreatePostaddressResponse|bool
      */
@@ -213,9 +213,9 @@ class Service extends AbstractSoapClient
      * Meta information extracted from the WSDL
      * - documentation: Delete given address. The operation will fail if the address is assigned to any mandatory notification categories or if you are not authorized to remove one of the assigned notification categories. SECURED BY
      * [(cs.psv.person.DELETE_ADDRESS or cs.psv.self.DELETE_ADDRESS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\DeleteAddress $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\DeleteAddressResponse|bool
      */
@@ -238,9 +238,9 @@ class Service extends AbstractSoapClient
      * Meta information extracted from the WSDL
      * - documentation: Look-up for an EAddress. Will return ID of Address, ID of Person and the value of EAddress for each EAddress that match all given criteria.Yields both verified and unverified e-mail addresses. SECURED BY
      * [(cs.psv.person.VIEW_ADDRESSES)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\FindEaddress $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\FindEaddressResponse|bool
      */
@@ -262,9 +262,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named findPostaddress
      * Meta information extracted from the WSDL
      * - documentation: Look-up for an Postaddress. Will return ID of Address, ID of Person and the values of Postaddress for each Postaddress that match all given criteria. SECURED BY [(cs.psv.person.VIEW_ADDRESSES)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\FindPostaddress $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\FindPostaddressResponse|bool
      */
@@ -286,9 +286,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named findUnverifiedEMails
      * Meta information extracted from the WSDL
      * - documentation: Look-up for an unverified email Address. Will return ID of Address, ID of Person and the value of EAddress for each EAddress that match all given criteria. SECURED BY [(cs.psv.person.VIEW_ADDRESSES)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\FindUnverifiedEMails $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\FindUnverifiedEMailsResponse|bool
      */
@@ -311,9 +311,9 @@ class Service extends AbstractSoapClient
      * Meta information extracted from the WSDL
      * - documentation: Look-up for verified e-mail addresses. Will return ID of Address, ID of Person and the value of EAddress for each EAddress that match all given criteria.In case of an email, this operation returns only verified emails. SECURED BY
      * [(cs.psv.person.VIEW_ADDRESSES)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\FindVerifiedEmails $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\FindVerifiedEmailsResponse|bool
      */
@@ -335,9 +335,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named getAddressConfigurationForPerson
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.VIEW_ADDRESSES)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\GetAddressConfigurationForPerson $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\GetAddressConfigurationForPersonResponse|bool
      */
@@ -359,9 +359,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named reSendVerificationMail
      * Meta information extracted from the WSDL
      * - documentation: Verifikationsmail an die angegebene Email-Adresse versenden SECURED BY [(cs.psv.person.VERIFY_EADDRESS_EMAIL) and (cs.psv.person.VERIFY_EADDRESS_EMAIL)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\ReSendVerificationMail $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\ReSendVerificationMailResponse|bool
      */
@@ -383,9 +383,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readAddresses
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.VIEW_ADDRESSES or cs.psv.self.VIEW_ADDRESSES)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\ReadAddresses $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\ReadAddressesResponse|bool
      */
@@ -408,9 +408,9 @@ class Service extends AbstractSoapClient
      * Meta information extracted from the WSDL
      * - documentation: Reads all addresses for the given personId. For emails this method returns the new parameter isVerified for the indication of the verification state of the email. SECURED BY [(cs.psv.person.VIEW_ADDRESSES or
      * cs.psv.self.VIEW_ADDRESSES)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\ReadAddresses202506 $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\ReadAddresses202506Response|bool
      */
@@ -432,9 +432,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readAddressesByNotification
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.VIEW_ADDRESSES or cs.psv.self.VIEW_ADDRESSES)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\ReadAddressesByNotification $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\ReadAddressesByNotificationResponse|bool
      */
@@ -456,9 +456,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readAddressesByNotification202506
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.VIEW_ADDRESSES or cs.psv.self.VIEW_ADDRESSES)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\ReadAddressesByNotification202506 $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\ReadAddressesByNotification202506Response|bool
      */
@@ -480,9 +480,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readEaddresses
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.VIEW_ADDRESSES or cs.psv.self.VIEW_ADDRESSES)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\ReadEaddresses_1 $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\ReadEaddressesResponse_1|bool
      */
@@ -504,9 +504,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readPostaddressById
      * Meta information extracted from the WSDL
      * - documentation: For a given AddressID, get the corresponding Postaddress. Will return nil if no Postaddress exists with given ID. SECURED BY [(cs.psv.person.VIEW_ADDRESSES)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\ReadPostaddressById $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\ReadPostaddressByIdResponse|bool
      */
@@ -528,9 +528,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readPostaddresses
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.VIEW_ADDRESSES or cs.psv.self.VIEW_ADDRESSES)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\ReadPostaddresses_1 $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\ReadPostaddressesResponse_1|bool
      */
@@ -553,9 +553,9 @@ class Service extends AbstractSoapClient
      * Meta information extracted from the WSDL
      * - documentation: Removes an address from given notification category. This will consider both your rightsparameters and current address configurations and may fail accordingly. SECURED BY [(cs.psv.person.ASSIGN_PURPOSE_TO_ADDRESS or
      * cs.psv.self.CHANGE_ADDRESS_OF_PURPOSE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\RemoveAddressFromNotification $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\RemoveAddressFromNotificationResponse|bool
      */
@@ -577,9 +577,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named updateEmail
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.EDIT_EADDRESS_EMAIL or cs.psv.self.EDIT_EADDRESS_EMAIL) and (cs.psv.person.EDIT_EADDRESS_EMAIL or cs.psv.self.EDIT_EADDRESS_EMAIL)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\UpdateEmail $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\UpdateEmailResponse|bool
      */
@@ -602,9 +602,9 @@ class Service extends AbstractSoapClient
      * Meta information extracted from the WSDL
      * - documentation: Updates an existing email address. Allows to mark the email as verified if the webservice user role has the right ''cs.psv.person.MARK_EADDRESS_EMAIL_VERIFIED SECURED BY [(cs.psv.person.EDIT_EADDRESS_EMAIL or
      * cs.psv.self.EDIT_EADDRESS_EMAIL) and (cs.psv.person.EDIT_EADDRESS_EMAIL or cs.psv.self.EDIT_EADDRESS_EMAIL)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\UpdateEmail202506 $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\UpdateEmail202506Response|bool
      */
@@ -626,9 +626,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named updateHyperlink
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.EDIT_EADDRESS_HYPERLINK or cs.psv.self.EDIT_EADDRESS_HYPERLINK)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\UpdateHyperlink $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\UpdateHyperlinkResponse|bool
      */
@@ -650,9 +650,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named updateMessenger
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.EDIT_EADDRESS_MESSENGER or cs.psv.self.EDIT_EADDRESS_MESSENGER)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\UpdateMessenger $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\UpdateMessengerResponse|bool
      */
@@ -674,9 +674,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named updatePhone
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.EDIT_EADDRESS_PHONE or cs.psv.self.EDIT_EADDRESS_PHONE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\UpdatePhone $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\UpdatePhoneResponse|bool
      */
@@ -698,9 +698,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named updatePostaddress
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.EDIT_PERSON_POSTADDRESS or cs.psv.self.EDIT_POSTADDRESS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonAddressService\Struct\UpdatePostaddress $parameters
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\UpdatePostaddressResponse|bool
      */
@@ -720,7 +720,7 @@ class Service extends AbstractSoapClient
     }
     /**
      * Returns the result
-     * @see AbstractSoapClient::getResult()
+     * @see AbstractSoapService::getResult()
      * @return \FGTCLB\HisClient\PersonAddressService\Struct\AssignAddressToNotification202506Response|\FGTCLB\HisClient\PersonAddressService\Struct\AssignAddressToNotificationResponse|\FGTCLB\HisClient\PersonAddressService\Struct\CreateEmail202506Response|\FGTCLB\HisClient\PersonAddressService\Struct\CreateEmailResponse|\FGTCLB\HisClient\PersonAddressService\Struct\CreateHyperlinkResponse|\FGTCLB\HisClient\PersonAddressService\Struct\CreateMessengerResponse|\FGTCLB\HisClient\PersonAddressService\Struct\CreatePhoneResponse|\FGTCLB\HisClient\PersonAddressService\Struct\CreatePostaddressResponse|\FGTCLB\HisClient\PersonAddressService\Struct\DeleteAddressResponse|\FGTCLB\HisClient\PersonAddressService\Struct\FindEaddressResponse|\FGTCLB\HisClient\PersonAddressService\Struct\FindPostaddressResponse|\FGTCLB\HisClient\PersonAddressService\Struct\FindUnverifiedEMailsResponse|\FGTCLB\HisClient\PersonAddressService\Struct\FindVerifiedEmailsResponse|\FGTCLB\HisClient\PersonAddressService\Struct\GetAddressConfigurationForPersonResponse|\FGTCLB\HisClient\PersonAddressService\Struct\ReadAddresses202506Response|\FGTCLB\HisClient\PersonAddressService\Struct\ReadAddressesByNotification202506Response|\FGTCLB\HisClient\PersonAddressService\Struct\ReadAddressesByNotificationResponse|\FGTCLB\HisClient\PersonAddressService\Struct\ReadAddressesResponse|\FGTCLB\HisClient\PersonAddressService\Struct\ReadEaddressesResponse_1|\FGTCLB\HisClient\PersonAddressService\Struct\ReadPostaddressByIdResponse|\FGTCLB\HisClient\PersonAddressService\Struct\ReadPostaddressesResponse_1|\FGTCLB\HisClient\PersonAddressService\Struct\RemoveAddressFromNotificationResponse|\FGTCLB\HisClient\PersonAddressService\Struct\ReSendVerificationMailResponse|\FGTCLB\HisClient\PersonAddressService\Struct\UpdateEmail202506Response|\FGTCLB\HisClient\PersonAddressService\Struct\UpdateEmailResponse|\FGTCLB\HisClient\PersonAddressService\Struct\UpdateHyperlinkResponse|\FGTCLB\HisClient\PersonAddressService\Struct\UpdateMessengerResponse|\FGTCLB\HisClient\PersonAddressService\Struct\UpdatePhoneResponse|\FGTCLB\HisClient\PersonAddressService\Struct\UpdatePostaddressResponse
      */
     public function getResult()

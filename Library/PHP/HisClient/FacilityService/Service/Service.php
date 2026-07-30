@@ -5,21 +5,21 @@ declare(strict_types=1);
 namespace FGTCLB\HisClient\FacilityService\Service;
 
 use SoapFault;
-use FGTCLB\HisClientFacade\Soap\AbstractSoapClient;
+use FGTCLB\HisClientFacade\Soap\AbstractSoapService;
 
 /**
  * This class stands for all operations
  * @subpackage Services
  */
-class Service extends AbstractSoapClient
+class Service extends AbstractSoapService
 {
     /**
      * Method to call the operation originally named addSecondaryOrgunitToRoom
      * Meta information extracted from the WSDL
      * - documentation: Set/Add a secondary assignment from a room to a orgunit. A primary orgunit must be assigned first. SECURED BY [(cs.psv.orgunit.ASSIGN_ORGUNIT_ROOMS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\AddSecondaryOrgunitToRoom $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\AddSecondaryOrgunitToRoomResponse|bool
      */
@@ -41,9 +41,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named createBuildingOpeninghoursEntry
      * Meta information extracted from the WSDL
      * - documentation: Creates the specified openinghours entry. SECURED BY [(cs.psv.facility.EDIT_BUILDING_OPENHOURS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\CreateBuildingOpeninghoursEntry $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\CreateBuildingOpeninghoursEntryResponse|bool
      */
@@ -65,9 +65,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named deleteBuilding60
      * Meta information extracted from the WSDL
      * - documentation: Delete building with given id. SECURED BY [(cs.psv.facility.REMOVE_FACILITY)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\DeleteBuilding60 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\DeleteBuilding60Response|bool
      */
@@ -89,9 +89,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named deleteBuildingOpeninghoursEntry
      * Meta information extracted from the WSDL
      * - documentation: Delete the specified openinghours entry SECURED BY [(cs.psv.facility.EDIT_BUILDING_OPENHOURS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\DeleteBuildingOpeninghoursEntry $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\DeleteBuildingOpeninghoursEntryResponse|bool
      */
@@ -113,9 +113,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named deleteCampus60
      * Meta information extracted from the WSDL
      * - documentation: Delete campus with given id. SECURED BY [(cs.psv.facility.REMOVE_FACILITY or cs.psv.facility.CREATE_CAMPUS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\DeleteCampus60 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\DeleteCampus60Response|bool
      */
@@ -137,9 +137,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named deleteFloor60
      * Meta information extracted from the WSDL
      * - documentation: Delete floor with given id. SECURED BY [(cs.psv.facility.REMOVE_FACILITY)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\DeleteFloor60 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\DeleteFloor60Response|bool
      */
@@ -161,9 +161,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named deleteRoom60
      * Meta information extracted from the WSDL
      * - documentation: Delete room with given id. SECURED BY [(cs.psv.facility.room.EDIT_ROOM) and (cs.psv.facility.REMOVE_FACILITY)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\DeleteRoom60 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\DeleteRoom60Response|bool
      */
@@ -185,9 +185,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named deleteRoomComposition60
      * Meta information extracted from the WSDL
      * - documentation: Delete room composition with given id. SECURED BY [(cs.psv.facility.room.EDIT_ROOM) and (cs.psv.facility.REMOVE_FACILITY)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\DeleteRoomComposition60 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\DeleteRoomComposition60Response|bool
      */
@@ -209,9 +209,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named deleteRoomSegment60
      * Meta information extracted from the WSDL
      * - documentation: Delete room segment with given id. SECURED BY [(cs.psv.facility.room.EDIT_ROOM) and (cs.psv.facility.REMOVE_FACILITY)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\DeleteRoomSegment60 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\DeleteRoomSegment60Response|bool
      */
@@ -233,9 +233,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readAllBuildings
      * Meta information extracted from the WSDL
      * - documentation: Retrieve all buildings. SECURED BY [(RIGHT_EVERYONE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadAllBuildings $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadAllBuildingsResponse|bool
      */
@@ -257,9 +257,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readAllBuildingsOfCampus
      * Meta information extracted from the WSDL
      * - documentation: Retrieve all buildings of campus with given id. SECURED BY [(RIGHT_EVERYONE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadAllBuildingsOfCampus $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadAllBuildingsOfCampusResponse|bool
      */
@@ -281,9 +281,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readAllCampus
      * Meta information extracted from the WSDL
      * - documentation: Retrieve all campus. SECURED BY [(RIGHT_EVERYONE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadAllCampus $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadAllCampusResponse|bool
      */
@@ -305,9 +305,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readAllFloorsOfBuilding
      * Meta information extracted from the WSDL
      * - documentation: Retrieve all floors of building with given id. SECURED BY [(cs.psv.facility.DIALOG_FACILITY_STRUCTURE or cs.psv.facility.EDIT_FACILITY)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadAllFloorsOfBuilding $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadAllFloorsOfBuildingResponse|bool
      */
@@ -329,9 +329,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readBuilding
      * Meta information extracted from the WSDL
      * - documentation: Retrieve building with given ID. Returns null if no building exists with that ID. SECURED BY [(RIGHT_EVERYONE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadBuilding $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadBuildingResponse|bool
      */
@@ -353,9 +353,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readBuilding202006
      * Meta information extracted from the WSDL
      * - documentation: Retrieve building with given ID. Returns null if no building exists with that ID. SECURED BY [(RIGHT_EVERYONE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadBuilding202006 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadBuilding202006Response|bool
      */
@@ -377,9 +377,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readBuilding202106
      * Meta information extracted from the WSDL
      * - documentation: Retrieve building with given ID. Returns null if no building exists with that ID. SECURED BY [(RIGHT_EVERYONE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadBuilding202106 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadBuilding202106Response|bool
      */
@@ -401,9 +401,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readBuilding202112
      * Meta information extracted from the WSDL
      * - documentation: Retrieve building with given ID. Returns null if no building exists with that ID. SECURED BY [(RIGHT_EVERYONE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadBuilding202112 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadBuilding202112Response|bool
      */
@@ -425,9 +425,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readBuildingOpeninghours
      * Meta information extracted from the WSDL
      * - documentation: Retrieve opening hours of the specified building SECURED BY [(RIGHT_EVERYONE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadBuildingOpeninghours $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadBuildingOpeninghoursResponse|bool
      */
@@ -449,9 +449,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readBuildingOpeninghoursForDate
      * Meta information extracted from the WSDL
      * - documentation: Retrieve the timeslots indicating when the requested building is open at the given date. SECURED BY [(RIGHT_EVERYONE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadBuildingOpeninghoursForDate $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadBuildingOpeninghoursForDateResponse|bool
      */
@@ -473,9 +473,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readCampus
      * Meta information extracted from the WSDL
      * - documentation: Retrieve campus with given id. SECURED BY [(RIGHT_EVERYONE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadCampus $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadCampusResponse|bool
      */
@@ -497,9 +497,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readCampus202106
      * Meta information extracted from the WSDL
      * - documentation: Retrieve campus with given id. SECURED BY [(RIGHT_EVERYONE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadCampus202106 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadCampus202106Response|bool
      */
@@ -521,9 +521,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readCampus202112
      * Meta information extracted from the WSDL
      * - documentation: Retrieve campus with given id. SECURED BY [(RIGHT_EVERYONE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadCampus202112 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadCampus202112Response|bool
      */
@@ -545,9 +545,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readFloor
      * Meta information extracted from the WSDL
      * - documentation: Retrieve floor with given id. SECURED BY [(cs.psv.facility.DIALOG_FACILITY_STRUCTURE or cs.psv.facility.EDIT_FACILITY)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadFloor $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadFloorResponse|bool
      */
@@ -569,9 +569,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readFloor202106
      * Meta information extracted from the WSDL
      * - documentation: Retrieve floor with given id. SECURED BY [(cs.psv.facility.DIALOG_FACILITY_STRUCTURE or cs.psv.facility.EDIT_FACILITY)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadFloor202106 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadFloor202106Response|bool
      */
@@ -593,9 +593,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readFloor202112
      * Meta information extracted from the WSDL
      * - documentation: Retrieve floor with given id. SECURED BY [(cs.psv.facility.DIALOG_FACILITY_STRUCTURE or cs.psv.facility.EDIT_FACILITY)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadFloor202112 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadFloor202112Response|bool
      */
@@ -617,9 +617,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readRoom
      * Meta information extracted from the WSDL
      * - documentation: For a given roomID, get the corresponding room (e.g. lecture hall, examination room 1). SECURED BY [(cs.psv.facility.room.VIEW_ROOM)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadRoom $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadRoomResponse|bool
      */
@@ -641,9 +641,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readRoom202106
      * Meta information extracted from the WSDL
      * - documentation: For a given roomID, get the corresponding room (e.g. lecture hall, examination room 1). SECURED BY [(cs.psv.facility.room.VIEW_ROOM)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadRoom202106 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadRoom202106Response|bool
      */
@@ -665,9 +665,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readRoom202112
      * Meta information extracted from the WSDL
      * - documentation: For a given roomID, get the corresponding room (e.g. lecture hall, examination room 1). SECURED BY [(cs.psv.facility.room.VIEW_ROOM)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadRoom202112 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadRoom202112Response|bool
      */
@@ -689,9 +689,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readRoom61
      * Meta information extracted from the WSDL
      * - documentation: For a given roomID, get the corresponding room (e.g. lecture hall, examination room 1). Works as well for RoomSegments and Compositions. SECURED BY [(cs.psv.facility.room.VIEW_ROOM)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadRoom61 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadRoom61Response|bool
      */
@@ -713,9 +713,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readRoomComposition
      * Meta information extracted from the WSDL
      * - documentation: Retrieve room composition with given id. SECURED BY [(cs.psv.facility.room.VIEW_ROOM)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadRoomComposition $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadRoomCompositionResponse|bool
      */
@@ -737,9 +737,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readRoomComposition202106
      * Meta information extracted from the WSDL
      * - documentation: Retrieve room composition with given id. SECURED BY [(cs.psv.facility.room.VIEW_ROOM)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadRoomComposition202106 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadRoomComposition202106Response|bool
      */
@@ -761,9 +761,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readRoomLarge
      * Meta information extracted from the WSDL
      * - documentation: For a given roomID, get the corresponding room (Search of an abstract room). SECURED BY [(cs.psv.facility.room.VIEW_ROOM)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadRoomLarge $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadRoomLargeResponse|bool
      */
@@ -785,9 +785,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readRoomLarge201706
      * Meta information extracted from the WSDL
      * - documentation: For a given roomID, get the corresponding room (Search of an abstract room). SECURED BY [(cs.psv.facility.room.VIEW_ROOM)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadRoomLarge201706 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadRoomLarge201706Response|bool
      */
@@ -809,9 +809,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readRoomSegment
      * Meta information extracted from the WSDL
      * - documentation: Retrieve room segment with given id. SECURED BY [(cs.psv.facility.room.VIEW_ROOM)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadRoomSegment $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadRoomSegmentResponse|bool
      */
@@ -833,9 +833,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readRoomSegment202106
      * Meta information extracted from the WSDL
      * - documentation: Retrieve room segment with given id. SECURED BY [(cs.psv.facility.room.VIEW_ROOM)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadRoomSegment202106 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadRoomSegment202106Response|bool
      */
@@ -857,9 +857,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named readRoomSegment202112
      * Meta information extracted from the WSDL
      * - documentation: Retrieve room segment with given id. SECURED BY [(cs.psv.facility.room.VIEW_ROOM)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\ReadRoomSegment202112 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\ReadRoomSegment202112Response|bool
      */
@@ -881,9 +881,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named removeEquipmentFromRoom
      * Meta information extracted from the WSDL
      * - documentation: Removes equipment from room. SECURED BY [(cs.psv.facility.MANAGE_ROOM_EQUIPMENT)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\RemoveEquipmentFromRoom $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\RemoveEquipmentFromRoomResponse|bool
      */
@@ -905,9 +905,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named removeSecondaryOrgunitFromRoom
      * Meta information extracted from the WSDL
      * - documentation: Remove a secondary orgunit assignment from a room. SECURED BY [(cs.psv.orgunit.ASSIGN_ORGUNIT_ROOMS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\RemoveSecondaryOrgunitFromRoom $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\RemoveSecondaryOrgunitFromRoomResponse|bool
      */
@@ -929,9 +929,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named saveBuilding
      * Meta information extracted from the WSDL
      * - documentation: Store building and return id. SECURED BY [(cs.psv.facility.EDIT_FACILITY or cs.bia.costaccounting.CREATE_DATA)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SaveBuilding $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SaveBuildingResponse|bool
      */
@@ -953,9 +953,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named saveBuilding202106
      * Meta information extracted from the WSDL
      * - documentation: Save or update building and return id. SECURED BY [(cs.psv.facility.EDIT_FACILITY or cs.bia.costaccounting.CREATE_DATA) and (cs.psv.facility.EDIT_FACILITY or cs.bia.costaccounting.CREATE_DATA)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SaveBuilding202106 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SaveBuilding202106Response|bool
      */
@@ -977,9 +977,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named saveBuilding202112
      * Meta information extracted from the WSDL
      * - documentation: Save or update building and return id. SECURED BY [(cs.psv.facility.EDIT_FACILITY or cs.bia.costaccounting.CREATE_DATA) and (cs.psv.facility.EDIT_FACILITY or cs.bia.costaccounting.CREATE_DATA)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SaveBuilding202112 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SaveBuilding202112Response|bool
      */
@@ -1001,9 +1001,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named saveCampus
      * Meta information extracted from the WSDL
      * - documentation: Store campus and return id. SECURED BY [(cs.psv.facility.EDIT_FACILITY or cs.psv.facility.CREATE_CAMPUS or cs.bia.costaccounting.CREATE_DATA)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SaveCampus $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SaveCampusResponse|bool
      */
@@ -1025,9 +1025,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named saveCampus202106
      * Meta information extracted from the WSDL
      * - documentation: Store or update campus and return id. SECURED BY [(cs.psv.facility.EDIT_FACILITY or cs.psv.facility.CREATE_CAMPUS or cs.bia.costaccounting.CREATE_DATA)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SaveCampus202106 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SaveCampus202106Response|bool
      */
@@ -1049,9 +1049,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named saveCampus202112
      * Meta information extracted from the WSDL
      * - documentation: Store or update campus and return id. SECURED BY [(cs.psv.facility.EDIT_FACILITY or cs.psv.facility.CREATE_CAMPUS or cs.bia.costaccounting.CREATE_DATA)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SaveCampus202112 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SaveCampus202112Response|bool
      */
@@ -1073,9 +1073,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named saveFloor
      * Meta information extracted from the WSDL
      * - documentation: Store floor and return id. SECURED BY [(cs.psv.facility.EDIT_FACILITY or cs.bia.costaccounting.CREATE_DATA or cs.bia.costaccounting.VIEW_DATA)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SaveFloor $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SaveFloorResponse|bool
      */
@@ -1097,9 +1097,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named saveFloor202106
      * Meta information extracted from the WSDL
      * - documentation: Store or update floor and return id. SECURED BY [(cs.psv.facility.EDIT_FACILITY or cs.bia.costaccounting.CREATE_DATA or cs.bia.costaccounting.VIEW_DATA)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SaveFloor202106 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SaveFloor202106Response|bool
      */
@@ -1121,9 +1121,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named saveFloor202112
      * Meta information extracted from the WSDL
      * - documentation: Store or update floor and return id. SECURED BY [(cs.psv.facility.EDIT_FACILITY or cs.bia.costaccounting.CREATE_DATA or cs.bia.costaccounting.VIEW_DATA)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SaveFloor202112 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SaveFloor202112Response|bool
      */
@@ -1145,9 +1145,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named saveRoom
      * Meta information extracted from the WSDL
      * - documentation: Store room and return id. SECURED BY [(cs.psv.facility.room.EDIT_ROOM) and (cs.psv.facility.room.EDIT_ROOM)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SaveRoom $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SaveRoomResponse|bool
      */
@@ -1169,9 +1169,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named saveRoom202006
      * Meta information extracted from the WSDL
      * - documentation: Store room and return id. SECURED BY [(cs.psv.facility.room.EDIT_ROOM) and (cs.psv.facility.room.EDIT_ROOM)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SaveRoom202006 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SaveRoom202006Response|bool
      */
@@ -1193,9 +1193,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named saveRoom202106
      * Meta information extracted from the WSDL
      * - documentation: Store room and return id. SECURED BY [(cs.psv.facility.room.EDIT_ROOM) and (cs.psv.facility.room.EDIT_ROOM)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SaveRoom202106 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SaveRoom202106Response|bool
      */
@@ -1217,9 +1217,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named saveRoom202112
      * Meta information extracted from the WSDL
      * - documentation: Store room and return id. SECURED BY [(cs.psv.facility.room.EDIT_ROOM) and (cs.psv.facility.room.EDIT_ROOM)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SaveRoom202112 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SaveRoom202112Response|bool
      */
@@ -1241,9 +1241,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named saveRoomComposition
      * Meta information extracted from the WSDL
      * - documentation: Store room composition and return id. SECURED BY [(cs.psv.facility.room.EDIT_ROOM)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SaveRoomComposition $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SaveRoomCompositionResponse|bool
      */
@@ -1265,9 +1265,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named saveRoomComposition202106
      * Meta information extracted from the WSDL
      * - documentation: Store room composition and return id. SECURED BY [(cs.psv.facility.room.EDIT_ROOM)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SaveRoomComposition202106 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SaveRoomComposition202106Response|bool
      */
@@ -1289,9 +1289,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named saveRoomSegment
      * Meta information extracted from the WSDL
      * - documentation: Store room segment and return id. SECURED BY [(cs.psv.facility.room.EDIT_ROOM)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SaveRoomSegment $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SaveRoomSegmentResponse|bool
      */
@@ -1313,9 +1313,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named saveRoomSegment202106
      * Meta information extracted from the WSDL
      * - documentation: Store room segment and return id. SECURED BY [(cs.psv.facility.room.EDIT_ROOM)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SaveRoomSegment202106 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SaveRoomSegment202106Response|bool
      */
@@ -1337,9 +1337,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named saveRoomSegment202112
      * Meta information extracted from the WSDL
      * - documentation: Store room segment and return id. SECURED BY [(cs.psv.facility.room.EDIT_ROOM)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SaveRoomSegment202112 $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SaveRoomSegment202112Response|bool
      */
@@ -1361,9 +1361,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named search
      * Meta information extracted from the WSDL
      * - documentation: Detailed look-up for a room. Will return a distinct list of IDs of all those rooms matching all given criteria. SECURED BY [(cs.psv.facility.SEARCH_ROOM or cs.psv.facility.VIEW_FACILITY)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\Search $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SearchResponse|bool
      */
@@ -1385,9 +1385,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named searchBuilding
      * Meta information extracted from the WSDL
      * - documentation: Retrieve all ID's of buildings SECURED BY [(cs.psv.facility.VIEW_FACILITY)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SearchBuilding $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SearchBuildingResponse|bool
      */
@@ -1409,9 +1409,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named searchFloor
      * Meta information extracted from the WSDL
      * - documentation: Retrieve all ID's of floors SECURED BY [(cs.psv.facility.VIEW_FACILITY)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SearchFloor $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SearchFloorResponse|bool
      */
@@ -1433,9 +1433,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named searchRoom
      * Meta information extracted from the WSDL
      * - documentation: Detailed look-up for a room. Will return a distinct list of IDs of all those rooms matching all given criteria. SECURED BY [(cs.psv.facility.SEARCH_ROOM or cs.psv.facility.VIEW_FACILITY)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SearchRoom $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SearchRoomResponse|bool
      */
@@ -1457,9 +1457,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named setEquipmentToRoom
      * Meta information extracted from the WSDL
      * - documentation: Adds equipment to room. SECURED BY [(cs.psv.facility.MANAGE_ROOM_EQUIPMENT)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SetEquipmentToRoom $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SetEquipmentToRoomResponse|bool
      */
@@ -1481,9 +1481,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named setOrgunitToRoom
      * Meta information extracted from the WSDL
      * - documentation: Setting an assignment from a room to a facility. SECURED BY [(cs.psv.orgunit.ASSIGN_ORGUNIT_ROOMS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SetOrgunitToRoom $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SetOrgunitToRoomResponse|bool
      */
@@ -1505,9 +1505,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named setPrimaryOrgunitToRoom
      * Meta information extracted from the WSDL
      * - documentation: Setting an primary assignment from a room to a orgunit. SECURED BY [(cs.psv.orgunit.ASSIGN_ORGUNIT_ROOMS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\SetPrimaryOrgunitToRoom $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\SetPrimaryOrgunitToRoomResponse|bool
      */
@@ -1529,9 +1529,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named updateBuildingOpeninghoursEntry
      * Meta information extracted from the WSDL
      * - documentation: Updates the specified openinghours entry. SECURED BY [(cs.psv.facility.EDIT_BUILDING_OPENHOURS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\UpdateBuildingOpeninghoursEntry $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\UpdateBuildingOpeninghoursEntryResponse|bool
      */
@@ -1553,9 +1553,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named updatePlanningProperty
      * Meta information extracted from the WSDL
      * - documentation: Updates the planning properties, e.g. centralised, of the room. SECURED BY [(cs.psv.facility.room.EDIT_PLANNING_ATTRIBUTE) and (cs.psv.facility.room.EDIT_PLANNING_ATTRIBUTE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\FacilityService\Struct\UpdatePlanningProperty $parameters
      * @return \FGTCLB\HisClient\FacilityService\Struct\UpdatePlanningPropertyResponse|bool
      */
@@ -1575,7 +1575,7 @@ class Service extends AbstractSoapClient
     }
     /**
      * Returns the result
-     * @see AbstractSoapClient::getResult()
+     * @see AbstractSoapService::getResult()
      * @return \FGTCLB\HisClient\FacilityService\Struct\AddSecondaryOrgunitToRoomResponse|\FGTCLB\HisClient\FacilityService\Struct\CreateBuildingOpeninghoursEntryResponse|\FGTCLB\HisClient\FacilityService\Struct\DeleteBuilding60Response|\FGTCLB\HisClient\FacilityService\Struct\DeleteBuildingOpeninghoursEntryResponse|\FGTCLB\HisClient\FacilityService\Struct\DeleteCampus60Response|\FGTCLB\HisClient\FacilityService\Struct\DeleteFloor60Response|\FGTCLB\HisClient\FacilityService\Struct\DeleteRoom60Response|\FGTCLB\HisClient\FacilityService\Struct\DeleteRoomComposition60Response|\FGTCLB\HisClient\FacilityService\Struct\DeleteRoomSegment60Response|\FGTCLB\HisClient\FacilityService\Struct\ReadAllBuildingsOfCampusResponse|\FGTCLB\HisClient\FacilityService\Struct\ReadAllBuildingsResponse|\FGTCLB\HisClient\FacilityService\Struct\ReadAllCampusResponse|\FGTCLB\HisClient\FacilityService\Struct\ReadAllFloorsOfBuildingResponse|\FGTCLB\HisClient\FacilityService\Struct\ReadBuilding202006Response|\FGTCLB\HisClient\FacilityService\Struct\ReadBuilding202106Response|\FGTCLB\HisClient\FacilityService\Struct\ReadBuilding202112Response|\FGTCLB\HisClient\FacilityService\Struct\ReadBuildingOpeninghoursForDateResponse|\FGTCLB\HisClient\FacilityService\Struct\ReadBuildingOpeninghoursResponse|\FGTCLB\HisClient\FacilityService\Struct\ReadBuildingResponse|\FGTCLB\HisClient\FacilityService\Struct\ReadCampus202106Response|\FGTCLB\HisClient\FacilityService\Struct\ReadCampus202112Response|\FGTCLB\HisClient\FacilityService\Struct\ReadCampusResponse|\FGTCLB\HisClient\FacilityService\Struct\ReadFloor202106Response|\FGTCLB\HisClient\FacilityService\Struct\ReadFloor202112Response|\FGTCLB\HisClient\FacilityService\Struct\ReadFloorResponse|\FGTCLB\HisClient\FacilityService\Struct\ReadRoom61Response|\FGTCLB\HisClient\FacilityService\Struct\ReadRoom202106Response|\FGTCLB\HisClient\FacilityService\Struct\ReadRoom202112Response|\FGTCLB\HisClient\FacilityService\Struct\ReadRoomComposition202106Response|\FGTCLB\HisClient\FacilityService\Struct\ReadRoomCompositionResponse|\FGTCLB\HisClient\FacilityService\Struct\ReadRoomLarge201706Response|\FGTCLB\HisClient\FacilityService\Struct\ReadRoomLargeResponse|\FGTCLB\HisClient\FacilityService\Struct\ReadRoomResponse|\FGTCLB\HisClient\FacilityService\Struct\ReadRoomSegment202106Response|\FGTCLB\HisClient\FacilityService\Struct\ReadRoomSegment202112Response|\FGTCLB\HisClient\FacilityService\Struct\ReadRoomSegmentResponse|\FGTCLB\HisClient\FacilityService\Struct\RemoveEquipmentFromRoomResponse|\FGTCLB\HisClient\FacilityService\Struct\RemoveSecondaryOrgunitFromRoomResponse|\FGTCLB\HisClient\FacilityService\Struct\SaveBuilding202106Response|\FGTCLB\HisClient\FacilityService\Struct\SaveBuilding202112Response|\FGTCLB\HisClient\FacilityService\Struct\SaveBuildingResponse|\FGTCLB\HisClient\FacilityService\Struct\SaveCampus202106Response|\FGTCLB\HisClient\FacilityService\Struct\SaveCampus202112Response|\FGTCLB\HisClient\FacilityService\Struct\SaveCampusResponse|\FGTCLB\HisClient\FacilityService\Struct\SaveFloor202106Response|\FGTCLB\HisClient\FacilityService\Struct\SaveFloor202112Response|\FGTCLB\HisClient\FacilityService\Struct\SaveFloorResponse|\FGTCLB\HisClient\FacilityService\Struct\SaveRoom202006Response|\FGTCLB\HisClient\FacilityService\Struct\SaveRoom202106Response|\FGTCLB\HisClient\FacilityService\Struct\SaveRoom202112Response|\FGTCLB\HisClient\FacilityService\Struct\SaveRoomComposition202106Response|\FGTCLB\HisClient\FacilityService\Struct\SaveRoomCompositionResponse|\FGTCLB\HisClient\FacilityService\Struct\SaveRoomResponse|\FGTCLB\HisClient\FacilityService\Struct\SaveRoomSegment202106Response|\FGTCLB\HisClient\FacilityService\Struct\SaveRoomSegment202112Response|\FGTCLB\HisClient\FacilityService\Struct\SaveRoomSegmentResponse|\FGTCLB\HisClient\FacilityService\Struct\SearchBuildingResponse|\FGTCLB\HisClient\FacilityService\Struct\SearchFloorResponse|\FGTCLB\HisClient\FacilityService\Struct\SearchResponse|\FGTCLB\HisClient\FacilityService\Struct\SearchRoomResponse|\FGTCLB\HisClient\FacilityService\Struct\SetEquipmentToRoomResponse|\FGTCLB\HisClient\FacilityService\Struct\SetOrgunitToRoomResponse|\FGTCLB\HisClient\FacilityService\Struct\SetPrimaryOrgunitToRoomResponse|\FGTCLB\HisClient\FacilityService\Struct\UpdateBuildingOpeninghoursEntryResponse|\FGTCLB\HisClient\FacilityService\Struct\UpdatePlanningPropertyResponse
      */
     public function getResult()

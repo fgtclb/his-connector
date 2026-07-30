@@ -5,21 +5,21 @@ declare(strict_types=1);
 namespace FGTCLB\HisClient\KeyvalueService\Service;
 
 use SoapFault;
-use FGTCLB\HisClientFacade\Soap\AbstractSoapClient;
+use FGTCLB\HisClientFacade\Soap\AbstractSoapService;
 
 /**
  * This class stands for all operations
  * @subpackage Services
  */
-class Service extends AbstractSoapClient
+class Service extends AbstractSoapService
 {
     /**
      * Method to call the operation originally named getAll
      * Meta information extracted from the WSDL
      * - documentation: Get all values for given keytable. The result may contain values that are outdated/not valid today. SECURED BY [(cs.sys.core.VIEW_KEYTABLE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\KeyvalueService\Struct\GetAll $parameters
      * @return \FGTCLB\HisClient\KeyvalueService\Struct\GetAllResponse|bool
      */
@@ -41,9 +41,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named getAllExtended
      * Meta information extracted from the WSDL
      * - documentation: Get all values for given keytable with additional attributes. The result may contain values that are outdated/not valid today. SECURED BY [(cs.sys.core.VIEW_KEYTABLE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\KeyvalueService\Struct\GetAllExtended $parameters
      * @return \FGTCLB\HisClient\KeyvalueService\Struct\GetAllExtendedResponse|bool
      */
@@ -65,9 +65,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named getAllValid
      * Meta information extracted from the WSDL
      * - documentation: Get all valid values for given keytable. The result will ONLY contain values that are valid today. SECURED BY [(cs.sys.core.VIEW_KEYTABLE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\KeyvalueService\Struct\GetAllValid $parameters
      * @return \FGTCLB\HisClient\KeyvalueService\Struct\GetAllValidResponse|bool
      */
@@ -89,9 +89,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named getAllValidExtended
      * Meta information extracted from the WSDL
      * - documentation: Get all values for given keytable with additional attributes. The result will ONLY contain values that are valid today. SECURED BY [(cs.sys.core.VIEW_KEYTABLE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\KeyvalueService\Struct\GetAllValidExtended $parameters
      * @return \FGTCLB\HisClient\KeyvalueService\Struct\GetAllValidExtendedResponse|bool
      */
@@ -113,9 +113,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named getAllValueClasses
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.sys.core.VIEW_KEYTABLE)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\KeyvalueService\Struct\GetAllValueClasses $parameters
      * @return \FGTCLB\HisClient\KeyvalueService\Struct\GetAllValueClassesResponse|bool
      */
@@ -135,7 +135,7 @@ class Service extends AbstractSoapClient
     }
     /**
      * Returns the result
-     * @see AbstractSoapClient::getResult()
+     * @see AbstractSoapService::getResult()
      * @return \FGTCLB\HisClient\KeyvalueService\Struct\GetAllExtendedResponse|\FGTCLB\HisClient\KeyvalueService\Struct\GetAllResponse|\FGTCLB\HisClient\KeyvalueService\Struct\GetAllValidExtendedResponse|\FGTCLB\HisClient\KeyvalueService\Struct\GetAllValidResponse|\FGTCLB\HisClient\KeyvalueService\Struct\GetAllValueClassesResponse
      */
     public function getResult()

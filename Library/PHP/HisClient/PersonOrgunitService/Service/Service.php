@@ -5,21 +5,21 @@ declare(strict_types=1);
 namespace FGTCLB\HisClient\PersonOrgunitService\Service;
 
 use SoapFault;
-use FGTCLB\HisClientFacade\Soap\AbstractSoapClient;
+use FGTCLB\HisClientFacade\Soap\AbstractSoapService;
 
 /**
  * This class stands for all operations
  * @subpackage Services
  */
-class Service extends AbstractSoapClient
+class Service extends AbstractSoapService
 {
     /**
      * Method to call the operation originally named addAffiliationToPerson
      * Meta information extracted from the WSDL
      * - documentation: Add an affiliation for a person in an organizational unit. SECURED BY [(cs.psv.person.CREATE_PERSON_FUNCTIONS) and (cs.psv.person.CREATE_PERSON_FUNCTIONS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonOrgunitService\Struct\AddAffiliationToPerson $parameters
      * @return \FGTCLB\HisClient\PersonOrgunitService\Struct\AddAffiliationToPersonResponse|bool
      */
@@ -42,9 +42,9 @@ class Service extends AbstractSoapClient
      * Meta information extracted from the WSDL
      * - documentation: Adding a previously stored E-Address of the corresponding person (Email, Phone, Fax, ...) to a person's function (possibility of multiple adding). SECURED BY [(cs.psv.person.EDIT_PERSON_FUNCTIONS) and
      * (cs.psv.person.EDIT_PERSON_FUNCTIONS or CONTEXT_CS_PSV_VERIFY_AFFILIATION_EMAIL)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonOrgunitService\Struct\AddEAddressToAffiliation $parameters
      * @return \FGTCLB\HisClient\PersonOrgunitService\Struct\AddEAddressToAffiliationResponse|bool
      */
@@ -66,9 +66,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named addPostAddressToAffiliation
      * Meta information extracted from the WSDL
      * - documentation: Adding a previously stored postal address of the corresponding person if a room does not exist. SECURED BY [(cs.psv.person.EDIT_PERSON_FUNCTIONS) and (cs.psv.person.EDIT_PERSON_FUNCTIONS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonOrgunitService\Struct\AddPostAddressToAffiliation $parameters
      * @return \FGTCLB\HisClient\PersonOrgunitService\Struct\AddPostAddressToAffiliationResponse|bool
      */
@@ -90,9 +90,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named addRoomToAffiliation
      * Meta information extracted from the WSDL
      * - documentation: Adding of a stored room if a postal address does not exist. SECURED BY [(cs.psv.person.EDIT_PERSON_FUNCTIONS) and (cs.psv.person.EDIT_PERSON_FUNCTIONS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonOrgunitService\Struct\AddRoomToAffiliation $parameters
      * @return \FGTCLB\HisClient\PersonOrgunitService\Struct\AddRoomToAffiliationResponse|bool
      */
@@ -114,9 +114,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named findAffiliationById
      * Meta information extracted from the WSDL
      * - documentation: Get affiliation with id. SECURED BY [(cs.psv.person.VIEW_PERSON_FUNCTIONS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonOrgunitService\Struct\FindAffiliationById $parameters
      * @return \FGTCLB\HisClient\PersonOrgunitService\Struct\FindAffiliationByIdResponse|bool
      */
@@ -138,9 +138,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named getEAddressesFromAffiliation
      * Meta information extracted from the WSDL
      * - documentation: Read-out of E-Addresses of a person's function SECURED BY [(cs.psv.person.VIEW_PERSON_FUNCTIONS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonOrgunitService\Struct\GetEAddressesFromAffiliation $parameters
      * @return \FGTCLB\HisClient\PersonOrgunitService\Struct\GetEAddressesFromAffiliationResponse|bool
      */
@@ -162,9 +162,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named getLocationFromAffiliation
      * Meta information extracted from the WSDL
      * - documentation: Read-out a location (room or address) of a person's function (Location represents an abstract class of room location or address location). SECURED BY [(cs.psv.person.VIEW_PERSON_FUNCTIONS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonOrgunitService\Struct\GetLocationFromAffiliation $parameters
      * @return \FGTCLB\HisClient\PersonOrgunitService\Struct\GetLocationFromAffiliationResponse|bool
      */
@@ -187,9 +187,9 @@ class Service extends AbstractSoapClient
      * Meta information extracted from the WSDL
      * - documentation: Load affiliation includign the location and eaddresses. SECURED BY [(cs.psv.person.VIEW_PERSON_FUNCTIONS) and (CONTEXT_CM_STU_HAS_DOCTORAL_PROJECT or cs.psv.person.CREATE_PERSON_FUNCTIONS or cs.psv.person.EDIT_PERSON_FUNCTIONS or
      * cs.psv.person.VIEW_PERSON_FUNCTIONS or cs.psv.person.EDIT_PERSON_FUNCTIONS_OWN)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonOrgunitService\Struct\ReadAffiliation $parameters
      * @return \FGTCLB\HisClient\PersonOrgunitService\Struct\ReadAffiliationResponse|bool
      */
@@ -212,9 +212,9 @@ class Service extends AbstractSoapClient
      * Meta information extracted from the WSDL
      * - documentation: Load affiliation including visibility. SECURED BY [(cs.psv.person.VIEW_PERSON_FUNCTIONS) and (CONTEXT_CM_STU_HAS_DOCTORAL_PROJECT or cs.psv.person.CREATE_PERSON_FUNCTIONS or cs.psv.person.EDIT_PERSON_FUNCTIONS or
      * cs.psv.person.VIEW_PERSON_FUNCTIONS or cs.psv.person.EDIT_PERSON_FUNCTIONS_OWN)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonOrgunitService\Struct\ReadAffiliation202412 $parameters
      * @return \FGTCLB\HisClient\PersonOrgunitService\Struct\ReadAffiliation202412Response|bool
      */
@@ -236,9 +236,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named removeAffiliationFromPerson
      * Meta information extracted from the WSDL
      * - documentation: Remove an affiliation from person. SECURED BY [(cs.psv.person.DELETE_PERSON_FUNCTIONS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonOrgunitService\Struct\RemoveAffiliationFromPerson $parameters
      * @return void|bool
      */
@@ -260,9 +260,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named removeEAddressFromAffiliation
      * Meta information extracted from the WSDL
      * - documentation: Removal of an E-Address of a person's function. SECURED BY [(cs.psv.person.EDIT_PERSON_FUNCTIONS) and (cs.psv.person.EDIT_PERSON_FUNCTIONS or CONTEXT_CS_PSV_VERIFY_AFFILIATION_EMAIL)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonOrgunitService\Struct\RemoveEAddressFromAffiliation $parameters
      * @return \FGTCLB\HisClient\PersonOrgunitService\Struct\RemoveEAddressFromAffiliationResponse|bool
      */
@@ -284,9 +284,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named removeLocationFromAffiliation
      * Meta information extracted from the WSDL
      * - documentation: Removal of a stored location (room or address) of a person's function. SECURED BY [(cs.psv.person.EDIT_PERSON_FUNCTIONS) and (cs.psv.person.EDIT_PERSON_FUNCTIONS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonOrgunitService\Struct\RemoveLocationFromAffiliation $parameters
      * @return \FGTCLB\HisClient\PersonOrgunitService\Struct\RemoveLocationFromAffiliationResponse|bool
      */
@@ -308,9 +308,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named searchAffiliation
      * Meta information extracted from the WSDL
      * - documentation: Search of all affiliation for a personId. SECURED BY [(cs.psv.person.VIEW_PERSON_FUNCTIONS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonOrgunitService\Struct\SearchAffiliation $parameters
      * @return \FGTCLB\HisClient\PersonOrgunitService\Struct\SearchAffiliationResponse|bool
      */
@@ -332,9 +332,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named searchAffiliation202412
      * Meta information extracted from the WSDL
      * - documentation: Extended search of all affiliations including visibility and supplement. SECURED BY [(cs.psv.person.VIEW_PERSON_FUNCTIONS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonOrgunitService\Struct\SearchAffiliation202412 $parameters
      * @return \FGTCLB\HisClient\PersonOrgunitService\Struct\SearchAffiliation202412Response|bool
      */
@@ -356,9 +356,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named searchAffiliationById
      * Meta information extracted from the WSDL
      * - documentation: Search of all affiliation for a personId. The response contains the additional field supplement. SECURED BY [(cs.psv.person.VIEW_PERSON_FUNCTIONS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonOrgunitService\Struct\SearchAffiliationById $parameters
      * @return \FGTCLB\HisClient\PersonOrgunitService\Struct\SearchAffiliationByIdResponse|bool
      */
@@ -380,9 +380,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named searchAffiliationsForPerson
      * Meta information extracted from the WSDL
      * - documentation: Quest of all functions dedicated ta a person for a given personId. SECURED BY [(cs.psv.person.VIEW_PERSON_FUNCTIONS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonOrgunitService\Struct\SearchAffiliationsForPerson $parameters
      * @return \FGTCLB\HisClient\PersonOrgunitService\Struct\SearchAffiliationsForPersonResponse|bool
      */
@@ -405,9 +405,9 @@ class Service extends AbstractSoapClient
      * Meta information extracted from the WSDL
      * - documentation: Sets the location of the affiliation to given postaddress. Any previous assignment is removed. In case a postaddress was assigned before, the old address will be deleted if it has no other references. SECURED BY
      * [(cs.psv.person.EDIT_PERSON_FUNCTIONS) and (cs.psv.person.EDIT_PERSON_FUNCTIONS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonOrgunitService\Struct\SetPostaddressForAffiliation $parameters
      * @return \FGTCLB\HisClient\PersonOrgunitService\Struct\SetPostaddressForAffiliationResponse|bool
      */
@@ -430,9 +430,9 @@ class Service extends AbstractSoapClient
      * Meta information extracted from the WSDL
      * - documentation: Sets the location of the affiliation to given room. Any previous assignment is removed. In case a postaddress was assigned before, this address will be deleted if it has no other references. SECURED BY
      * [(cs.psv.person.EDIT_PERSON_FUNCTIONS) and (cs.psv.person.EDIT_PERSON_FUNCTIONS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonOrgunitService\Struct\SetRoomForAffiliation $parameters
      * @return \FGTCLB\HisClient\PersonOrgunitService\Struct\SetRoomForAffiliationResponse|bool
      */
@@ -454,9 +454,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named updateAffiliation
      * Meta information extracted from the WSDL
      * - documentation: Save an existing affiliation. SECURED BY [(cs.psv.person.EDIT_PERSON_FUNCTIONS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonOrgunitService\Struct\UpdateAffiliation $parameters
      * @return \FGTCLB\HisClient\PersonOrgunitService\Struct\UpdateAffiliationResponse|bool
      */
@@ -478,9 +478,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named updateAffiliation202412
      * Meta information extracted from the WSDL
      * - documentation: Update an affiliation. Set id to nil to create a new affiliation instead. updateAffiliation60 expanded to include visibility. SECURED BY [(cs.psv.person.EDIT_PERSON_FUNCTIONS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonOrgunitService\Struct\UpdateAffiliation202412 $parameters
      * @return \FGTCLB\HisClient\PersonOrgunitService\Struct\UpdateAffiliation202412Response|bool
      */
@@ -502,9 +502,9 @@ class Service extends AbstractSoapClient
      * Method to call the operation originally named updateAffiliation60
      * Meta information extracted from the WSDL
      * - documentation: Update an affiliation. Set id to nil to create a new affiliation instead. SECURED BY [(cs.psv.person.EDIT_PERSON_FUNCTIONS)]
-     * @uses AbstractSoapClient::getSoapClient()
-     * @uses AbstractSoapClient::setResult()
-     * @uses AbstractSoapClient::saveLastError()
+     * @uses AbstractSoapService::getSoapClient()
+     * @uses AbstractSoapService::setResult()
+     * @uses AbstractSoapService::saveLastError()
      * @param \FGTCLB\HisClient\PersonOrgunitService\Struct\UpdateAffiliation60 $parameters
      * @return \FGTCLB\HisClient\PersonOrgunitService\Struct\UpdateAffiliation60Response|bool
      */
@@ -524,7 +524,7 @@ class Service extends AbstractSoapClient
     }
     /**
      * Returns the result
-     * @see AbstractSoapClient::getResult()
+     * @see AbstractSoapService::getResult()
      * @return void|\FGTCLB\HisClient\PersonOrgunitService\Struct\AddAffiliationToPersonResponse|\FGTCLB\HisClient\PersonOrgunitService\Struct\AddEAddressToAffiliationResponse|\FGTCLB\HisClient\PersonOrgunitService\Struct\AddPostAddressToAffiliationResponse|\FGTCLB\HisClient\PersonOrgunitService\Struct\AddRoomToAffiliationResponse|\FGTCLB\HisClient\PersonOrgunitService\Struct\FindAffiliationByIdResponse|\FGTCLB\HisClient\PersonOrgunitService\Struct\GetEAddressesFromAffiliationResponse|\FGTCLB\HisClient\PersonOrgunitService\Struct\GetLocationFromAffiliationResponse|\FGTCLB\HisClient\PersonOrgunitService\Struct\ReadAffiliation202412Response|\FGTCLB\HisClient\PersonOrgunitService\Struct\ReadAffiliationResponse|\FGTCLB\HisClient\PersonOrgunitService\Struct\RemoveEAddressFromAffiliationResponse|\FGTCLB\HisClient\PersonOrgunitService\Struct\RemoveLocationFromAffiliationResponse|\FGTCLB\HisClient\PersonOrgunitService\Struct\SearchAffiliation202412Response|\FGTCLB\HisClient\PersonOrgunitService\Struct\SearchAffiliationByIdResponse|\FGTCLB\HisClient\PersonOrgunitService\Struct\SearchAffiliationResponse|\FGTCLB\HisClient\PersonOrgunitService\Struct\SearchAffiliationsForPersonResponse|\FGTCLB\HisClient\PersonOrgunitService\Struct\SetPostaddressForAffiliationResponse|\FGTCLB\HisClient\PersonOrgunitService\Struct\SetRoomForAffiliationResponse|\FGTCLB\HisClient\PersonOrgunitService\Struct\UpdateAffiliation60Response|\FGTCLB\HisClient\PersonOrgunitService\Struct\UpdateAffiliation202412Response|\FGTCLB\HisClient\PersonOrgunitService\Struct\UpdateAffiliationResponse
      */
     public function getResult()
