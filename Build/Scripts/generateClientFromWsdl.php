@@ -23,7 +23,6 @@ $supportedEndpoints = [
     'PersonAddressService',
     'PersonOrgunitService',
     'PersonService',
-    'RoomAttributeService',
 ];
 
 $application = new SingleCommandApplication();
