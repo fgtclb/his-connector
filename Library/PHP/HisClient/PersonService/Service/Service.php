@@ -5,22 +5,22 @@ declare(strict_types=1);
 namespace FGTCLB\HisClient\PersonService\Service;
 
 use SoapFault;
-use WsdlToPhp\PackageBase\AbstractSoapClientBase;
+use FGTCLB\HisClientFacade\Soap\AbstractSoapClient;
 
 /**
  * This class stands for all operations
  * @subpackage Services
  */
-class Service extends AbstractSoapClientBase
+class Service extends AbstractSoapClient
 {
     /**
      * Method to call the operation originally named createPerson
      * Meta information extracted from the WSDL
      * - documentation: Create or update a Person. For creating a Person, make sure to set the id to nil. Will return the id of the Person in either case. SECURED BY [(cs.psv.person.EDIT_PERSON_EMPLOYEEDATA_OWN or cs.psv.person.CREATE_PERSON_EMPLOYEEDATA or
      * cs.psv.person.CREATE_PERSON_MAINDATA or cs.psv.person.EDIT_PERSON_MAINDATA or cs.psv.person.EDIT_PERSON_MAINDATA_OWN or cs.psv.person.CREATE_NEW_PERSON or CONTEXT_CS_PSV_ORGUNIT_CONTACTPERSON)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\CreatePerson $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\CreatePersonResponse|bool
      */
@@ -42,9 +42,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named createPerson201912
      * Meta information extracted from the WSDL
      * - documentation: Create or update a Person. For creating a Person, make sure to set the id to nil. Will return the id of the Person in either case. SECURED BY [(cs.psv.person.CREATE_NEW_PERSON or CONTEXT_CS_PSV_ORGUNIT_CONTACTPERSON)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\CreatePerson201912 $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\CreatePerson201912Response|bool
      */
@@ -66,9 +66,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named createPerson202412
      * Meta information extracted from the WSDL
      * - documentation: Create or update a Person. For creating a Person, make sure to set the id to nil. Will return the id of the Person in either case. SECURED BY [(cs.psv.person.CREATE_NEW_PERSON)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\CreatePerson202412 $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\CreatePerson202412Response|bool
      */
@@ -90,9 +90,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named createPersonAttribute202006
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.CREATE_PERSON_ATTRIBUTE)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\CreatePersonAttribute202006 $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\CreatePersonAttribute202006Response|bool
      */
@@ -114,9 +114,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named createPersonAttributeForPerson
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.CREATE_PERSON_ATTRIBUTE or cs.psv.person.CREATE_PERSON_ATTRIBUTE_OWN) and (cs.psv.person.CREATE_PERSON_ATTRIBUTE or cs.psv.person.CREATE_PERSON_ATTRIBUTE_OWN)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\CreatePersonAttributeForPerson $parameters
      * @return void|bool
      */
@@ -138,9 +138,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named createPersonIdentifier
      * Meta information extracted from the WSDL
      * - documentation: Create and save a new identifier for the given person SECURED BY [(cs.psv.person.CREATE_PERSON_IDENTIFIER or SYSROLE_WALLET_SYNC)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\CreatePersonIdentifier $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\CreatePersonIdentifierResponse|bool
      */
@@ -162,9 +162,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named deletePerson
      * Meta information extracted from the WSDL
      * - documentation: Attempt to delete this person and all associated data. SECURED BY [(cs.psv.person.DELETE_PERSON or CONTEXT_CS_PSV_ORGUNIT_CONTACTPERSON)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\DeletePerson $parameters
      * @return void|bool
      */
@@ -186,9 +186,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named deletePersonAttribute202006
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.DELETE_PERSON_ATTRIBUTE) and (cs.psv.person.DELETE_PERSON_ATTRIBUTE)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\DeletePersonAttribute202006 $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\DeletePersonAttribute202006Response|bool
      */
@@ -210,9 +210,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named deletePersonAttributeFromPerson
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.DELETE_PERSON_ATTRIBUTE) and (cs.psv.person.DELETE_PERSON_ATTRIBUTE)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\DeletePersonAttributeFromPerson $parameters
      * @return void|bool
      */
@@ -234,9 +234,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named deletePersonIdentifier
      * Meta information extracted from the WSDL
      * - documentation: Delete a person identifier SECURED BY [(cs.psv.person.DELETE_PERSON_IDENTIFIER)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\DeletePersonIdentifier $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\DeletePersonIdentifierResponse|bool
      */
@@ -258,9 +258,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named deletePersonMarkOnly
      * Meta information extracted from the WSDL
      * - documentation: Mark the person for deletion. SECURED BY [(cs.psv.person.DELETE_PERSON)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\DeletePersonMarkOnly $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\DeletePersonMarkOnlyResponse|bool
      */
@@ -282,9 +282,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named findPerson
      * Meta information extracted from the WSDL
      * - documentation: Look-up for a Person. Will return a distinct list of IDs of all those Persons that match all given criteria. SECURED BY [(cs.psv.person.VIEW_PERSON_MAINDATA)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\FindPerson $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\FindPersonResponse|bool
      */
@@ -306,9 +306,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named findPerson201912
      * Meta information extracted from the WSDL
      * - documentation: Look-up for a Person. Will return a distinct list of IDs of all those Persons that match all given criteria. Also allows searching the roles of the person. SECURED BY [(cs.psv.person.VIEW_PERSON_MAINDATA)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\FindPerson201912 $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\FindPerson201912Response|bool
      */
@@ -330,9 +330,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named findPerson60
      * Meta information extracted from the WSDL
      * - documentation: Look-up for a Person. Will return a distinct list of IDs of all those Persons that match all given criteria. Also allows searching the roles of the person. SECURED BY [(cs.psv.person.VIEW_PERSON_MAINDATA)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\FindPerson60 $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\FindPerson60Response|bool
      */
@@ -354,9 +354,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named findPersonIdentifiers
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.VIEW_PERSON_IDENTIFIER)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\FindPersonIdentifiers $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\FindPersonIdentifiersResponse|bool
      */
@@ -378,9 +378,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named generateNewUsername
      * Meta information extracted from the WSDL
      * - documentation: Uses the default AccountGenerator to compute a new username. This does NOT create or change accounts! SECURED BY [(cs.psv.account.GENERATE_ACCOUNTS)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\GenerateNewUsername $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\GenerateNewUsernameResponse|bool
      */
@@ -402,9 +402,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named generatePersonIdentifier
      * Meta information extracted from the WSDL
      * - documentation: Generate and save a new identifier for the given person SECURED BY [(cs.psv.person.GENERATE_PERSON_IDENTIFIER or cs.psv.person.CREATE_PERSON_IDENTIFIER)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\GeneratePersonIdentifier $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\GeneratePersonIdentifierResponse|bool
      */
@@ -427,9 +427,9 @@ class Service extends AbstractSoapClientBase
      * Meta information extracted from the WSDL
      * - documentation: Load the definitions of the available attribute types. SECURED BY [(cs.psv.person.EDIT_PERSON_ATTRIBUTE_OWN or cs.psv.person.VIEW_PERSON_ATTRIBUTE_OWN or cs.psv.person.VIEW_PERSON_ATTRIBUTE or cs.psv.person.EDIT_PERSON_ATTRIBUTE or
      * cs.psv.person.CREATE_PERSON_ATTRIBUTE)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\GetAllPersonAttributeTypes $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\GetAllPersonAttributeTypesResponse|bool
      */
@@ -451,9 +451,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named getAllPersonPlaceholders
      * Meta information extracted from the WSDL
      * - documentation: Load all placeholders for lecturers (e.g. scientific assistant, not yet, to be defined) SECURED BY [(RIGHT_EVERYONE)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\GetAllPersonPlaceholders $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\GetAllPersonPlaceholdersResponse|bool
      */
@@ -475,9 +475,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named isUsernameAlreadyAssigned
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.VIEW_PERSON_ACCOUNT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\IsUsernameAlreadyAssigned $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\IsUsernameAlreadyAssignedResponse|bool
      */
@@ -499,9 +499,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named readAllAcademicDegrees
      * Meta information extracted from the WSDL
      * - documentation: Read all available academic degrees. SECURED BY [(RIGHT_EVERYONE)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\ReadAllAcademicDegrees $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\ReadAllAcademicDegreesResponse|bool
      */
@@ -523,9 +523,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named readAllGenders
      * Meta information extracted from the WSDL
      * - documentation: Read all available genders. SECURED BY [(RIGHT_EVERYONE)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\ReadAllGenders $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\ReadAllGendersResponse|bool
      */
@@ -548,9 +548,9 @@ class Service extends AbstractSoapClientBase
      * Meta information extracted from the WSDL
      * - documentation: Read all additional attributes from given Person. SECURED BY [(RIGHT_IS_LOGGED_IN or cs.psv.person.EDIT_PERSON_ATTRIBUTE_OWN or cs.psv.person.VIEW_PERSON_ATTRIBUTE_OWN or cs.psv.person.VIEW_PERSON_ATTRIBUTE or
      * cs.psv.person.EDIT_PERSON_ATTRIBUTE)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\ReadAllPersonAttributesFromPerson $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\ReadAllPersonAttributesFromPersonResponse|bool
      */
@@ -572,9 +572,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named readAllTitles
      * Meta information extracted from the WSDL
      * - documentation: Read all available titles. SECURED BY [(RIGHT_EVERYONE)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\ReadAllTitles $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\ReadAllTitlesResponse|bool
      */
@@ -596,9 +596,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named readPerson
      * Meta information extracted from the WSDL
      * - documentation: For a given PersonID, get the corresponding Person. Will return nil when no Person exists with given ID. SECURED BY [(cs.psv.person.VIEW_PERSON_MAINDATA or cs.psv.person.EDIT_PERSON_MAINDATA)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\ReadPerson $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\ReadPersonResponse|bool
      */
@@ -620,9 +620,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named readPerson201806
      * Meta information extracted from the WSDL
      * - documentation: For a given PersonID, get the corresponding Person. Will return nil when no Person exists with given ID. SECURED BY [(cs.psv.person.VIEW_PERSON_MAINDATA or cs.psv.person.EDIT_PERSON_MAINDATA)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\ReadPerson201806 $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\ReadPerson201806Response|bool
      */
@@ -644,9 +644,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named readPerson201912
      * Meta information extracted from the WSDL
      * - documentation: For a given PersonID, get the corresponding Person. Will return nil when no Person exists with given ID. SECURED BY [(cs.psv.person.VIEW_PERSON_MAINDATA or cs.psv.person.EDIT_PERSON_MAINDATA)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\ReadPerson201912 $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\ReadPerson201912Response|bool
      */
@@ -669,9 +669,9 @@ class Service extends AbstractSoapClientBase
      * Meta information extracted from the WSDL
      * - documentation: Read all additional attributes from given Person. SECURED BY [(RIGHT_IS_LOGGED_IN or cs.psv.person.EDIT_PERSON_ATTRIBUTE_OWN or cs.psv.person.VIEW_PERSON_ATTRIBUTE_OWN or cs.psv.person.VIEW_PERSON_ATTRIBUTE or
      * cs.psv.person.EDIT_PERSON_ATTRIBUTE)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\ReadPersonAttributes202006 $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\ReadPersonAttributes202006Response|bool
      */
@@ -693,9 +693,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named readPersonByIdentifierTypeAndValue
      * Meta information extracted from the WSDL
      * - documentation: Search a person with a given identifier value and type. SECURED BY [(cs.psv.person.VIEW_PERSON_IDENTIFIER)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\ReadPersonByIdentifierTypeAndValue $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\ReadPersonByIdentifierTypeAndValueResponse|bool
      */
@@ -717,9 +717,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named readPersonIdentifiers
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.VIEW_PERSON_IDENTIFIER)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\ReadPersonIdentifiers $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\ReadPersonIdentifiersResponse|bool
      */
@@ -743,9 +743,9 @@ class Service extends AbstractSoapClientBase
      * - documentation: SECURED BY [(cs.psv.person.VIEW_PERSON_EMPLOYEEDATA) and (cs.psv.person.SEARCH_PERSON or cs.psv.person.VIEW_PERSON_MAINDATA or cs.psv.person.VIEW_PERSON_MAINDATA_OWN or cs.psv.person.EDIT_PERSON_MAINDATA or
      * cs.psv.person.EDIT_PERSON_MAINDATA_OWN or cs.psv.person.EDIT_PERSON_MAINDATA_BUSINESS or cs.psv.person.VIEW_PERSON_MAINDATA_BUSINESS or cs.psv.person.EDIT_PERSON_MAINDATA_BUSINESS or cs.psv.person.MANAGE_PERSON_WITHOUT_ROLES or
      * cs.psv.person.CREATE_NEW_PERSON or cs.psv.person.CREATE_PERSON_MAINDATA)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\ReadPersonaldata $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\ReadPersonaldataResponse|bool
      */
@@ -768,9 +768,9 @@ class Service extends AbstractSoapClientBase
      * Meta information extracted from the WSDL
      * - documentation: Create or update a Person. For creating a Person, make sure to set the id to nil. Will return the id of the Person in either case. SECURED BY [(cs.psv.person.EDIT_PERSON_EMPLOYEEDATA_OWN or cs.psv.person.CREATE_PERSON_EMPLOYEEDATA or
      * cs.psv.person.CREATE_PERSON_MAINDATA or cs.psv.person.EDIT_PERSON_MAINDATA or cs.psv.person.EDIT_PERSON_MAINDATA_OWN or cs.psv.person.CREATE_NEW_PERSON or CONTEXT_CS_PSV_ORGUNIT_CONTACTPERSON)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\SavePerson $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\SavePersonResponse|bool
      */
@@ -793,9 +793,9 @@ class Service extends AbstractSoapClientBase
      * Meta information extracted from the WSDL
      * - documentation: Update an existing Person. May not be used for creating a Person. The id returned will be the same as the id of the given Person. SECURED BY [(cs.psv.person.EDIT_PERSON_EMPLOYEEDATA_OWN or cs.psv.person.CREATE_PERSON_EMPLOYEEDATA or
      * cs.psv.person.CREATE_PERSON_MAINDATA or cs.psv.person.EDIT_PERSON_MAINDATA or cs.psv.person.EDIT_PERSON_MAINDATA_OWN or cs.psv.person.CREATE_NEW_PERSON or CONTEXT_CS_PSV_ORGUNIT_CONTACTPERSON)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\UpdatePerson $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\UpdatePersonResponse|bool
      */
@@ -818,9 +818,9 @@ class Service extends AbstractSoapClientBase
      * Meta information extracted from the WSDL
      * - documentation: Update an existing Person. May not be used for creating a Person. The id returned will be the same as the id of the given Person. SECURED BY [(cs.psv.person.EDIT_PERSON_EMPLOYEEDATA_OWN or cs.psv.person.CREATE_PERSON_EMPLOYEEDATA or
      * cs.psv.person.CREATE_PERSON_MAINDATA or cs.psv.person.EDIT_PERSON_MAINDATA or cs.psv.person.EDIT_PERSON_MAINDATA_OWN or cs.psv.person.CREATE_NEW_PERSON or CONTEXT_CS_PSV_ORGUNIT_CONTACTPERSON)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\UpdatePerson201912 $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\UpdatePerson201912Response|bool
      */
@@ -842,9 +842,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named updatePersonAttribute202006
      * Meta information extracted from the WSDL
      * - documentation: Update an additional attribute from given person. ID must not be NULL! SECURED BY [(cs.psv.person.EDIT_PERSON_ATTRIBUTE)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\UpdatePersonAttribute202006 $parameters
      * @return \FGTCLB\HisClient\PersonService\Struct\UpdatePersonAttribute202006Response|bool
      */
@@ -866,9 +866,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named updatePersonAttributeForPerson
      * Meta information extracted from the WSDL
      * - documentation: Update an additional attribute from given person. ID must not be NULL! SECURED BY [(cs.psv.person.EDIT_PERSON_ATTRIBUTE) and (cs.psv.person.EDIT_PERSON_ATTRIBUTE or cs.psv.person.EDIT_PERSON_ATTRIBUTE_OWN)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\PersonService\Struct\UpdatePersonAttributeForPerson $parameters
      * @return void|bool
      */
@@ -888,7 +888,7 @@ class Service extends AbstractSoapClientBase
     }
     /**
      * Returns the result
-     * @see AbstractSoapClientBase::getResult()
+     * @see AbstractSoapClient::getResult()
      * @return void|\FGTCLB\HisClient\PersonService\Struct\CreatePerson201912Response|\FGTCLB\HisClient\PersonService\Struct\CreatePerson202412Response|\FGTCLB\HisClient\PersonService\Struct\CreatePersonAttribute202006Response|\FGTCLB\HisClient\PersonService\Struct\CreatePersonIdentifierResponse|\FGTCLB\HisClient\PersonService\Struct\CreatePersonResponse|\FGTCLB\HisClient\PersonService\Struct\DeletePersonAttribute202006Response|\FGTCLB\HisClient\PersonService\Struct\DeletePersonIdentifierResponse|\FGTCLB\HisClient\PersonService\Struct\DeletePersonMarkOnlyResponse|\FGTCLB\HisClient\PersonService\Struct\FindPerson60Response|\FGTCLB\HisClient\PersonService\Struct\FindPerson201912Response|\FGTCLB\HisClient\PersonService\Struct\FindPersonIdentifiersResponse|\FGTCLB\HisClient\PersonService\Struct\FindPersonResponse|\FGTCLB\HisClient\PersonService\Struct\GenerateNewUsernameResponse|\FGTCLB\HisClient\PersonService\Struct\GeneratePersonIdentifierResponse|\FGTCLB\HisClient\PersonService\Struct\GetAllPersonAttributeTypesResponse|\FGTCLB\HisClient\PersonService\Struct\GetAllPersonPlaceholdersResponse|\FGTCLB\HisClient\PersonService\Struct\IsUsernameAlreadyAssignedResponse|\FGTCLB\HisClient\PersonService\Struct\ReadAllAcademicDegreesResponse|\FGTCLB\HisClient\PersonService\Struct\ReadAllGendersResponse|\FGTCLB\HisClient\PersonService\Struct\ReadAllPersonAttributesFromPersonResponse|\FGTCLB\HisClient\PersonService\Struct\ReadAllTitlesResponse|\FGTCLB\HisClient\PersonService\Struct\ReadPerson201806Response|\FGTCLB\HisClient\PersonService\Struct\ReadPerson201912Response|\FGTCLB\HisClient\PersonService\Struct\ReadPersonaldataResponse|\FGTCLB\HisClient\PersonService\Struct\ReadPersonAttributes202006Response|\FGTCLB\HisClient\PersonService\Struct\ReadPersonByIdentifierTypeAndValueResponse|\FGTCLB\HisClient\PersonService\Struct\ReadPersonIdentifiersResponse|\FGTCLB\HisClient\PersonService\Struct\ReadPersonResponse|\FGTCLB\HisClient\PersonService\Struct\SavePersonResponse|\FGTCLB\HisClient\PersonService\Struct\UpdatePerson201912Response|\FGTCLB\HisClient\PersonService\Struct\UpdatePersonAttribute202006Response|\FGTCLB\HisClient\PersonService\Struct\UpdatePersonResponse
      */
     public function getResult()

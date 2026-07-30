@@ -5,22 +5,22 @@ declare(strict_types=1);
 namespace FGTCLB\HisClient\AccountService\Service;
 
 use SoapFault;
-use WsdlToPhp\PackageBase\AbstractSoapClientBase;
+use FGTCLB\HisClientFacade\Soap\AbstractSoapClient;
 
 /**
  * This class stands for all operations
  * @subpackage Services
  */
-class Service extends AbstractSoapClientBase
+class Service extends AbstractSoapClient
 {
     /**
      * Method to call the operation originally named changePasswordForAccount
      * Meta information extracted from the WSDL
      * - documentation: The password will be set for the account. Before saving, the password will be hashed and the accountAuth of the Account will be set to HASH. The marker 'isInitialPassword' will be set to 'false'. SECURED BY
      * [(cs.psv.person.EDIT_PERSON_ACCOUNT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\AccountService\Struct\ChangePasswordForAccount $parameters
      * @return \FGTCLB\HisClient\AccountService\Struct\ChangePasswordForAccountResponse|bool
      */
@@ -43,9 +43,9 @@ class Service extends AbstractSoapClientBase
      * Meta information extracted from the WSDL
      * - documentation: Creates a new Account for a Person. The person is identified by its ID. If 'initialPassword' is true, the password of the Account will be saved as-is. Otherwise the password will be hashed by the algorithm configured in HISinOne.
      * Also, the accountauthId will be set to 'HASH' in this case. SECURED BY [(cs.psv.person.CREATE_PERSON_ACCOUNT or cs.psv.person.EDIT_PERSON_ACCOUNT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\AccountService\Struct\CreateAccount $parameters
      * @return \FGTCLB\HisClient\AccountService\Struct\CreateAccountResponse|bool
      */
@@ -67,9 +67,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named createNewAccountForPerson
      * Meta information extracted from the WSDL
      * - documentation: Create new Account with username and password for Person with specified id. To enrich the account with more data, see the operations readAccount and updateAccount. SECURED BY [(cs.psv.person.CREATE_PERSON_ACCOUNT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\AccountService\Struct\CreateNewAccountForPerson $parameters
      * @return \FGTCLB\HisClient\AccountService\Struct\CreateNewAccountForPersonResponse|bool
      */
@@ -91,9 +91,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named createNewBlockedAccountForPerson
      * Meta information extracted from the WSDL
      * - documentation: Create new blocked Account with username and password for Person with specified id SECURED BY [(cs.psv.person.CREATE_PERSON_ACCOUNT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\AccountService\Struct\CreateNewBlockedAccountForPerson $parameters
      * @return \FGTCLB\HisClient\AccountService\Struct\CreateNewBlockedAccountForPersonResponse|bool
      */
@@ -115,9 +115,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named deleteAccount
      * Meta information extracted from the WSDL
      * - documentation: Deletes an account. Marking the account as invalid is recommended instead, use updateAccount to do so. SECURED BY [(cs.psv.person.DELETE_PERSON_ACCOUNT or cs.psv.person.EDIT_PERSON_ACCOUNT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\AccountService\Struct\DeleteAccount $parameters
      * @return \FGTCLB\HisClient\AccountService\Struct\DeleteAccountResponse|bool
      */
@@ -139,9 +139,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named findAccount
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.person.VIEW_PERSON_ACCOUNT or cs.psv.person.EDIT_PERSON_ACCOUNT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\AccountService\Struct\FindAccount $parameters
      * @return \FGTCLB\HisClient\AccountService\Struct\FindAccountResponse|bool
      */
@@ -163,9 +163,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named readAccount
      * Meta information extracted from the WSDL
      * - documentation: Reads an account. Returns nil if no account exists with given ID. SECURED BY [(cs.psv.person.VIEW_PERSON_ACCOUNT or cs.psv.person.EDIT_PERSON_ACCOUNT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\AccountService\Struct\ReadAccount $parameters
      * @return \FGTCLB\HisClient\AccountService\Struct\ReadAccountResponse|bool
      */
@@ -187,9 +187,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named readAccount201712
      * Meta information extracted from the WSDL
      * - documentation: Reads an account. Returns nil if no account exists with given ID. SECURED BY [(cs.psv.person.VIEW_PERSON_ACCOUNT or cs.psv.person.EDIT_PERSON_ACCOUNT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\AccountService\Struct\ReadAccount201712 $parameters
      * @return \FGTCLB\HisClient\AccountService\Struct\ReadAccount201712Response|bool
      */
@@ -212,9 +212,9 @@ class Service extends AbstractSoapClientBase
      * Meta information extracted from the WSDL
      * - documentation: Save a List of Accounts for Person. SECURED BY [(cs.psv.account.reset_access_data or cs.psv.person.EDIT_PERSON_ACCOUNT or cs.psv.person.EDIT_PERSON_ACCOUNT_OWN or cs.psv.person.CREATE_PERSON_ACCOUNT or
      * cs.psv.person.DELETE_PERSON_ACCOUNT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\AccountService\Struct\SaveAccount $parameters
      * @return \FGTCLB\HisClient\AccountService\Struct\SaveAccountResponse|bool
      */
@@ -236,9 +236,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named searchAccountForPerson
      * Meta information extracted from the WSDL
      * - documentation: Searching all Accounts for Person. SECURED BY [(RIGHT_IS_LOGGED_IN or cs.psv.person.EDIT_PERSON_ACCOUNT or cs.psv.person.VIEW_PERSON_ACCOUNT or cs.psv.person.VIEW_PERSON_ACCOUNT_OWN)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\AccountService\Struct\SearchAccountForPerson $parameters
      * @return \FGTCLB\HisClient\AccountService\Struct\SearchAccountForPersonResponse|bool
      */
@@ -260,9 +260,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named searchAccountForPerson61
      * Meta information extracted from the WSDL
      * - documentation: Read all accounts to given person. SECURED BY [(RIGHT_IS_LOGGED_IN or cs.psv.person.EDIT_PERSON_ACCOUNT or cs.psv.person.VIEW_PERSON_ACCOUNT or cs.psv.person.VIEW_PERSON_ACCOUNT_OWN)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\AccountService\Struct\SearchAccountForPerson61 $parameters
      * @return \FGTCLB\HisClient\AccountService\Struct\SearchAccountForPerson61Response|bool
      */
@@ -285,9 +285,9 @@ class Service extends AbstractSoapClientBase
      * Meta information extracted from the WSDL
      * - documentation: Updates an existing account. This will not allow any altering of the owning Person or the username of any existing Accounts. The password of the Account will be saved as-is, no further hashing will be performed. Please make sure to
      * choose the accountauthId accordingly. SECURED BY [(cs.psv.person.EDIT_PERSON_ACCOUNT or CONTEXT_CM_STU_FORMER_ACCOUNT_PROZESS)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\AccountService\Struct\UpdateAccount $parameters
      * @return \FGTCLB\HisClient\AccountService\Struct\UpdateAccountResponse|bool
      */
@@ -310,9 +310,9 @@ class Service extends AbstractSoapClientBase
      * Meta information extracted from the WSDL
      * - documentation: Updates an existing account. This will not allow any altering of the owning Person or the username of any existing Accounts. The password of the Account will be saved as-is, no further hashing will be performed. Please make sure to
      * choose the accountauthId accordingly. SECURED BY [(cs.psv.person.EDIT_PERSON_ACCOUNT or CONTEXT_CM_STU_FORMER_ACCOUNT_PROZESS)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\AccountService\Struct\UpdateAccount201712 $parameters
      * @return \FGTCLB\HisClient\AccountService\Struct\UpdateAccount201712Response|bool
      */
@@ -332,7 +332,7 @@ class Service extends AbstractSoapClientBase
     }
     /**
      * Returns the result
-     * @see AbstractSoapClientBase::getResult()
+     * @see AbstractSoapClient::getResult()
      * @return \FGTCLB\HisClient\AccountService\Struct\ChangePasswordForAccountResponse|\FGTCLB\HisClient\AccountService\Struct\CreateAccountResponse|\FGTCLB\HisClient\AccountService\Struct\CreateNewAccountForPersonResponse|\FGTCLB\HisClient\AccountService\Struct\CreateNewBlockedAccountForPersonResponse|\FGTCLB\HisClient\AccountService\Struct\DeleteAccountResponse|\FGTCLB\HisClient\AccountService\Struct\FindAccountResponse|\FGTCLB\HisClient\AccountService\Struct\ReadAccount201712Response|\FGTCLB\HisClient\AccountService\Struct\ReadAccountResponse|\FGTCLB\HisClient\AccountService\Struct\SaveAccountResponse|\FGTCLB\HisClient\AccountService\Struct\SearchAccountForPerson61Response|\FGTCLB\HisClient\AccountService\Struct\SearchAccountForPersonResponse|\FGTCLB\HisClient\AccountService\Struct\UpdateAccount201712Response|\FGTCLB\HisClient\AccountService\Struct\UpdateAccountResponse
      */
     public function getResult()

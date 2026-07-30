@@ -5,21 +5,21 @@ declare(strict_types=1);
 namespace FGTCLB\HisClient\OrgUnitService\Service;
 
 use SoapFault;
-use WsdlToPhp\PackageBase\AbstractSoapClientBase;
+use FGTCLB\HisClientFacade\Soap\AbstractSoapClient;
 
 /**
  * This class stands for all operations
  * @subpackage Services
  */
-class Service extends AbstractSoapClientBase
+class Service extends AbstractSoapClient
 {
     /**
      * Method to call the operation originally named childrenSizeOfOrgunit
      * Meta information extracted from the WSDL
      * - documentation: SECURED BY [(cs.psv.orgtree.VIEW_ORGUNIT_TREE)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\OrgUnitService\Struct\ChildrenSizeOfOrgunit $parameters
      * @return \FGTCLB\HisClient\OrgUnitService\Struct\ChildrenSizeOfOrgunitResponse|bool
      */
@@ -41,9 +41,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named findAllVersionsByLid
      * Meta information extracted from the WSDL
      * - documentation: Look-up for all versions of an organizational unit. Will return a list of IDs and values of all available versions matching the given lid. SECURED BY [(cs.psv.orgtree.SEARCH_ORGUNIT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\OrgUnitService\Struct\FindAllVersionsByLid $parameters
      * @return \FGTCLB\HisClient\OrgUnitService\Struct\FindAllVersionsByLidResponse|bool
      */
@@ -65,9 +65,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named findOrgUnit
      * Meta information extracted from the WSDL
      * - documentation: Look-up for an organizational unit. Will return a distinct list of IDs of all those units that match all given criteria. SECURED BY [(cs.psv.orgtree.SEARCH_ORGUNIT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\OrgUnitService\Struct\FindOrgUnit $parameters
      * @return \FGTCLB\HisClient\OrgUnitService\Struct\FindOrgUnitResponse|bool
      */
@@ -89,9 +89,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named findOrgUnit60
      * Meta information extracted from the WSDL
      * - documentation: Look-up for an organizational unit. Will return a list of IDs and values of all those units that match all given criteria. SECURED BY [(cs.psv.orgtree.SEARCH_ORGUNIT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\OrgUnitService\Struct\FindOrgUnit60 $parameters
      * @return \FGTCLB\HisClient\OrgUnitService\Struct\FindOrgUnit60Response|bool
      */
@@ -113,9 +113,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named findOrgUnit61
      * Meta information extracted from the WSDL
      * - documentation: Look-up for an organizational unit. Will return a list of IDs and values of all those units that match all given criteria. SECURED BY [(cs.psv.orgtree.SEARCH_ORGUNIT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\OrgUnitService\Struct\FindOrgUnit61 $parameters
      * @return \FGTCLB\HisClient\OrgUnitService\Struct\FindOrgUnit61Response|bool
      */
@@ -137,9 +137,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named getOrgunitLid
      * Meta information extracted from the WSDL
      * - documentation: Load the lid of an organizational unit specified by a given id SECURED BY [(cs.psv.orgunit.VIEW_ORGUNIT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\OrgUnitService\Struct\GetOrgunitLid $parameters
      * @return \FGTCLB\HisClient\OrgUnitService\Struct\GetOrgunitLidResponse|bool
      */
@@ -161,9 +161,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named getOrgunitWithChildren
      * Meta information extracted from the WSDL
      * - documentation: Load all children units of an organizational unit specified by a given lid SECURED BY [(cs.psv.orgtree.VIEW_ORGUNIT_TREE)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\OrgUnitService\Struct\GetOrgunitWithChildren $parameters
      * @return \FGTCLB\HisClient\OrgUnitService\Struct\GetOrgunitWithChildrenResponse|bool
      */
@@ -185,9 +185,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named getUniversityLid
      * Meta information extracted from the WSDL
      * - documentation: Load long-living id of university SECURED BY [(cs.psv.orgtree.SEARCH_ORGUNIT or cs.psv.orgunit.VIEW_ORGUNIT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\OrgUnitService\Struct\GetUniversityLid $parameters
      * @return \FGTCLB\HisClient\OrgUnitService\Struct\GetUniversityLidResponse|bool
      */
@@ -209,9 +209,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named readOrgUnit
      * Meta information extracted from the WSDL
      * - documentation: Read all values of an existing organizational unit. Will return a list of IDs and values matching all given criteria. SECURED BY [(cs.psv.orgunit.VIEW_ORGUNIT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\OrgUnitService\Struct\ReadOrgUnit $parameters
      * @return \FGTCLB\HisClient\OrgUnitService\Struct\ReadOrgUnitResponse|bool
      */
@@ -233,9 +233,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named readOrgUnit61
      * Meta information extracted from the WSDL
      * - documentation: Read all values of an existing organizational unit. Will return a list of IDs and values matching all given criteria. SECURED BY [(cs.psv.orgunit.VIEW_ORGUNIT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\OrgUnitService\Struct\ReadOrgUnit61 $parameters
      * @return \FGTCLB\HisClient\OrgUnitService\Struct\ReadOrgUnit61Response|bool
      */
@@ -258,9 +258,9 @@ class Service extends AbstractSoapClientBase
      * Meta information extracted from the WSDL
      * - documentation: Read all values of child elements belonging to an existing organizational unit (Must be specified by a given lid and date). Will return a list of IDs and values of all available child elements matching all given criteria. SECURED BY
      * [(cs.psv.orgtree.VIEW_ORGUNIT_TREE)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\OrgUnitService\Struct\ReadOrgUnitsChildren $parameters
      * @return \FGTCLB\HisClient\OrgUnitService\Struct\ReadOrgUnitsChildrenResponse|bool
      */
@@ -283,9 +283,9 @@ class Service extends AbstractSoapClientBase
      * Meta information extracted from the WSDL
      * - documentation: Read all values of child elements belonging to an existing organizational unit (Must be specified by a given lid and date). Will return a list of IDs and values of all available child elements matching all given criteria. SECURED BY
      * [(cs.psv.orgtree.VIEW_ORGUNIT_TREE)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\OrgUnitService\Struct\ReadOrgUnitsChildren61 $parameters
      * @return \FGTCLB\HisClient\OrgUnitService\Struct\ReadOrgUnitsChildren61Response|bool
      */
@@ -307,9 +307,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named readOrgunitById
      * Meta information extracted from the WSDL
      * - documentation: Read all values of an existing organizational unit specified by a given id. SECURED BY [(cs.psv.orgunit.VIEW_ORGUNIT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\OrgUnitService\Struct\ReadOrgunitById $parameters
      * @return \FGTCLB\HisClient\OrgUnitService\Struct\ReadOrgunitByIdResponse|bool
      */
@@ -331,9 +331,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named removeOrgunits
      * Meta information extracted from the WSDL
      * - documentation: Remove all versions of the orgunit. The right 'cs.psv.DELETE_ORGUNIT' is needed to use this method. SECURED BY [(cs.psv.orgunit.DELETE_ORGUNIT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\OrgUnitService\Struct\RemoveOrgunits $parameters
      * @return void|bool
      */
@@ -356,9 +356,9 @@ class Service extends AbstractSoapClientBase
      * Meta information extracted from the WSDL
      * - documentation: Save an initial build organizational unit. If validity parameters are not set, validity period defaults to 01.01.1900-31.12.2100. One of the following rights is needed to use this method: 'cs.psv.orgunit.EDIT_ORGUNIT',
      * 'cs.psv.orgunit.CREATE_ORGUNIT' SECURED BY [(cs.psv.orgunit.EDIT_ORGUNIT or cs.psv.orgunit.CREATE_ORGUNIT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\OrgUnitService\Struct\SaveNewOrgunit $parameters
      * @return \FGTCLB\HisClient\OrgUnitService\Struct\SaveNewOrgunitResponse|bool
      */
@@ -382,9 +382,9 @@ class Service extends AbstractSoapClientBase
      * - documentation: Save an new version of an existing organizational unit. The attribute id must contain the id of the old version of the orgunit. Same for attributes lid and versionedObjId (the latter equals lid). At least one of the two validity
      * attributes must be set to date which doesn't overlap with other versions of existing OrgUnit. One of the following rights is needed to use this method: 'cs.psv.orgunit.EDIT_ORGUNIT', 'cs.psv.orgunit.CREATE_ORGUNIT' SECURED BY
      * [(cs.psv.orgunit.EDIT_ORGUNIT or cs.psv.orgunit.CREATE_ORGUNIT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\OrgUnitService\Struct\SaveNewVersionOfExistingOrgunit $parameters
      * @return \FGTCLB\HisClient\OrgUnitService\Struct\SaveNewVersionOfExistingOrgunitResponse|bool
      */
@@ -406,9 +406,9 @@ class Service extends AbstractSoapClientBase
      * Method to call the operation originally named updateOrgunit
      * Meta information extracted from the WSDL
      * - documentation: Update and save an existing organizational unit. SECURED BY [(cs.psv.orgunit.EDIT_ORGUNIT or cs.psv.orgunit.CREATE_ORGUNIT)]
-     * @uses AbstractSoapClientBase::getSoapClient()
-     * @uses AbstractSoapClientBase::setResult()
-     * @uses AbstractSoapClientBase::saveLastError()
+     * @uses AbstractSoapClient::getSoapClient()
+     * @uses AbstractSoapClient::setResult()
+     * @uses AbstractSoapClient::saveLastError()
      * @param \FGTCLB\HisClient\OrgUnitService\Struct\UpdateOrgunit $parameters
      * @return \FGTCLB\HisClient\OrgUnitService\Struct\UpdateOrgunitResponse|bool
      */
@@ -428,7 +428,7 @@ class Service extends AbstractSoapClientBase
     }
     /**
      * Returns the result
-     * @see AbstractSoapClientBase::getResult()
+     * @see AbstractSoapClient::getResult()
      * @return void|\FGTCLB\HisClient\OrgUnitService\Struct\ChildrenSizeOfOrgunitResponse|\FGTCLB\HisClient\OrgUnitService\Struct\FindAllVersionsByLidResponse|\FGTCLB\HisClient\OrgUnitService\Struct\FindOrgUnit60Response|\FGTCLB\HisClient\OrgUnitService\Struct\FindOrgUnit61Response|\FGTCLB\HisClient\OrgUnitService\Struct\FindOrgUnitResponse|\FGTCLB\HisClient\OrgUnitService\Struct\GetOrgunitLidResponse|\FGTCLB\HisClient\OrgUnitService\Struct\GetOrgunitWithChildrenResponse|\FGTCLB\HisClient\OrgUnitService\Struct\GetUniversityLidResponse|\FGTCLB\HisClient\OrgUnitService\Struct\ReadOrgUnit61Response|\FGTCLB\HisClient\OrgUnitService\Struct\ReadOrgunitByIdResponse|\FGTCLB\HisClient\OrgUnitService\Struct\ReadOrgUnitResponse|\FGTCLB\HisClient\OrgUnitService\Struct\ReadOrgUnitsChildren61Response|\FGTCLB\HisClient\OrgUnitService\Struct\ReadOrgUnitsChildrenResponse|\FGTCLB\HisClient\OrgUnitService\Struct\SaveNewOrgunitResponse|\FGTCLB\HisClient\OrgUnitService\Struct\SaveNewVersionOfExistingOrgunitResponse|\FGTCLB\HisClient\OrgUnitService\Struct\UpdateOrgunitResponse
      */
     public function getResult()
