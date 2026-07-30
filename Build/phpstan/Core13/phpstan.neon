@@ -16,7 +16,11 @@ parameters:
   paths:
     - ../../../Classes
     - ../../../Configuration
+    - ../../../Library/PHP
     - ../../../Tests
 
   excludePaths:
-    - ../../../Tests/*/Core14/*
+    analyseAndScan:
+      - ../../../Tests/*/Core14/*
+    analyse:
+      - ../../../Library/PHP/HisClient/*
