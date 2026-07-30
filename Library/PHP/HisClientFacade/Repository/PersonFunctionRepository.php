@@ -9,9 +9,9 @@ use FGTCLB\HisClient\PersonOrgunitService\Struct\ReadAffiliation;
 use FGTCLB\HisClient\PersonOrgunitService\Struct\ReadAffiliationResponse;
 use FGTCLB\HisClient\PersonOrgunitService\Struct\SearchAffiliationsForPerson;
 use FGTCLB\HisClient\PersonOrgunitService\Struct\SearchAffiliationsForPersonResponse;
+use FGTCLB\HisClientFacade\Collection\PersonFunctionCollection;
 use FGTCLB\HisClientFacade\Exception\Exception;
 use FGTCLB\HisClientFacade\Factory\PersonFunctionFactory;
-use FGTCLB\HisClientFacade\Model\PersonFunction;
 
 readonly class PersonFunctionRepository
 {
@@ -20,10 +20,7 @@ readonly class PersonFunctionRepository
         private PersonFunctionFactory $personFunctionFactory,
     ) {}
 
-    /**
-     * @return PersonFunction[]
-     */
-    public function findByPersonIdForLanguage(int $personId, string $language): array
+    public function findByPersonIdForLanguage(int $personId, string $language): PersonFunctionCollection
     {
         try {
             /** @var SearchAffiliationsForPersonResponse */
@@ -50,6 +47,6 @@ readonly class PersonFunctionRepository
             }
             $personFunctions[] = $this->personFunctionFactory->create($affiliationDetailsResponse->getAffiliation(), $language);
         }
-        return $personFunctions;
+        return PersonFunctionCollection::fromArray($personFunctions);
     }
 }

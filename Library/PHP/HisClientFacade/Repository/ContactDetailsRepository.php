@@ -7,9 +7,9 @@ namespace FGTCLB\HisClientFacade\Repository;
 use FGTCLB\HisClient\PersonAddressService\Service\Service as PersonAddressService;
 use FGTCLB\HisClient\PersonAddressService\Struct\ReadAddresses202506;
 use FGTCLB\HisClient\PersonAddressService\Struct\ReadAddresses202506Response;
+use FGTCLB\HisClientFacade\Collection\ContactDetailsCollection;
 use FGTCLB\HisClientFacade\Exception\Exception;
 use FGTCLB\HisClientFacade\Factory\ContactDetailsFactory;
-use FGTCLB\HisClientFacade\Model\ContactDetails;
 
 readonly class ContactDetailsRepository
 {
@@ -18,10 +18,7 @@ readonly class ContactDetailsRepository
         private ContactDetailsFactory $contactDetailsFactory,
     ) {}
 
-    /**
-     * @return ContactDetails[]
-     */
-    public function findByPersonIdForLanguage(int $personId, string $language): array
+    public function findByPersonIdForLanguage(int $personId, string $language): ContactDetailsCollection
     {
         try {
             /** @var ReadAddresses202506Response */
@@ -37,6 +34,6 @@ readonly class ContactDetailsRepository
         foreach ($personAddressesResponse->getPersonAddressesByNotifications202506()->getPersonAddressesByNotification202506() ?? [] as $addresses) {
             $contactDetails[] = $this->contactDetailsFactory->create($addresses, $language);
         }
-        return $contactDetails;
+        return ContactDetailsCollection::fromArray($contactDetails);
     }
 }
