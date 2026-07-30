@@ -9,9 +9,9 @@ use FGTCLB\HisClient\PersonService\Struct\FindPerson60;
 use FGTCLB\HisClient\PersonService\Struct\FindPerson60Response;
 use FGTCLB\HisClient\PersonService\Struct\ReadPerson;
 use FGTCLB\HisClient\PersonService\Struct\ReadPersonResponse;
+use FGTCLB\HisClientFacade\Collection\PersonCollection;
 use FGTCLB\HisClientFacade\Exception\Exception;
 use FGTCLB\HisClientFacade\Factory\PersonFactory;
-use FGTCLB\HisClientFacade\Model\Person;
 
 readonly class PersonRepository
 {
@@ -22,9 +22,8 @@ readonly class PersonRepository
 
     /**
      * @param int[] $roleIds
-     * @return Person[]
      */
-    public function findByRolesForLanguage(array $roleIds, string $language): array
+    public function findByRolesForLanguage(array $roleIds, string $language): PersonCollection
     {
         try {
             /** @var FindPerson60Response */
@@ -55,6 +54,6 @@ readonly class PersonRepository
                 $persons[] = $this->personFactory->create($personResponse->getPerson(), $language);
             }
         }
-        return $persons;
+        return PersonCollection::fromArray($persons);
     }
 }

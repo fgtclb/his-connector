@@ -7,6 +7,10 @@ namespace FGTCLB\HisClientFacade\Factory;
 use FGTCLB\HisClient\PersonOrgunitService\Struct\Affiliation60;
 use FGTCLB\HisClient\PersonOrgunitService\Struct\AffiliationLocationPostaddressDto;
 use FGTCLB\HisClient\PersonOrgunitService\Struct\AffiliationLocationRoomDto;
+use FGTCLB\HisClientFacade\Collection\EmailAddressCollection;
+use FGTCLB\HisClientFacade\Collection\HyperlinkCollection;
+use FGTCLB\HisClientFacade\Collection\MessengerCollection;
+use FGTCLB\HisClientFacade\Collection\PhoneNumberCollection;
 use FGTCLB\HisClientFacade\Enum\AddressType;
 use FGTCLB\HisClientFacade\Model\EmailAddress;
 use FGTCLB\HisClientFacade\Model\Hyperlink;
@@ -69,10 +73,10 @@ readonly class PersonFunctionFactory
             orgUnit: $this->orgUnitRepository->findByLonglivingId($affiliation->getOrgunitLid()),
             room: $room,
             postAddress: $postAddress,
-            emailAddresses: $emailAddresses,
-            hyperlinks: $hyperlinks,
-            phoneNumbers: $phoneNumbers,
-            messengers: $messengers,
+            emailAddresses: EmailAddressCollection::fromArray($emailAddresses),
+            hyperlinks: HyperlinkCollection::fromArray($hyperlinks),
+            phoneNumbers: PhoneNumberCollection::fromArray($phoneNumbers),
+            messengers: MessengerCollection::fromArray($messengers),
         );
     }
 }

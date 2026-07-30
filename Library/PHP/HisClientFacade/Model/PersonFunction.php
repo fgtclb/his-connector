@@ -6,6 +6,10 @@ namespace FGTCLB\HisClientFacade\Model;
 
 use FGTCLB\HisClient\FacilityService\Struct\Room;
 use FGTCLB\HisClient\OrgUnitService\Struct\OrgUnit;
+use FGTCLB\HisClientFacade\Collection\EmailAddressCollection;
+use FGTCLB\HisClientFacade\Collection\HyperlinkCollection;
+use FGTCLB\HisClientFacade\Collection\MessengerCollection;
+use FGTCLB\HisClientFacade\Collection\PhoneNumberCollection;
 
 final readonly class PersonFunction
 {
@@ -14,13 +18,9 @@ final readonly class PersonFunction
         public ?OrgUnit $orgUnit,
         public ?Room $room,
         public ?PostAddress $postAddress,
-        /** @var EmailAddress[] */
-        public array $emailAddresses,
-        /** @var PhoneNumber[] */
-        public array $phoneNumbers,
-        /** @var Hyperlink[] */
-        public array $hyperlinks,
-        /** @var Messenger[] */
-        public array $messengers,
+        public EmailAddressCollection $emailAddresses,
+        public PhoneNumberCollection $phoneNumbers,
+        public HyperlinkCollection $hyperlinks,
+        public MessengerCollection $messengers,
     ) {}
 }
