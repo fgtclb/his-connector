@@ -9,10 +9,10 @@ use FGTCLB\HisClient\KeyvalueService\Struct\CountryValue;
 use FGTCLB\HisClient\MimedataService\Struct\Mimedata;
 use FGTCLB\HisClient\PersonService\Struct\AcademicDegree;
 use FGTCLB\HisClient\PersonService\Struct\Gender;
-use FGTCLB\HisClient\PersonService\Struct\PersonAttributeDto;
 use FGTCLB\HisClient\PersonService\Struct\PersoninfoDto;
 use FGTCLB\HisClient\PersonService\Struct\Title;
 use FGTCLB\HisClientFacade\Collection\ContactDetailsCollection;
+use FGTCLB\HisClientFacade\Collection\PersonAttributeCollection;
 use FGTCLB\HisClientFacade\Collection\PersonFunctionCollection;
 
 final readonly class Person
@@ -44,7 +44,7 @@ final readonly class Person
         private \Closure $fetchFunctionsClosure,
         /** @var \Closure(): CompleteAccount[] */
         private \Closure $fetchAccountsClosure,
-        /** @var \Closure(): PersonAttributeDto[] */
+        /** @var \Closure(): PersonAttributeCollection */
         private \Closure $fetchAttributesClosure,
     ) {}
 
@@ -78,10 +78,7 @@ final readonly class Person
         return ($this->fetchAccountsClosure)();
     }
 
-    /**
-     * @return PersonAttributeDto[]
-     */
-    public function getAttributes(): array
+    public function getAttributes(): PersonAttributeCollection
     {
         // TODO cache result? Use proper lazy object?
         return ($this->fetchAttributesClosure)();
