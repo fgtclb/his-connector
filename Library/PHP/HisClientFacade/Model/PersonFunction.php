@@ -15,6 +15,7 @@ final readonly class PersonFunction
 {
     public function __construct(
         public int $id,
+        public string $title,
         public ?OrgUnit $orgUnit,
         public ?Room $room,
         public ?PostAddress $postAddress,
