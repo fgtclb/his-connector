@@ -1,0 +1,62 @@
+{namespace be=TYPO3\CMS\Backend\ViewHelpers}
+<f:layout name="Module" />
+
+<f:section name="Content">
+	<h1>HIS Connector — Mappings</h1>
+	<div class="table-fit">
+    <table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th>File</th>
+					<th></th>
+				</tr>
+			</thead>
+			<f:for each="{validConfigFiles}" as="config">
+				<tr>
+					<td>
+						<b>
+							<a href="{be:moduleLink(route:'hisconnector.mapping', arguments: {file: config.originalFile})}">
+								{config.name}
+							</a>
+						</b>
+					</td>
+					<td>{config.description}</td>
+					<td>{config.originalFile}</td>
+					<td class="col-control">
+						<div class="btn-group">
+
+							<a href="{be:moduleLink(route:'hisconnector.mapping', arguments: {file: config.originalFile})}" class="btn btn-default" title="Mapping Preview">
+								<typo3-backend-icon identifier="actions-document-view" size="small"></typo3-backend-icon>
+							</a>
+							<a href="{be:moduleLink(route:'hisconnector.inspect', arguments: {file: config.originalFile})}" class="btn btn-default" title="HIS Data Inspector">
+								<typo3-backend-icon identifier="actions-database" size="small"></typo3-backend-icon>
+							</a>
+						</div>
+					</td>
+				</tr>
+			</f:for>
+		</table>
+	</div>
+
+	<f:if condition="{invalidConfigFiles}">
+		<h2>Invalid Mapping Configurations</h2>
+		<div class="table-fit">
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>File</th>
+						<th>Error</th>
+					</tr>
+				</thead>
+				<f:for each="{invalidConfigFiles}" as="config">
+					<tr>
+						<td>{config.originalFile}</td>
+						<td>{config.exception.message} ({config.exception.code})</td>
+					</tr>
+				</f:for>
+			</table>
+		</div>
+	</f:if>
+</f:section>

@@ -476,4 +476,24 @@ final class SyncConfigurationTest extends UnitTestCase
         $subject = SyncConfiguration::fromConfig(['source' => ['repository' => 'foo', 'fetch' => 'bar()'], 'mapping' => $fieldMappings]);
         $this->assertEquals($expectedMapping, $subject->getMappingForClassNameAndTableName($className, $tableName));
     }
+
+    #[Test]
+    public function syncConfigWithStoragePage(): void
+    {
+        $subject = SyncConfiguration::fromConfig([
+            'name' => 'name value',
+            'description' => 'description value',
+            'version' => 'version value',
+            'schema' => 'schema value',
+            'source' => ['repository' => 'foo', 'fetch' => 'bar()'],
+            'mapping' => [],
+        ], 'originalFile value');
+        $subject = $subject->withStoragePage(123);
+        $this->assertSame(123, $subject->storagePage);
+        $this->assertSame('name value', $subject->name);
+        $this->assertSame('description value', $subject->description);
+        $this->assertSame('version value', $subject->version);
+        $this->assertSame('schema value', $subject->schema);
+        $this->assertSame('originalFile value', $subject->originalFile);
+    }
 }

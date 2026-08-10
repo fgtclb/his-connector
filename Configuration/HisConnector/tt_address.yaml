@@ -1,0 +1,64 @@
+name: tt_address
+description: 'Imports relevant fields from HIS to tt_address'
+$schema: 'https://www.fgtclb.com/schemas/his-connector/v1.json'
+version: 1
+source:
+  repository: 'personRepository'
+  fetch: 'findByRolesForLanguage(filter["roles"], filter["language"])'
+  filter:
+    language: 'de'
+    roles: [3, 69]
+mapping:
+  - entityClassName: FGTCLB\HisClientFacade\Model\Person
+    tableName: tt_address
+    fields:
+      gender:
+        sourceField: 'person.gender.uniquename'
+        valueMappingDefault: ''
+        valueMapping:
+          - source: 'M'
+            target: 'm'
+          - source: 'W'
+            target: 'f'
+      first_name:
+        sourceField: 'person.firstname'
+      last_name:
+        sourceField: 'person.surname'
+      title:
+        sourceField: 'person.title.shorttext'
+      birthday:
+        sourceField: 'person.dateofbirth'
+        # valueProcessing:
+        #   - convertToTimestamp
+      company:
+        sourceExpression: 'person.getFunctions().first()?.postAddress?.company ?? person.getFunctions().first()?.orgUnit?.displayText'
+      position:
+        sourceExpression: 'person.getFunctions().first()?.type?.defaultText'
+      address:
+        sourceExpression: 'person.getFunctions().first()?.postAddress?.street'
+      city:
+        sourceExpression: 'person.getFunctions().first()?.postAddress?.city'
+      zip:
+        sourceExpression: 'person.getFunctions().first()?.postAddress?.postcode'
+      region:
+        sourceExpression: 'person.getFunctions().first()?.postAddress?.state'
+      country:
+        sourceExpression: 'person.getFunctions().first()?.postAddress?.country?.getDefaulttext()'
+      building:
+        sourceExpression: 'person.getFunctions().first()?.room?.building?.building~" ("~person.getFunctions().first()?.room?.building?.campus~")"'
+      room:
+        sourceExpression: 'person.getFunctions().first()?.room?.defaultText'
+      email:
+        sourceExpression: 'person.getContactDetails().first()?.emailAddresses.onlyInDomain("business").first()?.email'
+      phone:
+        sourceExpression: 'person.getContactDetails().first()?.phoneNumbers.onlyInDomain("business").onlyOfType("phone").first()?.phoneNumber'
+      mobile:
+        sourceExpression: 'person.getContactDetails().first()?.phoneNumbers.onlyInDomain("business").onlyOfType("mobile").first()?.phoneNumber'
+      www:
+        sourceExpression: 'person.getContactDetails().first()?.hyperlinks.onlyInDomain("business").onlyOfType("www").first()?.hyperlink'
+      # image:
+      #   sourceField: 'person.getPictures(1)'
+      #   valueProcessing:
+      #     - referenceFile
+
+
