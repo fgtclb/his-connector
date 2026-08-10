@@ -12,7 +12,7 @@ use FGTCLB\HisClientFacade\Model\Messenger;
  *
  * @immutable
  */
-final readonly class MessengerCollection implements \IteratorAggregate, \Countable
+final readonly class MessengerCollection implements \IteratorAggregate, CollectionInterface
 {
     /**
      * @var list<Messenger>
@@ -49,5 +49,15 @@ final readonly class MessengerCollection implements \IteratorAggregate, \Countab
     public function count(): int
     {
         return count($this->items);
+    }
+
+    public function first(): ?Messenger
+    {
+        return array_first($this->items);
+    }
+
+    public function last(): ?Messenger
+    {
+        return array_last($this->items);
     }
 }

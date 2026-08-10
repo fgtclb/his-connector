@@ -12,7 +12,7 @@ use FGTCLB\HisClientFacade\Model\Hyperlink;
  *
  * @immutable
  */
-final readonly class HyperlinkCollection implements \IteratorAggregate, \Countable
+final readonly class HyperlinkCollection implements \IteratorAggregate, CollectionInterface
 {
     /**
      * @var list<Hyperlink>
@@ -49,5 +49,31 @@ final readonly class HyperlinkCollection implements \IteratorAggregate, \Countab
     public function count(): int
     {
         return count($this->items);
+    }
+
+    public function first(): ?Hyperlink
+    {
+        return array_first($this->items);
+    }
+
+    public function last(): ?Hyperlink
+    {
+        return array_last($this->items);
+    }
+
+    public function onlyInDomain(string $domain): self
+    {
+        return self::fromArray(array_values(array_filter(
+            $this->items,
+            fn(Hyperlink $hyperlink) => $hyperlink->domain === $domain,
+        )));
+    }
+
+    public function onlyOfType(string $type): self
+    {
+        return self::fromArray(array_values(array_filter(
+            $this->items,
+            fn(Hyperlink $hyperlink) => $hyperlink->type === $type,
+        )));
     }
 }

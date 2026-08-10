@@ -12,7 +12,7 @@ use FGTCLB\HisClientFacade\Model\EmailAddress;
  *
  * @immutable
  */
-final readonly class EmailAddressCollection implements \IteratorAggregate, \Countable
+final readonly class EmailAddressCollection implements \IteratorAggregate, CollectionInterface
 {
     /**
      * @var list<EmailAddress>
@@ -49,5 +49,39 @@ final readonly class EmailAddressCollection implements \IteratorAggregate, \Coun
     public function count(): int
     {
         return count($this->items);
+    }
+
+    public function first(): ?EmailAddress
+    {
+        return array_first($this->items);
+    }
+
+    public function last(): ?EmailAddress
+    {
+        return array_last($this->items);
+    }
+
+    public function onlyInDomain(string $domain): self
+    {
+        return self::fromArray(array_values(array_filter(
+            $this->items,
+            fn(EmailAddress $emailAddress) => $emailAddress->domain === $domain,
+        )));
+    }
+
+    public function onlyVerified(): self
+    {
+        return self::fromArray(array_values(array_filter(
+            $this->items,
+            fn(EmailAddress $emailAddress) => $emailAddress->isVerified,
+        )));
+    }
+
+    public function onlyNotVerified(): self
+    {
+        return self::fromArray(array_values(array_filter(
+            $this->items,
+            fn(EmailAddress $emailAddress) => !$emailAddress->isVerified,
+        )));
     }
 }

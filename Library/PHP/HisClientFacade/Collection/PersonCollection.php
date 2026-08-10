@@ -12,7 +12,7 @@ use FGTCLB\HisClientFacade\Model\Person;
  *
  * @immutable
  */
-final readonly class PersonCollection implements \IteratorAggregate, \Countable
+final readonly class PersonCollection implements \IteratorAggregate, CollectionInterface
 {
     /**
      * @var list<Person>
@@ -49,5 +49,15 @@ final readonly class PersonCollection implements \IteratorAggregate, \Countable
     public function count(): int
     {
         return count($this->items);
+    }
+
+    public function first(): ?Person
+    {
+        return array_first($this->items);
+    }
+
+    public function last(): ?Person
+    {
+        return array_last($this->items);
     }
 }
