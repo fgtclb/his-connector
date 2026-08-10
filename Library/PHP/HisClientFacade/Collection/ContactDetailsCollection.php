@@ -12,7 +12,7 @@ use FGTCLB\HisClientFacade\Model\ContactDetails;
  *
  * @immutable
  */
-final readonly class ContactDetailsCollection implements \IteratorAggregate, \Countable
+final readonly class ContactDetailsCollection implements \IteratorAggregate, CollectionInterface
 {
     /**
      * @var list<ContactDetails>
@@ -49,5 +49,15 @@ final readonly class ContactDetailsCollection implements \IteratorAggregate, \Co
     public function count(): int
     {
         return count($this->items);
+    }
+
+    public function first(): ?ContactDetails
+    {
+        return array_first($this->items);
+    }
+
+    public function last(): ?ContactDetails
+    {
+        return array_last($this->items);
     }
 }

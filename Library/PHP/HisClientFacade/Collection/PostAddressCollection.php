@@ -12,7 +12,7 @@ use FGTCLB\HisClientFacade\Model\PostAddress;
  *
  * @immutable
  */
-final readonly class PostAddressCollection implements \IteratorAggregate, \Countable
+final readonly class PostAddressCollection implements \IteratorAggregate, CollectionInterface
 {
     /**
      * @var list<PostAddress>
@@ -49,5 +49,15 @@ final readonly class PostAddressCollection implements \IteratorAggregate, \Count
     public function count(): int
     {
         return count($this->items);
+    }
+
+    public function first(): ?PostAddress
+    {
+        return array_first($this->items);
+    }
+
+    public function last(): ?PostAddress
+    {
+        return array_last($this->items);
     }
 }

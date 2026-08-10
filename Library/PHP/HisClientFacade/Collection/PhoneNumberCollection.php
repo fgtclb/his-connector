@@ -12,7 +12,7 @@ use FGTCLB\HisClientFacade\Model\PhoneNumber;
  *
  * @immutable
  */
-final readonly class PhoneNumberCollection implements \IteratorAggregate, \Countable
+final readonly class PhoneNumberCollection implements \IteratorAggregate, CollectionInterface
 {
     /**
      * @var list<PhoneNumber>
@@ -49,5 +49,31 @@ final readonly class PhoneNumberCollection implements \IteratorAggregate, \Count
     public function count(): int
     {
         return count($this->items);
+    }
+
+    public function first(): ?PhoneNumber
+    {
+        return array_first($this->items);
+    }
+
+    public function last(): ?PhoneNumber
+    {
+        return array_last($this->items);
+    }
+
+    public function onlyInDomain(string $domain): self
+    {
+        return self::fromArray(array_values(array_filter(
+            $this->items,
+            fn(PhoneNumber $phoneNumber) => $phoneNumber->domain === $domain,
+        )));
+    }
+
+    public function onlyOfType(string $type): self
+    {
+        return self::fromArray(array_values(array_filter(
+            $this->items,
+            fn(PhoneNumber $phoneNumber) => $phoneNumber->type === $type,
+        )));
     }
 }
