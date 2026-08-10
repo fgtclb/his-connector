@@ -70,6 +70,7 @@ readonly class PersonFunctionFactory
         }
         return new PersonFunction(
             id: $affiliation->getId(),
+            title: $this->keyvalueConverter->convertAffiliationTypeIdToTitle($affiliation->getAffiliationTypeId(), $language) ?? '',
             orgUnit: $this->orgUnitRepository->findByLonglivingId($affiliation->getOrgunitLid()),
             room: $room,
             postAddress: $postAddress,

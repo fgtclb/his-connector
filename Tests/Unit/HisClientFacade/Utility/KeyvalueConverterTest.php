@@ -89,4 +89,42 @@ final class KeyvalueConverterTest extends UnitTestCase
         $subject = new KeyvalueConverter($mockKeyvalueRepository);
         $this->assertSame($expectedResult, $subject->convertEAddressIdToUniquename($id, $language));
     }
+
+    /**
+     * @return mixed[]
+     */
+    public static function convertAffiliationTypeIdToTitleDataProvider(): array
+    {
+        return [
+            [2, 'de', 'Assistent/in'],
+            [6, 'en', 'assistant'],
+            [20, 'de', null],
+        ];
+    }
+
+    #[Test]
+    #[DataProvider('convertAffiliationTypeIdToTitleDataProvider')]
+    public function convertAffiliationTypeIdToTitle(int $id, string $language, ?string $expectedResult): void
+    {
+        $mockKeyvalueRepository = $this->createMock(KeyvalueRepository::class);
+        $mockKeyvalueRepository->method('findByTableForLanguage')->willReturnCallback(
+            fn(KeyvalueTable $table, string $language) => match ($language) {
+                'de' => [
+                    new KeyValue(1, '1', null, null, null, 'Dozent/in'),
+                    new KeyValue(2, '2', null, null, null, 'Assistent/in'),
+                    new KeyValue(3, '3', null, null, null, 'Direktor/in'),
+                    new KeyValue(4, '4', null, null, null, 'Angestellte/r'),
+                ],
+                'en' => [
+                    new KeyValue(5, '5', null, null, null, 'lecturer'),
+                    new KeyValue(6, '6', null, null, null, 'assistant'),
+                    new KeyValue(7, '7', null, null, null, 'director'),
+                    new KeyValue(8, '8', null, null, null, 'employee'),
+                ],
+                default => []
+            }
+        );
+        $subject = new KeyvalueConverter($mockKeyvalueRepository);
+        $this->assertSame($expectedResult, $subject->convertAffiliationTypeIdToTitle($id, $language));
+    }
 }
