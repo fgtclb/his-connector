@@ -11,7 +11,7 @@ use FGTCLB\HisClientFacade\Collection\HyperlinkCollection;
 use FGTCLB\HisClientFacade\Collection\MessengerCollection;
 use FGTCLB\HisClientFacade\Collection\PhoneNumberCollection;
 
-final readonly class PersonFunction
+final readonly class PersonFunction implements EntityInterface
 {
     public function __construct(
         public int $id,
@@ -24,4 +24,9 @@ final readonly class PersonFunction
         public HyperlinkCollection $hyperlinks,
         public MessengerCollection $messengers,
     ) {}
+
+    public function getIdentifier(): string
+    {
+        return (string)$this->id;
+    }
 }

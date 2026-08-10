@@ -15,7 +15,7 @@ use FGTCLB\HisClientFacade\Collection\ContactDetailsCollection;
 use FGTCLB\HisClientFacade\Collection\PersonAttributeCollection;
 use FGTCLB\HisClientFacade\Collection\PersonFunctionCollection;
 
-final readonly class Person
+final readonly class Person implements EntityInterface
 {
     public function __construct(
         public int $id,
@@ -47,6 +47,11 @@ final readonly class Person
         /** @var \Closure(): PersonAttributeCollection */
         private \Closure $fetchAttributesClosure,
     ) {}
+
+    public function getIdentifier(): string
+    {
+        return (string)$this->id;
+    }
 
     public function getContactDetails(): ContactDetailsCollection
     {
