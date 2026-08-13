@@ -16,6 +16,7 @@ use FGTCLB\HisClientFacade\Collection\PhoneNumberCollection;
 use FGTCLB\HisClientFacade\Collection\PostAddressCollection;
 use FGTCLB\HisClientFacade\Model\ContactDetails;
 use FGTCLB\HisClientFacade\Model\EmailAddress;
+use FGTCLB\HisClientFacade\Model\FunctionType;
 use FGTCLB\HisClientFacade\Model\Hyperlink;
 use FGTCLB\HisClientFacade\Model\Messenger;
 use FGTCLB\HisClientFacade\Model\Person;
@@ -152,7 +153,7 @@ final class CollectionTest extends UnitTestCase
 
         $function = new PersonFunction(
             id: 123,
-            title: 'Assistent/in',
+            type: new FunctionType(456, 'unique', 'Assistent/in', 'Assistent/in', 'Assistent/in'),
             orgUnit: null,
             room: null,
             postAddress: null,

@@ -30,11 +30,4 @@ readonly class KeyvalueConverter
         $item = array_find($items, fn(KeyValue $item) => $item->getId() === $id);
         return $item?->getUniquename();
     }
-
-    public function convertAffiliationTypeIdToTitle(int $id, string $language): ?string
-    {
-        $items = $this->keyvalueRepository->findByTableForLanguage(KeyvalueTable::AFFILIATIONTYPES, $language);
-        $item = array_find($items, fn(KeyValue $item) => $item->getId() === $id);
-        return $item?->getDefaulttext();
-    }
 }
