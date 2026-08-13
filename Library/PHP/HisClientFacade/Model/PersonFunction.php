@@ -14,7 +14,7 @@ final readonly class PersonFunction implements EntityInterface
 {
     public function __construct(
         public int $id,
-        public string $title,
+        public ?FunctionType $type,
         public ?OrgUnit $orgUnit,
         public ?Room $room,
         public ?PostAddress $postAddress,

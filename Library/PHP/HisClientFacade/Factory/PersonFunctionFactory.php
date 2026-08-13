@@ -18,6 +18,7 @@ use FGTCLB\HisClientFacade\Model\Messenger;
 use FGTCLB\HisClientFacade\Model\PersonFunction;
 use FGTCLB\HisClientFacade\Model\PhoneNumber;
 use FGTCLB\HisClientFacade\Repository\AddressRepository;
+use FGTCLB\HisClientFacade\Repository\FunctionTypeRepository;
 use FGTCLB\HisClientFacade\Repository\OrgUnitRepository;
 use FGTCLB\HisClientFacade\Repository\RoomRepository;
 use FGTCLB\HisClientFacade\Utility\KeyvalueConverter;
@@ -30,6 +31,7 @@ readonly class PersonFunctionFactory
         private AddressRepository $addressRepository,
         private PostAddressFactory $postAddressFactory,
         private KeyvalueConverter $keyvalueConverter,
+        private FunctionTypeRepository $functionTypeRepository,
     ) {}
 
     public function create(Affiliation60 $affiliation, string $language): PersonFunction
@@ -70,7 +72,7 @@ readonly class PersonFunctionFactory
         }
         return new PersonFunction(
             id: $affiliation->getId(),
-            title: $this->keyvalueConverter->convertAffiliationTypeIdToTitle($affiliation->getAffiliationTypeId(), $language) ?? '',
+            type: $this->functionTypeRepository->findByIdForLanguage($affiliation->getAffiliationTypeId(), $language),
             orgUnit: $this->orgUnitRepository->findByLonglivingId($affiliation->getOrgunitLid()),
             room: $room,
             postAddress: $postAddress,
