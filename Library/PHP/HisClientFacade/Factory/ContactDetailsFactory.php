@@ -34,6 +34,7 @@ readonly class ContactDetailsFactory
             )),
             emailAddresses: EmailAddressCollection::fromArray(array_map(
                 fn(EmailMeta202506 $email) => new EmailAddress(
+                    id: $email->getAddressId(),
                     email: $email->getEmail()->getEmailValue() ?? '',
                     isVerified: $email->getEmail()->getIsVerified() ?? false,
                     domain: $email->getEmail()->getAddresstag(),
@@ -42,6 +43,7 @@ readonly class ContactDetailsFactory
             )),
             phoneNumbers: PhoneNumberCollection::fromArray(array_map(
                 fn(PhoneMeta $phone) => new PhoneNumber(
+                    id: $phone->getAddressId(),
                     phoneNumber: $phone->getPhone()->getPhoneNumber() ?? '',
                     type: $phone->getPhone()->getEaddresstype(),
                     domain: $phone->getPhone()->getAddresstag(),
@@ -50,6 +52,7 @@ readonly class ContactDetailsFactory
             )),
             hyperlinks: HyperlinkCollection::fromArray(array_map(
                 fn(HyperlinkMeta $link) => new Hyperlink(
+                    id: $link->getAddressId(),
                     hyperlink: $link->getHyperlink()->getHyperlinkValue() ?? '',
                     type: $link->getHyperlink()->getEaddresstype(),
                     domain: $link->getHyperlink()->getAddresstag(),
@@ -58,6 +61,7 @@ readonly class ContactDetailsFactory
             )),
             messengers: MessengerCollection::fromArray(array_map(
                 fn(MessengerMeta $messenger) => new Messenger(
+                    id: $messenger->getAddressId(),
                     account: $messenger->getMessenger()->getMessengerValue() ?? '',
                     type: $messenger->getMessenger()->getEaddresstype(),
                     domain: $messenger->getMessenger()->getAddresstag(),
