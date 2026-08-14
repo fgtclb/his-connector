@@ -20,6 +20,7 @@ use FGTCLB\HisClientFacade\Model\FunctionType;
 use FGTCLB\HisClientFacade\Model\Hyperlink;
 use FGTCLB\HisClientFacade\Model\Messenger;
 use FGTCLB\HisClientFacade\Model\Person;
+use FGTCLB\HisClientFacade\Model\PersonalData;
 use FGTCLB\HisClientFacade\Model\PersonAttribute;
 use FGTCLB\HisClientFacade\Model\PersonFunction;
 use FGTCLB\HisClientFacade\Model\PhoneNumber;
@@ -139,6 +140,7 @@ final class CollectionTest extends UnitTestCase
             createdAt: null,
             updatedAt: null,
             fetchContactDetailsClosure: fn() => ContactDetailsCollection::fromArray([]),
+            fetchPersonalDataClosure: fn() => new PersonalData(null, null, null, null, null, null, null),
             fetchPicturesClosure: fn() => [],
             fetchFunctionsClosure: fn() => PersonFunctionCollection::fromArray([]),
             fetchAccountsClosure: fn() => [],

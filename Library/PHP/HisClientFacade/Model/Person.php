@@ -38,6 +38,8 @@ final readonly class Person implements EntityInterface
         public ?string $updatedAt,
         /** @var \Closure(): ContactDetailsCollection */
         private \Closure $fetchContactDetailsClosure,
+        /** @var \Closure(): PersonalData */
+        private \Closure $fetchPersonalDataClosure,
         /** @var \Closure(int): Mimedata[] */
         private \Closure $fetchPicturesClosure,
         /** @var \Closure(): PersonFunctionCollection */
@@ -51,6 +53,12 @@ final readonly class Person implements EntityInterface
     public function getIdentifier(): string
     {
         return (string)$this->id;
+    }
+
+    public function getPersonalData(): PersonalData
+    {
+        // TODO cache result? Use proper lazy object?
+        return ($this->fetchPersonalDataClosure)();
     }
 
     public function getContactDetails(): ContactDetailsCollection

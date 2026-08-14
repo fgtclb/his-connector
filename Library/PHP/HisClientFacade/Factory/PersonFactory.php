@@ -11,6 +11,7 @@ use FGTCLB\HisClientFacade\Repository\AccountRepository;
 use FGTCLB\HisClientFacade\Repository\ContactDetailsRepository;
 use FGTCLB\HisClientFacade\Repository\CountryRepository;
 use FGTCLB\HisClientFacade\Repository\GenderRepository;
+use FGTCLB\HisClientFacade\Repository\PersonalDataRepository;
 use FGTCLB\HisClientFacade\Repository\PersonAttributeRepository;
 use FGTCLB\HisClientFacade\Repository\PersonFunctionRepository;
 use FGTCLB\HisClientFacade\Repository\PersonPictureRepository;
@@ -28,6 +29,7 @@ readonly class PersonFactory
         private PersonFunctionRepository $personFunctionRepository,
         private AccountRepository $accountRepository,
         private PersonAttributeRepository $personAttributeRepository,
+        private PersonalDataRepository $personalDataRepository,
     ) {}
 
     public function create(PersonExisting $person, string $language): Person
@@ -52,6 +54,7 @@ readonly class PersonFactory
             createdAt: $person->getCreatedAt(),
             updatedAt: $person->getUpdatedAt(),
             fetchContactDetailsClosure: fn() => $this->contactDetailsRepository->findByPersonIdForLanguage($person->getId(), $language),
+            fetchPersonalDataClosure: fn() => $this->personalDataRepository->findByPersonId($person->getId()),
             fetchPicturesClosure: fn(int $hisKey) => $this->personPictureRepository->findByPersonIdAndHisKey($person->getId(), $hisKey),
             fetchFunctionsClosure: fn() => $this->personFunctionRepository->findByPersonIdForLanguage($person->getId(), $language),
             fetchAccountsClosure: fn() => $this->accountRepository->findByPersonId($person->getId()),
