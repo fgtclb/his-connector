@@ -54,19 +54,41 @@ readonly class PersonFunctionFactory
         }
         $emailAddresses = $hyperlinks = $phoneNumbers = $messengers = [];
         foreach ($affiliation->getEaddresses()->getEaddress() ?? [] as $eAddress) {
+            // Skip addresses without IDs as those cannot be imported properly
+            // In testing, this case never occurred, so it might just be a wrong declaration
+            // in the SOAP endpoint
+            if ($eAddress->getId() === null) {
+                continue;
+            }
             $type = $this->keyvalueConverter->convertEAddressIdToUniquename($eAddress->getEaddresstypeId(), $language);
             $domain = $this->keyvalueConverter->convertAddresstagIdToUniquename($eAddress->getAddresstagId(), $language);
             if ($eAddress instanceof \FGTCLB\HisClient\PersonOrgunitService\Struct\Phone) {
-                $phoneNumbers[] = new PhoneNumber($eAddress->getEaddress(), $type, $domain);
+                $phoneNumbers[] = new PhoneNumber(
+                    id: $eAddress->getId(),
+                    phoneNumber: $eAddress->getEaddress(),
+                    type: $type,
+                    domain: $domain,
+                );
             } elseif ($eAddress instanceof \FGTCLB\HisClient\PersonOrgunitService\Struct\Messenger) {
-                $messengers[] = new Messenger($eAddress->getEaddress(), $type, $domain);
+                $messengers[] = new Messenger(
+                    id: $eAddress->getId(),
+                    account: $eAddress->getEaddress(),
+                    type: $type,
+                    domain: $domain,
+                );
             } elseif ($eAddress instanceof \FGTCLB\HisClient\PersonOrgunitService\Struct\Hyperlink) {
-                $hyperlinks[] = new Hyperlink($eAddress->getEaddress(), $type, $domain);
+                $hyperlinks[] = new Hyperlink(
+                    id: $eAddress->getId(),
+                    hyperlink: $eAddress->getEaddress(),
+                    type: $type,
+                    domain: $domain,
+                );
             } elseif ($eAddress instanceof \FGTCLB\HisClient\PersonOrgunitService\Struct\EMail) {
                 $emailAddresses[] = new EmailAddress(
-                    $eAddress->getEaddress(),
-                    false, // TODO check if verified information is available elsewhere
-                    $domain,
+                    id: $eAddress->getId(),
+                    email: $eAddress->getEaddress(),
+                    isVerified: false, // TODO check if verified information is available elsewhere
+                    domain: $domain,
                 );
             }
         }

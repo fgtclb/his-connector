@@ -47,9 +47,9 @@ final class CollectionTest extends UnitTestCase
         ];
 
         $items = [
-            new EmailAddress('foo@example.com', false, null),
-            new EmailAddress('bar@example.com', true, null),
-            new EmailAddress('baz@example.com', false, 'business'),
+            new EmailAddress(123, 'foo@example.com', false, null),
+            new EmailAddress(456, 'bar@example.com', true, null),
+            new EmailAddress(789, 'baz@example.com', false, 'business'),
         ];
         $collection = EmailAddressCollection::fromArray($items);
         yield 'EmailAddressCollection' => [
@@ -58,9 +58,9 @@ final class CollectionTest extends UnitTestCase
         ];
 
         $items = [
-            new Hyperlink('https://example.com', null, null),
-            new Hyperlink('https://foo.example.com', 'www', null),
-            new Hyperlink('https://bar.example.com', 'www', 'business'),
+            new Hyperlink(123, 'https://example.com', null, null),
+            new Hyperlink(456, 'https://foo.example.com', 'www', null),
+            new Hyperlink(789, 'https://bar.example.com', 'www', 'business'),
         ];
         $collection = HyperlinkCollection::fromArray($items);
         yield 'HyperlinkCollection' => [
@@ -69,9 +69,9 @@ final class CollectionTest extends UnitTestCase
         ];
 
         $items = [
-            new Messenger('123456', 'icq', null),
-            new Messenger('baz@example.com', 'msn', null),
-            new Messenger('baz@example.com', null, 'business'),
+            new Messenger(123, '123456', 'icq', null),
+            new Messenger(456, 'baz@example.com', 'msn', null),
+            new Messenger(789, 'baz@example.com', null, 'business'),
         ];
         $collection = MessengerCollection::fromArray($items);
         yield 'MessengerCollection' => [
@@ -80,9 +80,9 @@ final class CollectionTest extends UnitTestCase
         ];
 
         $items = [
-            new PhoneNumber('+49 123 123456', 'mobile', null),
-            new PhoneNumber('+41 32 4353234', null, null),
-            new PhoneNumber('+49 3245 53434', null, 'business'),
+            new PhoneNumber(123, '+49 123 123456', 'mobile', null),
+            new PhoneNumber(456, '+41 32 4353234', null, null),
+            new PhoneNumber(789, '+49 3245 53434', null, 'business'),
         ];
         $collection = PhoneNumberCollection::fromArray($items);
         yield 'PhoneNumberCollection' => [
@@ -226,9 +226,9 @@ final class CollectionTest extends UnitTestCase
     public function phoneNumberCollectionCanBeFiltered(): void
     {
         $items = [
-            new PhoneNumber('+49 123 123456', 'mobile', null),
-            new PhoneNumber('+41 32 4353234', 'mobile', null),
-            new PhoneNumber('+49 3245 53434', null, 'business'),
+            new PhoneNumber(123, '+49 123 123456', 'mobile', null),
+            new PhoneNumber(456, '+41 32 4353234', 'mobile', null),
+            new PhoneNumber(789, '+49 3245 53434', null, 'business'),
         ];
         $collection = PhoneNumberCollection::fromArray($items);
         $this->assertSame(1, count($collection->onlyInDomain('business')));
@@ -241,9 +241,9 @@ final class CollectionTest extends UnitTestCase
     public function hyperlinkCollectionCanBeFiltered(): void
     {
         $items = [
-            new Hyperlink('https://example.com', null, null),
-            new Hyperlink('https://foo.example.com', 'www', null),
-            new Hyperlink('https://bar.example.com', 'www', 'business'),
+            new Hyperlink(123, 'https://example.com', null, null),
+            new Hyperlink(456, 'https://foo.example.com', 'www', null),
+            new Hyperlink(789, 'https://bar.example.com', 'www', 'business'),
         ];
         $collection = HyperlinkCollection::fromArray($items);
         $this->assertSame(1, count($collection->onlyInDomain('business')));
@@ -256,9 +256,9 @@ final class CollectionTest extends UnitTestCase
     public function EmailAddressCollectionCanBeFiltered(): void
     {
         $items = [
-            new EmailAddress('foo@example.com', false, null),
-            new EmailAddress('bar@example.com', true, null),
-            new EmailAddress('baz@example.com', false, 'business'),
+            new EmailAddress(123, 'foo@example.com', false, null),
+            new EmailAddress(456, 'bar@example.com', true, null),
+            new EmailAddress(789, 'baz@example.com', false, 'business'),
         ];
         $collection = EmailAddressCollection::fromArray($items);
         $this->assertSame(1, count($collection->onlyInDomain('business')));
