@@ -53,12 +53,12 @@ readonly class PersonFactory
             personInfo: $person->getPersonInfo(),
             createdAt: $person->getCreatedAt(),
             updatedAt: $person->getUpdatedAt(),
-            fetchContactDetailsClosure: fn() => $this->contactDetailsRepository->findByPersonIdForLanguage($person->getId(), $language),
-            fetchPersonalDataClosure: fn() => $this->personalDataRepository->findByPersonId($person->getId()),
+            contactDetails: fn() => $this->contactDetailsRepository->findByPersonIdForLanguage($person->getId(), $language),
+            personalData: fn() => $this->personalDataRepository->findByPersonId($person->getId()),
+            functions: fn() => $this->personFunctionRepository->findByPersonIdForLanguage($person->getId(), $language),
+            accounts: fn() => $this->accountRepository->findByPersonId($person->getId()),
+            attributes: fn() => $this->personAttributeRepository->findByPersonId($person->getId()),
             fetchPicturesClosure: fn(int $hisKey) => $this->personPictureRepository->findByPersonIdAndHisKey($person->getId(), $hisKey),
-            fetchFunctionsClosure: fn() => $this->personFunctionRepository->findByPersonIdForLanguage($person->getId(), $language),
-            fetchAccountsClosure: fn() => $this->accountRepository->findByPersonId($person->getId()),
-            fetchAttributesClosure: fn() => $this->personAttributeRepository->findByPersonId($person->getId()),
         );
     }
 }

@@ -15,39 +15,39 @@ use FGTCLB\HisClientFacade\Collection\ContactDetailsCollection;
 use FGTCLB\HisClientFacade\Collection\PersonAttributeCollection;
 use FGTCLB\HisClientFacade\Collection\PersonFunctionCollection;
 
-final readonly class Person implements EntityInterface
+final class Person implements EntityInterface
 {
     public function __construct(
-        public int $id,
-        public ?string $firstname,
-        public ?string $surname,
-        public ?Gender $gender,
-        public ?string $dateofbirth,
-        public ?string $allfirstnames,
-        public ?string $birthname,
-        public ?string $artistname,
-        public ?string $nameprefix,
-        public ?string $namesuffix,
-        public ?string $academicdegreesuffix,
-        public ?AcademicDegree $academicdegree,
-        public ?Title $title,
-        public ?string $birthcity,
-        public ?CountryValue $country,
-        public ?PersoninfoDto $personInfo,
-        public ?string $createdAt,
-        public ?string $updatedAt,
-        /** @var \Closure(): ContactDetailsCollection */
-        private \Closure $fetchContactDetailsClosure,
-        /** @var \Closure(): PersonalData */
-        private \Closure $fetchPersonalDataClosure,
+        public readonly int $id,
+        public readonly ?string $firstname,
+        public readonly ?string $surname,
+        public readonly ?Gender $gender,
+        public readonly ?string $dateofbirth,
+        public readonly ?string $allfirstnames,
+        public readonly ?string $birthname,
+        public readonly ?string $artistname,
+        public readonly ?string $nameprefix,
+        public readonly ?string $namesuffix,
+        public readonly ?string $academicdegreesuffix,
+        public readonly ?AcademicDegree $academicdegree,
+        public readonly ?Title $title,
+        public readonly ?string $birthcity,
+        public readonly ?CountryValue $country,
+        public readonly ?PersoninfoDto $personInfo,
+        public readonly ?string $createdAt,
+        public readonly ?string $updatedAt,
+        /** @var ContactDetailsCollection|(\Closure(): ContactDetailsCollection) */
+        private ContactDetailsCollection|\Closure $contactDetails,
+        /** @var PersonalData|(\Closure(): PersonalData) */
+        private PersonalData|\Closure $personalData,
+        /** @var PersonFunctionCollection|(\Closure(): PersonFunctionCollection) */
+        private PersonFunctionCollection|\Closure $functions,
+        /** @var AccountCollection|(\Closure(): AccountCollection) */
+        private AccountCollection|\Closure $accounts,
+        /** @var PersonAttributeCollection|(\Closure(): PersonAttributeCollection) */
+        private PersonAttributeCollection|\Closure $attributes,
         /** @var \Closure(int): Mimedata[] */
         private \Closure $fetchPicturesClosure,
-        /** @var \Closure(): PersonFunctionCollection */
-        private \Closure $fetchFunctionsClosure,
-        /** @var \Closure(): AccountCollection */
-        private \Closure $fetchAccountsClosure,
-        /** @var \Closure(): PersonAttributeCollection */
-        private \Closure $fetchAttributesClosure,
     ) {}
 
     public function getIdentifier(): string
@@ -55,42 +55,55 @@ final readonly class Person implements EntityInterface
         return (string)$this->id;
     }
 
-    public function getPersonalData(): PersonalData
-    {
-        // TODO cache result? Use proper lazy object?
-        return ($this->fetchPersonalDataClosure)();
-    }
-
-    public function getContactDetails(): ContactDetailsCollection
-    {
-        // TODO cache result? Use proper lazy object?
-        return ($this->fetchContactDetailsClosure)();
-    }
-
     /**
      * @return Mimedata[]
      */
     public function getPictures(int $hisKey): array
     {
-        // TODO cache result? Use proper lazy object?
         return ($this->fetchPicturesClosure)($hisKey);
     }
 
-    public function getFunctions(): PersonFunctionCollection
+    public function __get(string $name): mixed
     {
-        // TODO cache result? Use proper lazy object?
-        return ($this->fetchFunctionsClosure)();
-    }
+        // This allows access to lazy properties with the normal dot syntax (".functions" instead of ".getFunctions()")
+        // in the mapping configuration, which makes configuration easier to grasp. Also, it makes sure that each lazy
+        // relation is only resolved once. Because of that, the class can only be partially readonly.
+        // TODO Replace this with lazy objects and/or property hooks once support for PHP < 8.4 is dropped
+        switch ($name) {
+            case 'contactDetails':
+                if ($this->contactDetails instanceof \Closure) {
+                    $this->contactDetails = ($this->contactDetails)();
+                }
+                return $this->contactDetails;
 
-    public function getAccounts(): AccountCollection
-    {
-        // TODO cache result? Use proper lazy object?
-        return ($this->fetchAccountsClosure)();
-    }
+            case 'personalData':
+                if ($this->personalData instanceof \Closure) {
+                    $this->personalData = ($this->personalData)();
+                }
+                return $this->personalData;
 
-    public function getAttributes(): PersonAttributeCollection
-    {
-        // TODO cache result? Use proper lazy object?
-        return ($this->fetchAttributesClosure)();
+            case 'functions':
+                if ($this->functions instanceof \Closure) {
+                    $this->functions = ($this->functions)();
+                }
+                return $this->functions;
+
+            case 'accounts':
+                if ($this->accounts instanceof \Closure) {
+                    $this->accounts = ($this->accounts)();
+                }
+                return $this->accounts;
+
+            case 'attributes':
+                if ($this->attributes instanceof \Closure) {
+                    $this->attributes = ($this->attributes)();
+                }
+                return $this->attributes;
+        }
+        throw new \InvalidArgumentException(sprintf(
+            'Invalid property "%s" requested for "%s"',
+            $name,
+            static::class,
+        ), 1786817178);
     }
 }

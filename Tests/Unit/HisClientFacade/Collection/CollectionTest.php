@@ -145,12 +145,12 @@ final class CollectionTest extends UnitTestCase
             personInfo: null,
             createdAt: null,
             updatedAt: null,
-            fetchContactDetailsClosure: fn() => ContactDetailsCollection::fromArray([]),
-            fetchPersonalDataClosure: fn() => new PersonalData(null, null, null, null, null, null, null),
+            contactDetails: fn() => ContactDetailsCollection::fromArray([]),
+            personalData: fn() => new PersonalData(null, null, null, null, null, null, null),
+            functions: fn() => PersonFunctionCollection::fromArray([]),
+            accounts: fn() => AccountCollection::fromArray([]),
+            attributes: fn() => PersonAttributeCollection::fromArray([]),
             fetchPicturesClosure: fn() => [],
-            fetchFunctionsClosure: fn() => PersonFunctionCollection::fromArray([]),
-            fetchAccountsClosure: fn() => AccountCollection::fromArray([]),
-            fetchAttributesClosure: fn() => PersonAttributeCollection::fromArray([]),
         );
         $items = [$person, clone $person, clone $person];
         $collection = PersonCollection::fromArray($items);
