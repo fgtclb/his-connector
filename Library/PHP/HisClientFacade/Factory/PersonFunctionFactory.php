@@ -11,13 +11,11 @@ use FGTCLB\HisClientFacade\Collection\EmailAddressCollection;
 use FGTCLB\HisClientFacade\Collection\HyperlinkCollection;
 use FGTCLB\HisClientFacade\Collection\MessengerCollection;
 use FGTCLB\HisClientFacade\Collection\PhoneNumberCollection;
-use FGTCLB\HisClientFacade\Enum\AddressType;
 use FGTCLB\HisClientFacade\Model\EmailAddress;
 use FGTCLB\HisClientFacade\Model\Hyperlink;
 use FGTCLB\HisClientFacade\Model\Messenger;
 use FGTCLB\HisClientFacade\Model\PersonFunction;
 use FGTCLB\HisClientFacade\Model\PhoneNumber;
-use FGTCLB\HisClientFacade\Repository\AddressRepository;
 use FGTCLB\HisClientFacade\Repository\FunctionTypeRepository;
 use FGTCLB\HisClientFacade\Repository\OrgUnitRepository;
 use FGTCLB\HisClientFacade\Repository\RoomRepository;
@@ -28,7 +26,6 @@ readonly class PersonFunctionFactory
     public function __construct(
         private OrgUnitRepository $orgUnitRepository,
         private RoomRepository $roomRepository,
-        private AddressRepository $addressRepository,
         private PostAddressFactory $postAddressFactory,
         private KeyvalueConverter $keyvalueConverter,
         private FunctionTypeRepository $functionTypeRepository,
@@ -38,15 +35,8 @@ readonly class PersonFunctionFactory
     {
         $room = $postAddress = null;
         if ($affiliation->getLocation() instanceof AffiliationLocationRoomDto) {
-            $room = $this->roomRepository->findById($affiliation->getLocation()->getRoomId());
-            if ($room !== null) {
-                $buildingAddresses = $room->getBuildingId() !== null
-                    ? $this->addressRepository->findByIdAndTypeForLanguage($room->getBuildingId(), AddressType::BUILDING, $language)
-                    : [];
-                if (isset($buildingAddresses[0])) {
-                    $postAddress = $buildingAddresses[0];
-                }
-            }
+            $room = $this->roomRepository->findByIdForLanguage($affiliation->getLocation()->getRoomId(), $language);
+            $postAddress = $room?->building?->postAddress;
         } elseif ($affiliation->getLocation() instanceof AffiliationLocationPostaddressDto) {
             $postAddress = $this->postAddressFactory->createFromPersonOrgunitPostAddress($affiliation->getLocation()->getPostAddress(), $language);
         }
