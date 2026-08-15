@@ -103,6 +103,7 @@ final class CollectionTest extends UnitTestCase
         ];
 
         $postAddress = new PostAddress(
+            id: 123,
             postcode: '',
             street: 'Musterstraße',
             city: 'Hamburg',

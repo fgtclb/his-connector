@@ -45,8 +45,6 @@ readonly class PersonFunctionFactory
                     : [];
                 if (isset($buildingAddresses[0])) {
                     $postAddress = $buildingAddresses[0];
-                } elseif ($room->getBuildingDefaulttext() !== null) {
-                    $postAddress = $this->postAddressFactory->createFromStreetAndCity($room->getBuildingDefaulttext(), $room->getDefaulttext());
                 }
             }
         } elseif ($affiliation->getLocation() instanceof AffiliationLocationPostaddressDto) {

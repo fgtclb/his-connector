@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FGTCLB\HisConnector\Tests\Unit\HisClientFacade\Factory;
 
 use FGTCLB\HisClient\KeyvalueService\Struct\CountryValue;
+use FGTCLB\HisClientFacade\Exception\PostAddressEntityException;
 use FGTCLB\HisClientFacade\Factory\PostAddressFactory;
 use FGTCLB\HisClientFacade\Repository\CountryRepository;
 use FGTCLB\HisClientFacade\Utility\KeyvalueConverter;
@@ -21,6 +22,7 @@ final class PostAddressFactoryTest extends UnitTestCase
     {
         return [
             'all fields filled' => [
+                'id' => 789,
                 'postcode' => '12345',
                 'street' => 'Test Street',
                 'city' => 'Test City',
@@ -32,8 +34,10 @@ final class PostAddressFactoryTest extends UnitTestCase
                 'addresstagId' => 123,
                 'expectedCountryUniquename' => 'germany',
                 'expectedDomain' => 'business',
+                'expectedIdentifier' => '789',
             ],
             'minimal fields filled' => [
+                'id' => 123,
                 'postcode' => '12345',
                 'street' => 'Test Street',
                 'city' => 'Test City',
@@ -45,6 +49,7 @@ final class PostAddressFactoryTest extends UnitTestCase
                 'addresstagId' => 123,
                 'expectedCountryUniquename' => null,
                 'expectedDomain' => 'business',
+                'expectedIdentifier' => '123',
             ],
         ];
     }
@@ -52,6 +57,7 @@ final class PostAddressFactoryTest extends UnitTestCase
     #[Test]
     #[DataProvider('createFromPersonOrgunitPostAddressDataProvider')]
     public function createFromPersonOrgunitPostAddress(
+        ?int $id,
         string $postcode,
         string $street,
         string $city,
@@ -63,6 +69,7 @@ final class PostAddressFactoryTest extends UnitTestCase
         int $addresstagId,
         ?string $expectedCountryUniquename,
         ?string $expectedDomain,
+        ?string $expectedIdentifier,
     ): void {
         $germany = (new CountryValue())->setUniquename('germany');
         $mockCountryRepository = self::createMock(CountryRepository::class);
@@ -72,8 +79,11 @@ final class PostAddressFactoryTest extends UnitTestCase
 
         $subject = new PostAddressFactory($mockCountryRepository, $mockKeyvalueConverter);
         $input = (new \FGTCLB\HisClient\PersonOrgunitService\Struct\PostAddress($postcode, $street, $city, $addressaddition, $postofficebox, $company, $state, $countryId));
+        $input->setId($id);
         $input->setAddresstagId($addresstagId);
         $postAddress = $subject->createFromPersonOrgunitPostAddress($input, 'de');
+        $this->assertSame($expectedIdentifier, $postAddress->getIdentifier());
+        $this->assertSame($id, $postAddress->id);
         $this->assertSame($postcode, $postAddress->postcode);
         $this->assertSame($street, $postAddress->street);
         $this->assertSame($city, $postAddress->city);
@@ -85,6 +95,15 @@ final class PostAddressFactoryTest extends UnitTestCase
         $this->assertSame($expectedDomain, $postAddress->domain);
     }
 
+    #[Test]
+    public function createFromPersonOrgunitPostAddressValidatesId(): void
+    {
+        self::expectException(PostAddressEntityException::class);
+        $subject = new PostAddressFactory($this->createStub(CountryRepository::class), $this->createStub(KeyvalueConverter::class));
+        $input = (new \FGTCLB\HisClient\PersonOrgunitService\Struct\PostAddress('12345', 'street', 'city'));
+        $subject->createFromPersonOrgunitPostAddress($input, 'de');
+    }
+
     /**
      * @return array<string, mixed[]>
      */
@@ -92,6 +111,7 @@ final class PostAddressFactoryTest extends UnitTestCase
     {
         return [
             'all fields filled' => [
+                'id' => 789,
                 'postcode' => '12345',
                 'street' => 'Test Street',
                 'city' => 'Test City',
@@ -103,8 +123,10 @@ final class PostAddressFactoryTest extends UnitTestCase
                 'addresstagId' => 123,
                 'expectedCountryUniquename' => 'germany',
                 'expectedDomain' => 'business',
+                'expectedIdentifier' => '789',
             ],
             'minimal fields filled' => [
+                'id' => 123,
                 'postcode' => null,
                 'street' => 'Test Street',
                 'city' => 'Test City',
@@ -116,6 +138,7 @@ final class PostAddressFactoryTest extends UnitTestCase
                 'addresstagId' => null,
                 'expectedCountryUniquename' => null,
                 'expectedDomain' => null,
+                'expectedIdentifier' => '123',
             ],
         ];
     }
@@ -123,6 +146,7 @@ final class PostAddressFactoryTest extends UnitTestCase
     #[Test]
     #[DataProvider('createFromPersonOrgunitPostAddressDataProvider')]
     public function createFromPostAddressWithNillablePostcode(
+        ?int $id,
         ?string $postcode,
         string $street,
         string $city,
@@ -134,6 +158,7 @@ final class PostAddressFactoryTest extends UnitTestCase
         ?int $addresstagId,
         ?string $expectedCountryUniquename,
         ?string $expectedDomain,
+        ?string $expectedIdentifier,
     ): void {
         $germany = (new CountryValue())->setUniquename('germany');
         $mockCountryRepository = self::createMock(CountryRepository::class);
@@ -143,8 +168,11 @@ final class PostAddressFactoryTest extends UnitTestCase
 
         $subject = new PostAddressFactory($mockCountryRepository, $mockKeyvalueConverter);
         $input = (new \FGTCLB\HisClient\AddressService\Struct\PostAddressWithNillablePostcode($street, $city, $postcode, $addressaddition, $postofficebox, $company, $state, $countryId));
+        $input->setId($id);
         $input->setAddresstagId($addresstagId);
         $postAddress = $subject->createFromPostAddressWithNillablePostcode($input, 'de');
+        $this->assertSame($expectedIdentifier, $postAddress->getIdentifier());
+        $this->assertSame($id, $postAddress->id);
         $this->assertSame($postcode, $postAddress->postcode);
         $this->assertSame($street, $postAddress->street);
         $this->assertSame($city, $postAddress->city);
@@ -157,31 +185,22 @@ final class PostAddressFactoryTest extends UnitTestCase
     }
 
     #[Test]
-    public function createFromStreetAndCity(): void
+    public function createFromPostAddressWithNillablePostcodeValidatesId(): void
     {
-        $subject = new PostAddressFactory(
-            $this->createStub(CountryRepository::class),
-            $this->createStub(KeyvalueConverter::class)
-        );
-        $postAddress = $subject->createFromStreetAndCity('Test Street', 'Test City');
-        $this->assertSame('', $postAddress->postcode);
-        $this->assertSame('Test Street', $postAddress->street);
-        $this->assertSame('Test City', $postAddress->city);
-        $this->assertNull($postAddress->addressaddition);
-        $this->assertNull($postAddress->postofficebox);
-        $this->assertNull($postAddress->company);
-        $this->assertNull($postAddress->state);
-        $this->assertNull($postAddress->country);
-        $this->assertNull($postAddress->domain);
+        self::expectException(PostAddressEntityException::class);
+        $subject = new PostAddressFactory($this->createStub(CountryRepository::class), $this->createStub(KeyvalueConverter::class));
+        $input = (new \FGTCLB\HisClient\AddressService\Struct\PostAddressWithNillablePostcode('street', 'city'));
+        $subject->createFromPostAddressWithNillablePostcode($input, 'de');
     }
 
     /**
      * @return array<string, mixed[]>
      */
-    public static function createFromPostaddress_1DataProvider(): array
+    public static function createFromPostaddressMetaDataProvider(): array
     {
         return [
             'all fields filled' => [
+                'id' => 123,
                 'postcode' => '12345',
                 'street' => 'Test Street',
                 'city' => 'Test City',
@@ -191,12 +210,14 @@ final class PostAddressFactoryTest extends UnitTestCase
                 'state' => 'NRW',
                 'country' => 'DE',
                 'addresstag' => 'business',
+                'expectedIdentifier' => '123',
                 'expectedPostcode' => '12345',
                 'expectedStreet' => 'Test Street',
                 'expectedCity' => 'Test City',
                 'expectedCountryUniquename' => 'germany',
             ],
             'minimal fields filled' => [
+                'id' => 456,
                 'postcode' => null,
                 'street' => null,
                 'city' => null,
@@ -206,6 +227,7 @@ final class PostAddressFactoryTest extends UnitTestCase
                 'state' => null,
                 'country' => null,
                 'addresstag' => null,
+                'expectedIdentifier' => '456',
                 'expectedPostcode' => '',
                 'expectedStreet' => '',
                 'expectedCity' => '',
@@ -215,8 +237,9 @@ final class PostAddressFactoryTest extends UnitTestCase
     }
 
     #[Test]
-    #[DataProvider('createFromPostaddress_1DataProvider')]
-    public function createFromPostaddress_1(
+    #[DataProvider('createFromPostaddressMetaDataProvider')]
+    public function createFromPostaddressMeta(
+        int $id,
         ?string $postcode,
         ?string $street,
         ?string $city,
@@ -226,6 +249,7 @@ final class PostAddressFactoryTest extends UnitTestCase
         ?string $state,
         ?string $country,
         ?string $addresstag,
+        string $expectedIdentifier,
         string $expectedPostcode,
         string $expectedStreet,
         string $expectedCity,
@@ -238,8 +262,13 @@ final class PostAddressFactoryTest extends UnitTestCase
         $mockKeyvalueConverter->method('convertAddresstagIdToUniquename')->willReturnMap([[123, 'de', 'business']]);
 
         $subject = new PostAddressFactory($mockCountryRepository, $mockKeyvalueConverter);
-        $input = (new \FGTCLB\HisClient\PersonAddressService\Struct\Postaddress_1($postcode, $addressaddition, $postofficebox, $country, $addresstag, $company, null, $state, $street, $city));
-        $postAddress = $subject->createFromPostaddress_1($input, 'de');
+        $input = new \FGTCLB\HisClient\PersonAddressService\Struct\PostaddressMeta(
+            new \FGTCLB\HisClient\PersonAddressService\Struct\Postaddress_1($postcode, $addressaddition, $postofficebox, $country, $addresstag, $company, null, $state, $street, $city)
+        );
+        $input->setAddressId($id);
+        $postAddress = $subject->createFromPostaddressMeta($input, 'de');
+        $this->assertSame($expectedIdentifier, $postAddress->getIdentifier());
+        $this->assertSame($id, $postAddress->id);
         $this->assertSame($expectedPostcode, $postAddress->postcode);
         $this->assertSame($expectedStreet, $postAddress->street);
         $this->assertSame($expectedCity, $postAddress->city);

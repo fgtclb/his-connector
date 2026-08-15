@@ -29,7 +29,7 @@ readonly class ContactDetailsFactory
     {
         return new ContactDetails(
             postAddresses: PostAddressCollection::fromArray(array_map(
-                fn(PostaddressMeta $address) => $this->postAddressFactory->createFromPostaddress_1($address->getPostaddress(), $language),
+                fn(PostaddressMeta $address) => $this->postAddressFactory->createFromPostaddressMeta($address, $language),
                 array_values($addresses->getPostaddresses202506()?->getPostaddressMeta202506() ?? []),
             )),
             emailAddresses: EmailAddressCollection::fromArray(array_map(
