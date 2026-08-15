@@ -19,6 +19,7 @@ use FGTCLB\HisClientFacade\Model\PhoneNumber;
 use FGTCLB\HisClientFacade\Repository\FunctionTypeRepository;
 use FGTCLB\HisClientFacade\Repository\OrgUnitRepository;
 use FGTCLB\HisClientFacade\Repository\RoomRepository;
+use FGTCLB\HisClientFacade\Utility\DateTimeConverter;
 use FGTCLB\HisClientFacade\Utility\KeyvalueConverter;
 
 readonly class PersonFunctionFactory
@@ -28,6 +29,7 @@ readonly class PersonFunctionFactory
         private RoomRepository $roomRepository,
         private PostAddressFactory $postAddressFactory,
         private KeyvalueConverter $keyvalueConverter,
+        private DateTimeConverter $dateTimeConverter,
         private FunctionTypeRepository $functionTypeRepository,
     ) {}
 
@@ -90,6 +92,8 @@ readonly class PersonFunctionFactory
             hyperlinks: HyperlinkCollection::fromArray($hyperlinks),
             phoneNumbers: PhoneNumberCollection::fromArray($phoneNumbers),
             messengers: MessengerCollection::fromArray($messengers),
+            validFrom: $this->dateTimeConverter->convert($affiliation->getValidFrom()),
+            validTo: $this->dateTimeConverter->convert($affiliation->getValidTo()),
         );
     }
 }

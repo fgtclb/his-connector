@@ -9,8 +9,10 @@ use FGTCLB\HisClientFacade\Collection\HyperlinkCollection;
 use FGTCLB\HisClientFacade\Collection\MessengerCollection;
 use FGTCLB\HisClientFacade\Collection\PhoneNumberCollection;
 
-final readonly class PersonFunction implements EntityInterface
+final readonly class PersonFunction implements EntityInterface, ValidityAwareEntityInterface
 {
+    use ValidityAwareEntityTrait;
+
     public function __construct(
         public int $id,
         public ?FunctionType $type,
@@ -21,6 +23,8 @@ final readonly class PersonFunction implements EntityInterface
         public PhoneNumberCollection $phoneNumbers,
         public HyperlinkCollection $hyperlinks,
         public MessengerCollection $messengers,
+        public ?\DateTimeInterface $validFrom,
+        public ?\DateTimeInterface $validTo,
     ) {}
 
     public function getIdentifier(): string

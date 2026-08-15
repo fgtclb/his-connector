@@ -6,8 +6,10 @@ namespace FGTCLB\HisClientFacade\Model;
 
 use FGTCLB\HisClient\KeyvalueService\Struct\CountryValue;
 
-final readonly class PostAddress implements EntityInterface
+final readonly class PostAddress implements EntityInterface, ValidityAwareEntityInterface
 {
+    use ValidityAwareEntityTrait;
+
     public function __construct(
         public int $id,
         public string $postcode,
@@ -19,6 +21,8 @@ final readonly class PostAddress implements EntityInterface
         public ?string $state,
         public ?CountryValue $country,
         public ?string $domain,
+        public ?\DateTimeInterface $validFrom,
+        public ?\DateTimeInterface $validTo,
     ) {}
 
     public function getIdentifier(): string

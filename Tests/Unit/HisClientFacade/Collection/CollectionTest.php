@@ -14,6 +14,7 @@ use FGTCLB\HisClientFacade\Collection\PersonCollection;
 use FGTCLB\HisClientFacade\Collection\PersonFunctionCollection;
 use FGTCLB\HisClientFacade\Collection\PhoneNumberCollection;
 use FGTCLB\HisClientFacade\Collection\PostAddressCollection;
+use FGTCLB\HisClientFacade\Collection\ValidityAwareCollectionInterface;
 use FGTCLB\HisClientFacade\Model\ContactDetails;
 use FGTCLB\HisClientFacade\Model\EmailAddress;
 use FGTCLB\HisClientFacade\Model\FunctionType;
@@ -113,6 +114,8 @@ final class CollectionTest extends UnitTestCase
             state: null,
             country: null,
             domain: null,
+            validFrom: null,
+            validTo: null,
         );
         $items = [$postAddress, clone $postAddress, clone $postAddress];
         $collection = PostAddressCollection::fromArray($items);
@@ -164,6 +167,8 @@ final class CollectionTest extends UnitTestCase
             hyperlinks: HyperlinkCollection::fromArray([]),
             phoneNumbers: PhoneNumberCollection::fromArray([]),
             messengers: MessengerCollection::fromArray([]),
+            validFrom: new \DateTimeImmutable(),
+            validTo: new \DateTimeImmutable(),
         );
         $items = [$function, clone $function, clone $function];
         $collection = PersonFunctionCollection::fromArray($items);
@@ -270,5 +275,123 @@ final class CollectionTest extends UnitTestCase
         $this->assertSame([$items[0], $items[2]], $collection->onlyNotVerified()->asArray());
         $this->assertSame(1, count($collection->onlyVerified()));
         $this->assertSame($items[1], $collection->onlyVerified()->first());
+    }
+
+    /**
+     * @return array{collection: object, expectedValidItems: object[], expectedNotValidItems: object[]}[]
+     */
+    public static function validityAwareCollectionsCanBeFilteredDataProvider(): iterable
+    {
+        $items = [
+            new PostAddress(
+                id: 123,
+                postcode: '',
+                street: 'Musterstraße',
+                city: 'Hamburg',
+                addressaddition: null,
+                postofficebox: null,
+                company: null,
+                state: null,
+                country: null,
+                domain: null,
+                validFrom: null,
+                validTo: null,
+            ),
+            new PostAddress(
+                id: 123,
+                postcode: '',
+                street: 'Musterstraße',
+                city: 'Hamburg',
+                addressaddition: null,
+                postofficebox: null,
+                company: null,
+                state: null,
+                country: null,
+                domain: null,
+                validFrom: new \DateTimeImmutable('2026-01-15'),
+                validTo: new \DateTimeImmutable('2026-01-18'),
+            ),
+            new PostAddress(
+                id: 123,
+                postcode: '',
+                street: 'Musterstraße',
+                city: 'Hamburg',
+                addressaddition: null,
+                postofficebox: null,
+                company: null,
+                state: null,
+                country: null,
+                domain: null,
+                validFrom: new \DateTimeImmutable('2026-01-05'),
+                validTo: new \DateTimeImmutable('2026-01-10'),
+            ),
+        ];
+        yield 'PostAddressCollection' => [
+            'collection' => PostAddressCollection::fromArray($items),
+            'expectedValidItems' => [$items[0], $items[2]],
+            'expectedNotValidItems' => [$items[1]],
+        ];
+
+        $items = [
+            new PersonFunction(
+                id: 123,
+                type: new FunctionType(456, 'unique', 'Assistent/in', 'Assistent/in', 'Assistent/in'),
+                orgUnit: null,
+                room: null,
+                postAddress: null,
+                emailAddresses: EmailAddressCollection::fromArray([]),
+                hyperlinks: HyperlinkCollection::fromArray([]),
+                phoneNumbers: PhoneNumberCollection::fromArray([]),
+                messengers: MessengerCollection::fromArray([]),
+                validFrom: null,
+                validTo: null,
+            ),
+            new PersonFunction(
+                id: 456,
+                type: new FunctionType(456, 'unique', 'Assistent/in', 'Assistent/in', 'Assistent/in'),
+                orgUnit: null,
+                room: null,
+                postAddress: null,
+                emailAddresses: EmailAddressCollection::fromArray([]),
+                hyperlinks: HyperlinkCollection::fromArray([]),
+                phoneNumbers: PhoneNumberCollection::fromArray([]),
+                messengers: MessengerCollection::fromArray([]),
+                validFrom: new \DateTimeImmutable('2026-01-15'),
+                validTo: new \DateTimeImmutable('2026-01-18'),
+            ),
+            new PersonFunction(
+                id: 789,
+                type: new FunctionType(456, 'unique', 'Assistent/in', 'Assistent/in', 'Assistent/in'),
+                orgUnit: null,
+                room: null,
+                postAddress: null,
+                emailAddresses: EmailAddressCollection::fromArray([]),
+                hyperlinks: HyperlinkCollection::fromArray([]),
+                phoneNumbers: PhoneNumberCollection::fromArray([]),
+                messengers: MessengerCollection::fromArray([]),
+                validFrom: new \DateTimeImmutable('2026-01-05'),
+                validTo: new \DateTimeImmutable('2026-01-10'),
+            ),
+        ];
+        yield 'PersonFunctionCollection' => [
+            'collection' => PersonFunctionCollection::fromArray($items),
+            'expectedValidItems' => [$items[0], $items[2]],
+            'expectedNotValidItems' => [$items[1]],
+        ];
+    }
+
+    /**
+     * @param object[] $expectedValidItems
+     * @param object[] $expectedNotValidItems
+     */
+    #[Test]
+    #[DataProvider('validityAwareCollectionsCanBeFilteredDataProvider')]
+    public function validityAwareCollectionsCanBeFiltered(
+        CollectionInterface&ValidityAwareCollectionInterface $collection,
+        array $expectedValidItems,
+        array $expectedNotValidItems,
+    ): void {
+        $this->assertSame($expectedValidItems, $collection->onlyValidAt(new \DateTimeImmutable('2026-01-07'))->asArray());
+        $this->assertSame($expectedNotValidItems, $collection->notValidAt(new \DateTimeImmutable('2026-01-07'))->asArray());
     }
 }

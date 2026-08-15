@@ -90,7 +90,7 @@ final class RoomFactoryTest extends UnitTestCase
         $mockAddressRepository = self::createMock(AddressRepository::class);
         $mockAddressRepository->method('findByIdAndTypeForLanguage')->willReturnCallback(
             fn(int $buildingId, AddressType $type, string $language) => match ($buildingId) {
-                123 => [new PostAddress(123, '12345', 'street', 'city', null, null, null, null, null, null)],
+                123 => [new PostAddress(123, '12345', 'street', 'city', null, null, null, null, null, null, null, null)],
                 default => [],
             }
         );
