@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace FGTCLB\HisClientFacade\Model;
 
-use FGTCLB\HisClient\AccountService\Struct\CompleteAccount;
 use FGTCLB\HisClient\KeyvalueService\Struct\CountryValue;
 use FGTCLB\HisClient\MimedataService\Struct\Mimedata;
 use FGTCLB\HisClient\PersonService\Struct\AcademicDegree;
 use FGTCLB\HisClient\PersonService\Struct\Gender;
 use FGTCLB\HisClient\PersonService\Struct\PersoninfoDto;
 use FGTCLB\HisClient\PersonService\Struct\Title;
+use FGTCLB\HisClientFacade\Collection\AccountCollection;
 use FGTCLB\HisClientFacade\Collection\ContactDetailsCollection;
 use FGTCLB\HisClientFacade\Collection\PersonAttributeCollection;
 use FGTCLB\HisClientFacade\Collection\PersonFunctionCollection;
@@ -44,7 +44,7 @@ final readonly class Person implements EntityInterface
         private \Closure $fetchPicturesClosure,
         /** @var \Closure(): PersonFunctionCollection */
         private \Closure $fetchFunctionsClosure,
-        /** @var \Closure(): CompleteAccount[] */
+        /** @var \Closure(): AccountCollection */
         private \Closure $fetchAccountsClosure,
         /** @var \Closure(): PersonAttributeCollection */
         private \Closure $fetchAttributesClosure,
@@ -82,10 +82,7 @@ final readonly class Person implements EntityInterface
         return ($this->fetchFunctionsClosure)();
     }
 
-    /**
-     * @return CompleteAccount[]
-     */
-    public function getAccounts(): array
+    public function getAccounts(): AccountCollection
     {
         // TODO cache result? Use proper lazy object?
         return ($this->fetchAccountsClosure)();
