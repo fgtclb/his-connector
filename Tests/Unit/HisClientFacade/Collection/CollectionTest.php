@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FGTCLB\HisConnector\Tests\Unit\HisClientFacade\Collection;
 
+use FGTCLB\HisClientFacade\Collection\AccountCollection;
 use FGTCLB\HisClientFacade\Collection\CollectionInterface;
 use FGTCLB\HisClientFacade\Collection\ContactDetailsCollection;
 use FGTCLB\HisClientFacade\Collection\EmailAddressCollection;
@@ -15,6 +16,7 @@ use FGTCLB\HisClientFacade\Collection\PersonFunctionCollection;
 use FGTCLB\HisClientFacade\Collection\PhoneNumberCollection;
 use FGTCLB\HisClientFacade\Collection\PostAddressCollection;
 use FGTCLB\HisClientFacade\Collection\ValidityAwareCollectionInterface;
+use FGTCLB\HisClientFacade\Model\Account;
 use FGTCLB\HisClientFacade\Model\ContactDetails;
 use FGTCLB\HisClientFacade\Model\EmailAddress;
 use FGTCLB\HisClientFacade\Model\FunctionType;
@@ -147,7 +149,7 @@ final class CollectionTest extends UnitTestCase
             fetchPersonalDataClosure: fn() => new PersonalData(null, null, null, null, null, null, null),
             fetchPicturesClosure: fn() => [],
             fetchFunctionsClosure: fn() => PersonFunctionCollection::fromArray([]),
-            fetchAccountsClosure: fn() => [],
+            fetchAccountsClosure: fn() => AccountCollection::fromArray([]),
             fetchAttributesClosure: fn() => PersonAttributeCollection::fromArray([]),
         );
         $items = [$person, clone $person, clone $person];
@@ -173,6 +175,17 @@ final class CollectionTest extends UnitTestCase
         $items = [$function, clone $function, clone $function];
         $collection = PersonFunctionCollection::fromArray($items);
         yield 'PersonFunctionCollection' => [
+            'collection' => $collection,
+            'expectedItems' => $items,
+        ];
+
+        $items = [
+            new Account(123, 'foo', false, null, null),
+            new Account(456, 'bar', true, null, null),
+            new Account(789, 'baz', false, null, null),
+        ];
+        $collection = AccountCollection::fromArray($items);
+        yield 'AccountCollection' => [
             'collection' => $collection,
             'expectedItems' => $items,
         ];
@@ -277,6 +290,37 @@ final class CollectionTest extends UnitTestCase
         $this->assertSame($items[1], $collection->onlyVerified()->first());
     }
 
+    #[Test]
+    public function AccountCollectionCanBeFiltered(): void
+    {
+        $items = [
+            new Account(
+                id: 123,
+                username: 'foo',
+                isLdapAccount: false,
+                validFrom: null,
+                validTo: null,
+            ),
+            new Account(
+                id: 456,
+                username: 'bar',
+                isLdapAccount: true,
+                validFrom: new \DateTimeImmutable('2026-01-15'),
+                validTo: new \DateTimeImmutable('2026-01-18'),
+            ),
+            new Account(
+                id: 789,
+                username: 'baz',
+                isLdapAccount: false,
+                validFrom: new \DateTimeImmutable('2026-01-05'),
+                validTo: new \DateTimeImmutable('2026-01-10'),
+            ),
+        ];
+        $collection = AccountCollection::fromArray($items);
+        $this->assertSame(1, count($collection->onlyLdap()));
+        $this->assertSame($items[1], $collection->onlyLdap()->first());
+    }
+
     /**
      * @return array{collection: object, expectedValidItems: object[], expectedNotValidItems: object[]}[]
      */
@@ -375,6 +419,36 @@ final class CollectionTest extends UnitTestCase
         ];
         yield 'PersonFunctionCollection' => [
             'collection' => PersonFunctionCollection::fromArray($items),
+            'expectedValidItems' => [$items[0], $items[2]],
+            'expectedNotValidItems' => [$items[1]],
+        ];
+
+        $items = [
+            new Account(
+                id: 123,
+                username: 'foo',
+                isLdapAccount: false,
+                validFrom: null,
+                validTo: null,
+            ),
+            new Account(
+                id: 456,
+                username: 'bar',
+                isLdapAccount: true,
+                validFrom: new \DateTimeImmutable('2026-01-15'),
+                validTo: new \DateTimeImmutable('2026-01-18'),
+            ),
+            new Account(
+                id: 789,
+                username: 'baz',
+                isLdapAccount: false,
+                validFrom: new \DateTimeImmutable('2026-01-05'),
+                validTo: new \DateTimeImmutable('2026-01-10'),
+            ),
+        ];
+        $collection = AccountCollection::fromArray($items);
+        yield 'AccountCollection' => [
+            'collection' => $collection,
             'expectedValidItems' => [$items[0], $items[2]],
             'expectedNotValidItems' => [$items[1]],
         ];
