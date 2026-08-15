@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FGTCLB\HisClientFacade\Factory;
 
+use FGTCLB\HisClientFacade\Exception\PostAddressEntityException;
 use FGTCLB\HisClientFacade\Model\PostAddress;
 use FGTCLB\HisClientFacade\Repository\CountryRepository;
 use FGTCLB\HisClientFacade\Utility\KeyvalueConverter;
@@ -19,7 +20,19 @@ readonly class PostAddressFactory
         \FGTCLB\HisClient\PersonOrgunitService\Struct\PostAddress $postAddress,
         string $language,
     ): PostAddress {
+        if ($postAddress->getId() === null) {
+            throw new PostAddressEntityException(sprintf(
+                'Post address of type "%s" does not have an id: %s %s %s',
+                get_class($postAddress),
+                $postAddress->getStreet(),
+                $postAddress->getPostcode(),
+                $postAddress->getCity(),
+            ), 1786792221);
+        }
+        $country = $postAddress->getCountryId() ? $this->countryRepository->findByIdForLanguage($postAddress->getCountryId(), $language) : null;
+        $domain = $postAddress->getAddresstagId() ? $this->keyvalueConverter->convertAddresstagIdToUniquename($postAddress->getAddresstagId(), $language) : null;
         return new PostAddress(
+            id: $postAddress->getId(),
             postcode: $postAddress->getPostcode(),
             street: $postAddress->getStreet(),
             city: $postAddress->getCity(),
@@ -27,8 +40,8 @@ readonly class PostAddressFactory
             postofficebox: $postAddress->getPostofficebox(),
             company: $postAddress->getCompany(),
             state: $postAddress->getState(),
-            country: $postAddress->getCountryId() ? $this->countryRepository->findByIdForLanguage($postAddress->getCountryId(), $language) : null,
-            domain: $postAddress->getAddresstagId() ? $this->keyvalueConverter->convertAddresstagIdToUniquename($postAddress->getAddresstagId(), $language) : null,
+            country: $country,
+            domain: $domain,
         );
     }
 
@@ -36,7 +49,20 @@ readonly class PostAddressFactory
         \FGTCLB\HisClient\AddressService\Struct\PostAddressWithNillablePostcode $postAddress,
         string $language,
     ): PostAddress {
+        if ($postAddress->getId() === null) {
+            throw new PostAddressEntityException(sprintf(
+                'Post address of type "%s" does not have an id: %s %s %s',
+                get_class($postAddress),
+                $postAddress->getStreet(),
+                $postAddress->getPostcode() ?? '',
+                $postAddress->getCity(),
+            ), 1786792220);
+        }
+        $country = $postAddress->getCountryId() ? $this->countryRepository->findByIdForLanguage($postAddress->getCountryId(), $language) : null;
+        // Note that this field currently doesn't seem to be filled by the SOAP endpoint
+        $domain = $postAddress->getAddresstagId() ? $this->keyvalueConverter->convertAddresstagIdToUniquename($postAddress->getAddresstagId(), $language) : null;
         return new PostAddress(
+            id: $postAddress->getId(),
             postcode: $postAddress->getPostcode() ?? '',
             street: $postAddress->getStreet(),
             city: $postAddress->getCity(),
@@ -44,41 +70,26 @@ readonly class PostAddressFactory
             postofficebox: $postAddress->getPostofficebox(),
             company: $postAddress->getCompany(),
             state: $postAddress->getState(),
-            country: $postAddress->getCountryId() ? $this->countryRepository->findByIdForLanguage($postAddress->getCountryId(), $language) : null,
-            // Note that this field isn't filled in our real use case by the SOAP endpoint
-            domain: $postAddress->getAddresstagId() ? $this->keyvalueConverter->convertAddresstagIdToUniquename($postAddress->getAddresstagId(), $language) : null,
+            country: $country,
+            domain: $domain,
         );
     }
 
-    public function createFromStreetAndCity(string $street, string $city): PostAddress
-    {
-        return new PostAddress(
-            postcode: '',
-            street: $street,
-            city: $city,
-            addressaddition: null,
-            postofficebox: null,
-            company: null,
-            state: null,
-            country: null,
-            domain: null,
-        );
-    }
-
-    public function createFromPostaddress_1(
-        \FGTCLB\HisClient\PersonAddressService\Struct\Postaddress_1 $postAddress,
+    public function createFromPostaddressMeta(
+        \FGTCLB\HisClient\PersonAddressService\Struct\PostaddressMeta $postAddress,
         string $language,
     ): PostAddress {
         return new PostAddress(
-            postcode: $postAddress->getPostcode() ?? '',
-            street: $postAddress->getStreet() ?? '',
-            city: $postAddress->getCity() ?? '',
-            addressaddition: $postAddress->getAddressaddition(),
-            postofficebox: $postAddress->getPostofficebox(),
-            company: $postAddress->getCompany(),
-            state: $postAddress->getState(),
-            country: $postAddress->getCountry() ? $this->countryRepository->findByUniquenameForLanguage($postAddress->getCountry(), $language) : null,
-            domain: $postAddress->getAddresstag(),
+            id: $postAddress->getAddressId(),
+            postcode: $postAddress->getPostaddress()->getPostcode() ?? '',
+            street: $postAddress->getPostaddress()->getStreet() ?? '',
+            city: $postAddress->getPostaddress()->getCity() ?? '',
+            addressaddition: $postAddress->getPostaddress()->getAddressaddition(),
+            postofficebox: $postAddress->getPostaddress()->getPostofficebox(),
+            company: $postAddress->getPostaddress()->getCompany(),
+            state: $postAddress->getPostaddress()->getState(),
+            country: $postAddress->getPostaddress()->getCountry() ? $this->countryRepository->findByUniquenameForLanguage($postAddress->getPostaddress()->getCountry(), $language) : null,
+            domain: $postAddress->getPostaddress()->getAddresstag(),
         );
     }
 }
