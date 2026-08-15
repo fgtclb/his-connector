@@ -7,8 +7,9 @@ namespace FGTCLB\HisClientFacade\Repository;
 use FGTCLB\HisClient\FacilityService\Service\Service as FacilityService;
 use FGTCLB\HisClient\FacilityService\Struct\ReadRoom202112;
 use FGTCLB\HisClient\FacilityService\Struct\ReadRoom202112Response;
-use FGTCLB\HisClient\FacilityService\Struct\RoomLarge202112;
 use FGTCLB\HisClientFacade\Exception\Exception;
+use FGTCLB\HisClientFacade\Factory\RoomFactory;
+use FGTCLB\HisClientFacade\Model\Room;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 
@@ -16,11 +17,12 @@ readonly class RoomRepository
 {
     public function __construct(
         private FacilityService $facilityService,
+        private RoomFactory $roomFactory,
         #[Autowire(service: 'cache.runtime')]
         private readonly FrontendInterface $cache,
     ) {}
 
-    public function findById(int $id): ?RoomLarge202112
+    public function findByIdForLanguage(int $id, string $language): ?Room
     {
         $cacheIdentifier = str_replace('\\', '_', self::class) . '_' . $id;
         if (!$this->cache->has($cacheIdentifier)) {
@@ -34,7 +36,11 @@ readonly class RoomRepository
                     $e->getMessage(),
                 ), 1785252647, $e);
             }
-            $this->cache->set($cacheIdentifier, $roomResponse->getRoom());
+            if ($roomResponse->getRoom()) {
+                $this->cache->set($cacheIdentifier, $this->roomFactory->create($roomResponse->getRoom(), $language));
+            } else {
+                $this->cache->set($cacheIdentifier, null);
+            }
         }
         return $this->cache->get($cacheIdentifier);
     }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace FGTCLB\HisClientFacade\Model;
 
-use FGTCLB\HisClient\FacilityService\Struct\Room;
 use FGTCLB\HisClientFacade\Collection\EmailAddressCollection;
 use FGTCLB\HisClientFacade\Collection\HyperlinkCollection;
 use FGTCLB\HisClientFacade\Collection\MessengerCollection;
