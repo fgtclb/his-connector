@@ -12,7 +12,7 @@ use FGTCLB\HisClientFacade\Model\PostAddress;
  *
  * @immutable
  */
-final readonly class PostAddressCollection implements \IteratorAggregate, CollectionInterface
+final readonly class PostAddressCollection implements \IteratorAggregate, CollectionInterface, ValidityAwareCollectionInterface
 {
     /**
      * @var list<PostAddress>
@@ -59,5 +59,21 @@ final readonly class PostAddressCollection implements \IteratorAggregate, Collec
     public function last(): ?PostAddress
     {
         return array_last($this->items);
+    }
+
+    public function onlyValidAt(\DateTimeInterface $at): self
+    {
+        return self::fromArray(array_values(array_filter(
+            $this->items,
+            fn(PostAddress $postAddress) => $postAddress->isValidAt($at),
+        )));
+    }
+
+    public function notValidAt(\DateTimeInterface $at): self
+    {
+        return self::fromArray(array_values(array_filter(
+            $this->items,
+            fn(PostAddress $postAddress) => !$postAddress->isValidAt($at),
+        )));
     }
 }

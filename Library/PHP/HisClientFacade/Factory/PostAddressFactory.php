@@ -7,6 +7,7 @@ namespace FGTCLB\HisClientFacade\Factory;
 use FGTCLB\HisClientFacade\Exception\PostAddressEntityException;
 use FGTCLB\HisClientFacade\Model\PostAddress;
 use FGTCLB\HisClientFacade\Repository\CountryRepository;
+use FGTCLB\HisClientFacade\Utility\DateTimeConverter;
 use FGTCLB\HisClientFacade\Utility\KeyvalueConverter;
 
 readonly class PostAddressFactory
@@ -14,6 +15,7 @@ readonly class PostAddressFactory
     public function __construct(
         private CountryRepository $countryRepository,
         private KeyvalueConverter $keyvalueConverter,
+        private DateTimeConverter $dateTimeConverter,
     ) {}
 
     public function createFromPersonOrgunitPostAddress(
@@ -42,6 +44,8 @@ readonly class PostAddressFactory
             state: $postAddress->getState(),
             country: $country,
             domain: $domain,
+            validFrom: $this->dateTimeConverter->convert($postAddress->getValidFrom()),
+            validTo: $this->dateTimeConverter->convert($postAddress->getValidTo()),
         );
     }
 
@@ -72,6 +76,8 @@ readonly class PostAddressFactory
             state: $postAddress->getState(),
             country: $country,
             domain: $domain,
+            validFrom: $this->dateTimeConverter->convert($postAddress->getValidFrom()),
+            validTo: $this->dateTimeConverter->convert($postAddress->getValidTo()),
         );
     }
 
@@ -90,6 +96,8 @@ readonly class PostAddressFactory
             state: $postAddress->getPostaddress()->getState(),
             country: $postAddress->getPostaddress()->getCountry() ? $this->countryRepository->findByUniquenameForLanguage($postAddress->getPostaddress()->getCountry(), $language) : null,
             domain: $postAddress->getPostaddress()->getAddresstag(),
+            validFrom: $this->dateTimeConverter->convert($postAddress->getValidFrom()),
+            validTo: $this->dateTimeConverter->convert($postAddress->getValidTo()),
         );
     }
 }

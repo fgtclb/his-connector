@@ -12,7 +12,7 @@ use FGTCLB\HisClientFacade\Model\PersonFunction;
  *
  * @immutable
  */
-final readonly class PersonFunctionCollection implements \IteratorAggregate, CollectionInterface
+final readonly class PersonFunctionCollection implements \IteratorAggregate, CollectionInterface, ValidityAwareCollectionInterface
 {
     /**
      * @var list<PersonFunction>
@@ -59,5 +59,21 @@ final readonly class PersonFunctionCollection implements \IteratorAggregate, Col
     public function last(): ?PersonFunction
     {
         return array_last($this->items);
+    }
+
+    public function onlyValidAt(\DateTimeInterface $at): self
+    {
+        return self::fromArray(array_values(array_filter(
+            $this->items,
+            fn(PersonFunction $personFunction) => $personFunction->isValidAt($at),
+        )));
+    }
+
+    public function notValidAt(\DateTimeInterface $at): self
+    {
+        return self::fromArray(array_values(array_filter(
+            $this->items,
+            fn(PersonFunction $personFunction) => !$personFunction->isValidAt($at),
+        )));
     }
 }
