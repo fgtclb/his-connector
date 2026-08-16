@@ -19,4 +19,9 @@ interface CollectionInterface extends \Countable
     public function first(): ?object;
 
     public function last(): ?object;
+
+    /**
+     * @return class-string
+     */
+    public static function getItemType(): string;
 }

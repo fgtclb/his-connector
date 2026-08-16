@@ -76,4 +76,9 @@ final readonly class HyperlinkCollection implements \IteratorAggregate, Collecti
             fn(Hyperlink $hyperlink) => $hyperlink->type === $type,
         )));
     }
+
+    public static function getItemType(): string
+    {
+        return Hyperlink::class;
+    }
 }

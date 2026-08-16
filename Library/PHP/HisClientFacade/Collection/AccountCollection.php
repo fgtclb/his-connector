@@ -84,4 +84,9 @@ final readonly class AccountCollection implements \IteratorAggregate, Collection
             fn(Account $account) => $account->isLdapAccount,
         )));
     }
+
+    public static function getItemType(): string
+    {
+        return Account::class;
+    }
 }

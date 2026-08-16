@@ -76,4 +76,9 @@ final readonly class PersonFunctionCollection implements \IteratorAggregate, Col
             fn(PersonFunction $personFunction) => !$personFunction->isValidAt($at),
         )));
     }
+
+    public static function getItemType(): string
+    {
+        return PersonFunction::class;
+    }
 }

@@ -60,4 +60,9 @@ final readonly class PersonAttributeCollection implements \IteratorAggregate, Co
     {
         return array_last($this->items);
     }
+
+    public static function getItemType(): string
+    {
+        return PersonAttribute::class;
+    }
 }

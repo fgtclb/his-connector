@@ -76,4 +76,9 @@ final readonly class PostAddressCollection implements \IteratorAggregate, Collec
             fn(PostAddress $postAddress) => !$postAddress->isValidAt($at),
         )));
     }
+
+    public static function getItemType(): string
+    {
+        return PostAddress::class;
+    }
 }
