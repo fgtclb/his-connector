@@ -12,7 +12,10 @@ use FGTCLB\HisClient\MimedataService\Struct\SearchPersonPictureDtoList;
 use FGTCLB\HisClient\MimedataService\Struct\SearchPersonPictureDtoListResponse;
 use FGTCLB\HisClientFacade\Exception\Exception;
 
-readonly class PersonPictureRepository
+/**
+ * @implements RepositoryInterface<Mimedata>
+ */
+readonly class PersonPictureRepository implements RepositoryInterface
 {
     public function __construct(private MimedataService $mimedataService) {}
 
@@ -48,5 +51,10 @@ readonly class PersonPictureRepository
             }
         }
         return $picturesMimeData;
+    }
+
+    public function getObjectType(): string
+    {
+        return Mimedata::class;
     }
 }

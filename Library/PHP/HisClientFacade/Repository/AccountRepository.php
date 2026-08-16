@@ -10,10 +10,14 @@ use FGTCLB\HisClient\AccountService\Struct\SearchAccountForPersonResponse;
 use FGTCLB\HisClientFacade\Collection\AccountCollection;
 use FGTCLB\HisClientFacade\Exception\Exception;
 use FGTCLB\HisClientFacade\Factory\AccountFactory;
+use FGTCLB\HisClientFacade\Model\Account;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 
-readonly class AccountRepository
+/**
+ * @implements RepositoryInterface<Account>
+ */
+readonly class AccountRepository implements RepositoryInterface
 {
     public function __construct(
         private AccountService $accountService,
@@ -43,5 +47,10 @@ readonly class AccountRepository
             $this->cache->set($cacheIdentifier, AccountCollection::fromArray($accounts));
         }
         return $this->cache->get($cacheIdentifier);
+    }
+
+    public function getObjectType(): string
+    {
+        return Account::class;
     }
 }

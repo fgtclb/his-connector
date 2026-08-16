@@ -13,7 +13,10 @@ use FGTCLB\HisClientFacade\Exception\Exception;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 
-readonly class KeyvalueRepository
+/**
+ * @implements RepositoryInterface<KeyValue>
+ */
+readonly class KeyvalueRepository implements RepositoryInterface
 {
     public function __construct(
         private readonly KeyvalueService $keyvalueService,
@@ -42,5 +45,10 @@ readonly class KeyvalueRepository
             $this->cache->set($cacheIdentifier, $response->getValues()->getValue() ?? []);
         }
         return $this->cache->get($cacheIdentifier);
+    }
+
+    public function getObjectType(): string
+    {
+        return KeyValue::class;
     }
 }

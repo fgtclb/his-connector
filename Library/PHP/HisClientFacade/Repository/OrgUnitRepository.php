@@ -21,8 +21,10 @@ use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
  * which is why both variants need to be implemented. To prevent unnecessary roundtrips
  * to the API, already available data are used to pre-fill the runtime caches whenever
  * possible.
+ *
+ * @implements RepositoryInterface<OrgUnit>
  */
-readonly class OrgUnitRepository
+readonly class OrgUnitRepository implements RepositoryInterface
 {
     public function __construct(
         private OrgUnitService $orgUnitService,
@@ -117,5 +119,10 @@ readonly class OrgUnitRepository
     private function generateCacheIdentifierForId2Lid(int $id): string
     {
         return str_replace('\\', '_', self::class) . '_id2lid_' . $id;
+    }
+
+    public function getObjectType(): string
+    {
+        return OrgUnit::class;
     }
 }

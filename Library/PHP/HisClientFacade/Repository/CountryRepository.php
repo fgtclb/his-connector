@@ -12,7 +12,10 @@ use FGTCLB\HisClientFacade\Exception\Exception;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 
-readonly class CountryRepository
+/**
+ * @implements RepositoryInterface<CountryValue>
+ */
+readonly class CountryRepository implements RepositoryInterface
 {
     public function __construct(
         private readonly KeyvalueService $keyvalueService,
@@ -58,5 +61,10 @@ readonly class CountryRepository
             $this->cache->set($cacheIdentifier, $response->getValuesXtd()->getValue() ?? []);
         }
         return $this->cache->get($cacheIdentifier);
+    }
+
+    public function getObjectType(): string
+    {
+        return CountryValue::class;
     }
 }

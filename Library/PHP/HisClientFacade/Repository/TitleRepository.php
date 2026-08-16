@@ -12,7 +12,10 @@ use FGTCLB\HisClientFacade\Exception\Exception;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 
-readonly class TitleRepository
+/**
+ * @implements RepositoryInterface<Title>
+ */
+readonly class TitleRepository implements RepositoryInterface
 {
     public function __construct(
         private readonly PersonService $personService,
@@ -49,5 +52,10 @@ readonly class TitleRepository
             $this->cache->set($cacheIdentifier, $response->getTitles()->getTitle() ?? []);
         }
         return $this->cache->get($cacheIdentifier);
+    }
+
+    public function getObjectType(): string
+    {
+        return Title::class;
     }
 }
