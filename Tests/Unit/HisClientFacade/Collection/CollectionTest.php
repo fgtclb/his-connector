@@ -243,6 +243,16 @@ final class CollectionTest extends UnitTestCase
         $this->assertSame($expectedItems[2], $collection->last());
     }
 
+    /**
+     * @param object[] $expectedItems
+     */
+    #[Test]
+    #[DataProvider('collectionDataProvider')]
+    public function correctTypeIsReturned(CollectionInterface $collection, array $expectedItems): void
+    {
+        $this->assertSame(get_class($expectedItems[0]), $collection::getItemType());
+    }
+
     #[Test]
     public function phoneNumberCollectionCanBeFiltered(): void
     {

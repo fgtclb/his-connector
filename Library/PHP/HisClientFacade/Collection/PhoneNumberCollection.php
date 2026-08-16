@@ -76,4 +76,9 @@ final readonly class PhoneNumberCollection implements \IteratorAggregate, Collec
             fn(PhoneNumber $phoneNumber) => $phoneNumber->type === $type,
         )));
     }
+
+    public static function getItemType(): string
+    {
+        return PhoneNumber::class;
+    }
 }

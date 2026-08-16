@@ -60,4 +60,9 @@ final readonly class ContactDetailsCollection implements \IteratorAggregate, Col
     {
         return array_last($this->items);
     }
+
+    public static function getItemType(): string
+    {
+        return ContactDetails::class;
+    }
 }

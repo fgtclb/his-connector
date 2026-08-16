@@ -84,4 +84,9 @@ final readonly class EmailAddressCollection implements \IteratorAggregate, Colle
             fn(EmailAddress $emailAddress) => !$emailAddress->isVerified,
         )));
     }
+
+    public static function getItemType(): string
+    {
+        return EmailAddress::class;
+    }
 }
