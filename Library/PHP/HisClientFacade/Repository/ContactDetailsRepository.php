@@ -10,8 +10,12 @@ use FGTCLB\HisClient\PersonAddressService\Struct\ReadAddresses202506Response;
 use FGTCLB\HisClientFacade\Collection\ContactDetailsCollection;
 use FGTCLB\HisClientFacade\Exception\Exception;
 use FGTCLB\HisClientFacade\Factory\ContactDetailsFactory;
+use FGTCLB\HisClientFacade\Model\ContactDetails;
 
-readonly class ContactDetailsRepository
+/**
+ * @implements RepositoryInterface<ContactDetails>
+ */
+readonly class ContactDetailsRepository implements RepositoryInterface
 {
     public function __construct(
         private PersonAddressService $personAddressService,
@@ -35,5 +39,10 @@ readonly class ContactDetailsRepository
             $contactDetails[] = $this->contactDetailsFactory->create($addresses, $language);
         }
         return ContactDetailsCollection::fromArray($contactDetails);
+    }
+
+    public function getObjectType(): string
+    {
+        return ContactDetails::class;
     }
 }

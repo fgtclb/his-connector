@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use FGTCLB\HisClientFacade\Repository\RepositoryInterface;
 use FGTCLB\HisClientFacade\Soap\SoapClientFactory;
 use FGTCLB\HisClientFacade\Soap\SoapClientFactoryInterface;
 use FGTCLB\HisClientFacade\Soap\SoapServiceFactoryInterface;
@@ -68,6 +69,7 @@ return static function (
         ->exclude([
             __DIR__ . '/../Library/PHP/HisClientFacade/Model/*.php',
         ]);
+    $builder->registerForAutoconfiguration(RepositoryInterface::class)->addTag('hisclientfacade.repository');
 
     if (Environment::getContext()->isTesting()) {
         // Use mock factory that creates SOAP clients that don't actually call the SOAP service

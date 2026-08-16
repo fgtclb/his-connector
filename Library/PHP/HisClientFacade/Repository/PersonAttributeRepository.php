@@ -13,10 +13,14 @@ use FGTCLB\HisClient\PersonService\Struct\ReadAllPersonAttributesFromPersonRespo
 use FGTCLB\HisClientFacade\Collection\PersonAttributeCollection;
 use FGTCLB\HisClientFacade\Exception\Exception;
 use FGTCLB\HisClientFacade\Factory\PersonAttributeFactory;
+use FGTCLB\HisClientFacade\Model\PersonAttribute;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 
-readonly class PersonAttributeRepository
+/**
+ * @implements RepositoryInterface<PersonAttribute>
+ */
+readonly class PersonAttributeRepository implements RepositoryInterface
 {
     public function __construct(
         private PersonService $personService,
@@ -81,5 +85,10 @@ readonly class PersonAttributeRepository
             $this->cache->set($cacheIdentifier, $response->getPersonAttributeTypes()->getPersonAttributeType());
         }
         return $this->cache->get($cacheIdentifier);
+    }
+
+    public function getObjectType(): string
+    {
+        return PersonAttribute::class;
     }
 }

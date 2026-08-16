@@ -12,7 +12,10 @@ use FGTCLB\HisClientFacade\Exception\Exception;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 
-readonly class GenderRepository
+/**
+ * @implements RepositoryInterface<Gender>
+ */
+readonly class GenderRepository implements RepositoryInterface
 {
     public function __construct(
         private readonly PersonService $personService,
@@ -49,5 +52,10 @@ readonly class GenderRepository
             $this->cache->set($cacheIdentifier, $response->getGenders()->getGender() ?? []);
         }
         return $this->cache->get($cacheIdentifier);
+    }
+
+    public function getObjectType(): string
+    {
+        return Gender::class;
     }
 }

@@ -12,7 +12,10 @@ use FGTCLB\HisClientFacade\Exception\Exception;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 
-readonly class AcademicDegreeRepository
+/**
+ * @implements RepositoryInterface<AcademicDegree>
+ */
+readonly class AcademicDegreeRepository implements RepositoryInterface
 {
     public function __construct(
         private readonly PersonService $personService,
@@ -49,5 +52,10 @@ readonly class AcademicDegreeRepository
             $this->cache->set($cacheIdentifier, $response->getAcademicDegrees()->getAcademicDegree() ?? []);
         }
         return $this->cache->get($cacheIdentifier);
+    }
+
+    public function getObjectType(): string
+    {
+        return AcademicDegree::class;
     }
 }
