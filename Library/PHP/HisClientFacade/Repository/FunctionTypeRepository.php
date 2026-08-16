@@ -9,7 +9,10 @@ use FGTCLB\HisClientFacade\Enum\KeyvalueTable;
 use FGTCLB\HisClientFacade\Factory\FunctionTypeFactory;
 use FGTCLB\HisClientFacade\Model\FunctionType;
 
-readonly class FunctionTypeRepository
+/**
+ * @implements RepositoryInterface<FunctionType>
+ */
+readonly class FunctionTypeRepository implements RepositoryInterface
 {
     public function __construct(
         private KeyvalueRepository $keyvalueRepository,
@@ -21,5 +24,10 @@ readonly class FunctionTypeRepository
         $items = $this->keyvalueRepository->findByTableForLanguage(KeyvalueTable::AFFILIATIONTYPES, $language);
         $keyValue = array_find($items, fn(KeyValue $item) => $item->getId() === $id);
         return $keyValue !== null ? $this->functionTypeFactory->create($keyValue) : null;
+    }
+
+    public function getObjectType(): string
+    {
+        return FunctionType::class;
     }
 }

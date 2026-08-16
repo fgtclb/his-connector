@@ -12,8 +12,12 @@ use FGTCLB\HisClient\PersonService\Struct\ReadPersonResponse;
 use FGTCLB\HisClientFacade\Collection\PersonCollection;
 use FGTCLB\HisClientFacade\Exception\Exception;
 use FGTCLB\HisClientFacade\Factory\PersonFactory;
+use FGTCLB\HisClientFacade\Model\Person;
 
-readonly class PersonRepository
+/**
+ * @implements RepositoryInterface<Person>
+ */
+readonly class PersonRepository implements RepositoryInterface
 {
     public function __construct(
         private PersonService $personService,
@@ -55,5 +59,10 @@ readonly class PersonRepository
             }
         }
         return PersonCollection::fromArray($persons);
+    }
+
+    public function getObjectType(): string
+    {
+        return Person::class;
     }
 }

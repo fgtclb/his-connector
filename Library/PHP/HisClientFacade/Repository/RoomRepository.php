@@ -13,7 +13,10 @@ use FGTCLB\HisClientFacade\Model\Room;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 
-readonly class RoomRepository
+/**
+ * @implements RepositoryInterface<Room>
+ */
+readonly class RoomRepository implements RepositoryInterface
 {
     public function __construct(
         private FacilityService $facilityService,
@@ -43,5 +46,10 @@ readonly class RoomRepository
             }
         }
         return $this->cache->get($cacheIdentifier);
+    }
+
+    public function getObjectType(): string
+    {
+        return Room::class;
     }
 }

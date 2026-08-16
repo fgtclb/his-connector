@@ -13,7 +13,10 @@ use FGTCLB\HisClientFacade\Model\PersonalData;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 
-readonly class PersonalDataRepository
+/**
+ * @implements RepositoryInterface<PersonalData>
+ */
+readonly class PersonalDataRepository implements RepositoryInterface
 {
     public function __construct(
         private PersonService $personService,
@@ -42,5 +45,10 @@ readonly class PersonalDataRepository
             $this->cache->set($cacheIdentifier, $personalData);
         }
         return $this->cache->get($cacheIdentifier);
+    }
+
+    public function getObjectType(): string
+    {
+        return PersonalData::class;
     }
 }

@@ -14,7 +14,10 @@ use FGTCLB\HisClientFacade\Model\PostAddress;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 
-readonly class AddressRepository
+/**
+ * @implements RepositoryInterface<PostAddress>
+ */
+readonly class AddressRepository implements RepositoryInterface
 {
     public function __construct(
         private AddressService $addressService,
@@ -47,5 +50,10 @@ readonly class AddressRepository
             $this->cache->set($cacheIdentifier, $postAddresses);
         }
         return $this->cache->get($cacheIdentifier);
+    }
+
+    public function getObjectType(): string
+    {
+        return PostAddress::class;
     }
 }

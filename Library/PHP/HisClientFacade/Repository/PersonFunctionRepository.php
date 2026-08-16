@@ -12,8 +12,12 @@ use FGTCLB\HisClient\PersonOrgunitService\Struct\SearchAffiliationsForPersonResp
 use FGTCLB\HisClientFacade\Collection\PersonFunctionCollection;
 use FGTCLB\HisClientFacade\Exception\Exception;
 use FGTCLB\HisClientFacade\Factory\PersonFunctionFactory;
+use FGTCLB\HisClientFacade\Model\PersonFunction;
 
-readonly class PersonFunctionRepository
+/**
+ * @implements RepositoryInterface<PersonFunction>
+ */
+readonly class PersonFunctionRepository implements RepositoryInterface
 {
     public function __construct(
         private PersonOrgunitService $personOrgunitService,
@@ -48,5 +52,10 @@ readonly class PersonFunctionRepository
             $personFunctions[] = $this->personFunctionFactory->create($affiliationDetailsResponse->getAffiliation(), $language);
         }
         return PersonFunctionCollection::fromArray($personFunctions);
+    }
+
+    public function getObjectType(): string
+    {
+        return PersonFunction::class;
     }
 }
