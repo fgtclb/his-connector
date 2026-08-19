@@ -19,6 +19,7 @@ final class PersonalDataFactoryTest extends UnitTestCase
     {
         return [
             'full' => [
+                'personId' => 123,
                 'workplaceDescription' => 'workplace',
                 'academicCareer' => 'academic',
                 'professionalLife' => 'professional',
@@ -26,8 +27,10 @@ final class PersonalDataFactoryTest extends UnitTestCase
                 'practiceCooperation' => 'practice',
                 'publications' => 'publication',
                 'administrationFunctions' => 'administration',
+                'expectedIdentifier' => 'personalData-123',
             ],
             'null' => [
+                'personId' => 123,
                 'workplaceDescription' => null,
                 'academicCareer' => null,
                 'professionalLife' => null,
@@ -35,18 +38,19 @@ final class PersonalDataFactoryTest extends UnitTestCase
                 'practiceCooperation' => null,
                 'publications' => null,
                 'administrationFunctions' => null,
+                'expectedIdentifier' => 'personalData-123',
             ],
         ];
     }
 
     #[Test]
     #[DataProvider('createPersonalDataDataProvider')]
-    public function createPersonalData(?string $workplaceDescription, ?string $academicCareer, ?string $professionalLife, ?string $researchProjects, ?string $practiceCooperation, ?string $publications, ?string $administrationFunctions): void
+    public function createPersonalData(int $personId, ?string $workplaceDescription, ?string $academicCareer, ?string $professionalLife, ?string $researchProjects, ?string $practiceCooperation, ?string $publications, ?string $administrationFunctions, string $expectedIdentifier): void
     {
         $subject = new PersonalDataFactory();
         $result = $subject->create(
             new Personaldata(
-                123,
+                $personId,
                 $workplaceDescription,
                 $academicCareer,
                 $professionalLife,
@@ -56,6 +60,8 @@ final class PersonalDataFactoryTest extends UnitTestCase
                 $administrationFunctions,
             )
         );
+        $this->assertSame($expectedIdentifier, $result->getIdentifier());
+        $this->assertSame($personId, $result->personId);
         $this->assertSame($workplaceDescription, $result->workplaceDescription);
         $this->assertSame($academicCareer, $result->academicCareer);
         $this->assertSame($professionalLife, $result->professionalLife);
@@ -69,7 +75,9 @@ final class PersonalDataFactoryTest extends UnitTestCase
     public function createEmpty(): void
     {
         $subject = new PersonalDataFactory();
-        $result = $subject->createEmpty();
+        $result = $subject->createEmpty(123);
+        $this->assertSame('personalData-123', $result->getIdentifier());
+        $this->assertSame(123, $result->personId);
         $this->assertNull($result->workplaceDescription);
         $this->assertNull($result->academicCareer);
         $this->assertNull($result->professionalLife);
