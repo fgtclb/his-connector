@@ -8,22 +8,24 @@ use FGTCLB\HisClientFacade\Model\PersonalData;
 
 readonly class PersonalDataFactory
 {
-    public function create(\FGTCLB\HisClient\PersonService\Struct\Personaldata $addresses): PersonalData
+    public function create(\FGTCLB\HisClient\PersonService\Struct\Personaldata $personalData): PersonalData
     {
         return new PersonalData(
-            workplaceDescription: $addresses->getWorkplaceDescription(),
-            academicCareer: $addresses->getAcademicCareer(),
-            professionalLife: $addresses->getProfessionalLife(),
-            researchProjects: $addresses->getResearchProjects(),
-            practiceCooperation: $addresses->getPracticeCooperation(),
-            publications: $addresses->getPublications(),
-            administrationFunctions: $addresses->getAdministrationFunctions(),
+            personId: $personalData->getPersonId(),
+            workplaceDescription: $personalData->getWorkplaceDescription(),
+            academicCareer: $personalData->getAcademicCareer(),
+            professionalLife: $personalData->getProfessionalLife(),
+            researchProjects: $personalData->getResearchProjects(),
+            practiceCooperation: $personalData->getPracticeCooperation(),
+            publications: $personalData->getPublications(),
+            administrationFunctions: $personalData->getAdministrationFunctions(),
         );
     }
 
-    public function createEmpty(): PersonalData
+    public function createEmpty(int $personId): PersonalData
     {
         return new PersonalData(
+            personId: $personId,
             workplaceDescription: null,
             academicCareer: null,
             professionalLife: null,

@@ -40,9 +40,9 @@ final class CollectionTest extends UnitTestCase
     public static function collectionDataProvider(): iterable
     {
         $items = [
-            new ContactDetails(PostAddressCollection::fromArray([]), EmailAddressCollection::fromArray([]), PhoneNumberCollection::fromArray([]), HyperlinkCollection::fromArray([]), MessengerCollection::fromArray([])),
-            new ContactDetails(PostAddressCollection::fromArray([]), EmailAddressCollection::fromArray([]), PhoneNumberCollection::fromArray([]), HyperlinkCollection::fromArray([]), MessengerCollection::fromArray([])),
-            new ContactDetails(PostAddressCollection::fromArray([]), EmailAddressCollection::fromArray([]), PhoneNumberCollection::fromArray([]), HyperlinkCollection::fromArray([]), MessengerCollection::fromArray([])),
+            new ContactDetails(123, PostAddressCollection::fromArray([]), EmailAddressCollection::fromArray([]), PhoneNumberCollection::fromArray([]), HyperlinkCollection::fromArray([]), MessengerCollection::fromArray([])),
+            new ContactDetails(456, PostAddressCollection::fromArray([]), EmailAddressCollection::fromArray([]), PhoneNumberCollection::fromArray([]), HyperlinkCollection::fromArray([]), MessengerCollection::fromArray([])),
+            new ContactDetails(789, PostAddressCollection::fromArray([]), EmailAddressCollection::fromArray([]), PhoneNumberCollection::fromArray([]), HyperlinkCollection::fromArray([]), MessengerCollection::fromArray([])),
         ];
         $collection = ContactDetailsCollection::fromArray($items);
         yield 'ContactDetailsCollection' => [
@@ -146,7 +146,7 @@ final class CollectionTest extends UnitTestCase
             createdAt: null,
             updatedAt: null,
             fetchContactDetailsClosure: fn() => ContactDetailsCollection::fromArray([]),
-            fetchPersonalDataClosure: fn() => new PersonalData(null, null, null, null, null, null, null),
+            fetchPersonalDataClosure: fn() => new PersonalData(123, null, null, null, null, null, null, null),
             fetchPicturesClosure: fn() => [],
             fetchFunctionsClosure: fn() => PersonFunctionCollection::fromArray([]),
             fetchAccountsClosure: fn() => AccountCollection::fromArray([]),

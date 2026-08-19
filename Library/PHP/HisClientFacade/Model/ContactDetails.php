@@ -10,13 +10,19 @@ use FGTCLB\HisClientFacade\Collection\MessengerCollection;
 use FGTCLB\HisClientFacade\Collection\PhoneNumberCollection;
 use FGTCLB\HisClientFacade\Collection\PostAddressCollection;
 
-final readonly class ContactDetails
+final readonly class ContactDetails implements EntityInterface
 {
     public function __construct(
+        public int $personId,
         public PostAddressCollection $postAddresses,
         public EmailAddressCollection $emailAddresses,
         public PhoneNumberCollection $phoneNumbers,
         public HyperlinkCollection $hyperlinks,
         public MessengerCollection $messengers,
     ) {}
+
+    public function getIdentifier(): string
+    {
+        return sprintf('contactDetails-%d', $this->personId);
+    }
 }

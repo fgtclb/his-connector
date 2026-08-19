@@ -36,7 +36,7 @@ readonly class ContactDetailsRepository implements RepositoryInterface
         }
         $contactDetails = [];
         foreach ($personAddressesResponse->getPersonAddressesByNotifications202506()->getPersonAddressesByNotification202506() ?? [] as $addresses) {
-            $contactDetails[] = $this->contactDetailsFactory->create($addresses, $language);
+            $contactDetails[] = $this->contactDetailsFactory->create($personId, $addresses, $language);
         }
         return ContactDetailsCollection::fromArray($contactDetails);
     }

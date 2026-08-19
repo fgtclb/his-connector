@@ -41,7 +41,7 @@ readonly class PersonalDataRepository implements RepositoryInterface
             }
             $personalData = $response->getPersonaldata()
                 ? $this->personalDataFactory->create($response->getPersonaldata())
-                : $this->personalDataFactory->createEmpty();
+                : $this->personalDataFactory->createEmpty($personId);
             $this->cache->set($cacheIdentifier, $personalData);
         }
         return $this->cache->get($cacheIdentifier);
