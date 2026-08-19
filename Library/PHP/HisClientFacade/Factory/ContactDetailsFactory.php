@@ -25,9 +25,10 @@ readonly class ContactDetailsFactory
 {
     public function __construct(private PostAddressFactory $postAddressFactory) {}
 
-    public function create(PersonAddressesByNotification202506 $addresses, string $language): ContactDetails
+    public function create(int $personId, PersonAddressesByNotification202506 $addresses, string $language): ContactDetails
     {
         return new ContactDetails(
+            personId: $personId,
             postAddresses: PostAddressCollection::fromArray(array_map(
                 fn(PostaddressMeta $address) => $this->postAddressFactory->createFromPostaddressMeta($address, $language),
                 array_values($addresses->getPostaddresses202506()?->getPostaddressMeta202506() ?? []),
