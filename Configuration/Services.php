@@ -56,7 +56,8 @@ return static function (
             foreach ($container->findTaggedServiceIds('hisclient.soapservice') as $id => $tags) {
                 $container->findDefinition($id)
                     ->setFactory([new Reference(SoapServiceFactoryInterface::class), 'create'])
-                    ->setArguments([$id]);
+                    ->setArguments([$id])
+                    ->setLazy(true);
             }
         }
     });
