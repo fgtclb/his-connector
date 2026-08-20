@@ -11,7 +11,7 @@ final class MockSoapClient extends \SoapClient
      * to be able to verify them in tests.
      *
      * @param array<string, string> $wsdlOptions
-     * @param array<string, string> $suppliedArguments
+     * @param array<string, int|string> $suppliedArguments
      */
     public function __construct(public ?string $wsdlUrl, public ?array $wsdlOptions, public array $suppliedArguments) {}
 }

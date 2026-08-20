@@ -13,5 +13,5 @@ namespace FGTCLB\HisClientFacade\Soap;
  */
 interface SoapClientFactoryInterface
 {
-    public function createForService(string $serviceNameClass, string $urlPrefix, string $wssUsername, string $wssPassword): \SoapClient;
+    public function createForService(string $serviceNameClass, string $urlPrefix, string $wssUsername, string $wssPassword, int $timeout): \SoapClient;
 }

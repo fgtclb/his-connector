@@ -8,7 +8,7 @@ use FGTCLB\HisClientFacade\Soap\SoapClientFactoryInterface;
 
 final readonly class MockSoapClientFactory implements SoapClientFactoryInterface
 {
-    public function createForService(string $serviceClassName, string $urlPrefix, string $wssUsername, string $wssPassword): \SoapClient
+    public function createForService(string $serviceClassName, string $urlPrefix, string $wssUsername, string $wssPassword, int $timeout): \SoapClient
     {
         // Create simple mock SOAP client that doesn't connect to anything during construction
         return new MockSoapClient(null, [], [
@@ -16,6 +16,7 @@ final readonly class MockSoapClientFactory implements SoapClientFactoryInterface
             'urlPrefix' => $urlPrefix,
             'wssUsername' => $wssUsername,
             'wssPassword' => $wssPassword,
+            'timeout' => $timeout,
         ]);
     }
 }
