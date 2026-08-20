@@ -16,7 +16,7 @@ final readonly class SoapClientFactory implements SoapClientFactoryInterface
 {
     private const WSS_NAMESPACE_PREFIX = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss';
 
-    public function createForService(string $serviceClassName, string $urlPrefix, string $wssUsername, string $wssPassword): \SoapClient
+    public function createForService(string $serviceClassName, string $urlPrefix, string $wssUsername, string $wssPassword, int $timeout): \SoapClient
     {
         // Extract SOAP endpoint from requested PHP class
         // e. g. FGTCLB\HisClient\PersonService\Service\Service => PersonService
@@ -29,6 +29,7 @@ final readonly class SoapClientFactory implements SoapClientFactoryInterface
             ...array_filter(AbstractSoapClientBase::getDefaultWsdlOptions(), fn($value) => !is_null($value)),
             SoapClientInterface::WSDL_LOCATION => $urlPrefix . $serviceName,
             SoapClientInterface::WSDL_CLASSMAP => $classMap::get(),
+            SoapClientInterface::WSDL_CONNECTION_TIMEOUT => $timeout,
         ];
         // Remove possible non-standard WSDL option from library
         unset($options[SoapClientInterface::WSDL_URL]);

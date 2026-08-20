@@ -7,4 +7,7 @@ soap {
 
     # cat=SOAP; type=string; label=Password to access SOAP services
     password = admin!
+
+    # cat=SOAP; type=string; label=Connection timeout for SOAP services
+    timeout = 5
 }

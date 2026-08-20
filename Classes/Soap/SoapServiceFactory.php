@@ -34,9 +34,10 @@ final readonly class SoapServiceFactory implements SoapServiceFactoryInterface
         $username = $this->extensionConfiguration->get('his_connector', 'soap/username');
         $password = $this->extensionConfiguration->get('his_connector', 'soap/password');
         $urlPrefix = $this->extensionConfiguration->get('his_connector', 'soap/urlPrefix');
+        $timeout = (int)$this->extensionConfiguration->get('his_connector', 'soap/timeout');
 
         $service = new $className();
-        $service->setSoapClient($this->soapClientFactory->createForService($className, $urlPrefix, $username, $password));
+        $service->setSoapClient($this->soapClientFactory->createForService($className, $urlPrefix, $username, $password, $timeout));
         return $service;
     }
 }

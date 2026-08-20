@@ -28,6 +28,7 @@ final class HisClientTest extends AbstractHisConnectorTestCase
                     'urlPrefix' => 'http://127.0.0.1/path/to/soap/',
                     'username' => 'testing',
                     'password' => 'testing!',
+                    'timeout' => 10,
                 ],
             ],
         ],
@@ -65,6 +66,7 @@ final class HisClientTest extends AbstractHisConnectorTestCase
                 'urlPrefix' => 'http://127.0.0.1/path/to/soap/',
                 'wssUsername' => 'testing',
                 'wssPassword' => 'testing!',
+                'timeout' => 10,
             ],
             $service->getSoapClient()->suppliedArguments,
         );
