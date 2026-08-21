@@ -8,11 +8,11 @@ use FGTCLB\HisClientFacade\Iterator\PersonCollectionIterator;
 use FGTCLB\HisClientFacade\Model\Person;
 
 /**
- * @template-implements \IteratorAggregate<non-negative-int, Person>
+ * @template-implements CollectionInterface<Person>
  *
  * @immutable
  */
-final readonly class PersonCollection implements \IteratorAggregate, CollectionInterface
+final readonly class PersonCollection implements CollectionInterface
 {
     /**
      * @var list<Person>

@@ -8,11 +8,11 @@ use FGTCLB\HisClientFacade\Iterator\MessengerCollectionIterator;
 use FGTCLB\HisClientFacade\Model\Messenger;
 
 /**
- * @template-implements \IteratorAggregate<non-negative-int, Messenger>
+ * @template-implements CollectionInterface<Messenger>
  *
  * @immutable
  */
-final readonly class MessengerCollection implements \IteratorAggregate, CollectionInterface
+final readonly class MessengerCollection implements CollectionInterface
 {
     /**
      * @var list<Messenger>

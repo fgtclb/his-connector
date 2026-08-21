@@ -192,11 +192,12 @@ final class CollectionTest extends UnitTestCase
     }
 
     /**
+     * @param CollectionInterface<object> $collection
      * @param object[] $expectedItems
      */
     #[Test]
     #[DataProvider('collectionDataProvider')]
-    public function collectionCanBeIterated(\IteratorAggregate $collection, array $expectedItems): void
+    public function collectionCanBeIterated(CollectionInterface $collection, array $expectedItems): void
     {
         foreach ($collection as $i => $item) {
             $this->assertSame($expectedItems[$i], $item);
@@ -204,6 +205,7 @@ final class CollectionTest extends UnitTestCase
     }
 
     /**
+     * @param CollectionInterface<object> $collection
      * @param object[] $expectedItems
      */
     #[Test]
@@ -214,6 +216,7 @@ final class CollectionTest extends UnitTestCase
     }
 
     /**
+     * @param CollectionInterface<object> $collection
      * @param object[] $expectedItems
      */
     #[Test]
@@ -224,6 +227,7 @@ final class CollectionTest extends UnitTestCase
     }
 
     /**
+     * @param CollectionInterface<object> $collection
      * @param object[] $expectedItems
      */
     #[Test]
@@ -234,6 +238,7 @@ final class CollectionTest extends UnitTestCase
     }
 
     /**
+     * @param CollectionInterface<object> $collection
      * @param object[] $expectedItems
      */
     #[Test]
@@ -244,6 +249,7 @@ final class CollectionTest extends UnitTestCase
     }
 
     /**
+     * @param CollectionInterface<object> $collection
      * @param object[] $expectedItems
      */
     #[Test]
@@ -465,6 +471,7 @@ final class CollectionTest extends UnitTestCase
     }
 
     /**
+     * @param CollectionInterface<object>&ValidityAwareCollectionInterface<object> $collection
      * @param object[] $expectedValidItems
      * @param object[] $expectedNotValidItems
      */

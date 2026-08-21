@@ -8,11 +8,11 @@ use FGTCLB\HisClientFacade\Iterator\EmailAddressCollectionIterator;
 use FGTCLB\HisClientFacade\Model\EmailAddress;
 
 /**
- * @template-implements \IteratorAggregate<non-negative-int, EmailAddress>
+ * @template-implements CollectionInterface<EmailAddress>
  *
  * @immutable
  */
-final readonly class EmailAddressCollection implements \IteratorAggregate, CollectionInterface
+final readonly class EmailAddressCollection implements CollectionInterface
 {
     /**
      * @var list<EmailAddress>

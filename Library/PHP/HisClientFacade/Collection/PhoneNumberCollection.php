@@ -8,11 +8,11 @@ use FGTCLB\HisClientFacade\Iterator\PhoneNumberCollectionIterator;
 use FGTCLB\HisClientFacade\Model\PhoneNumber;
 
 /**
- * @template-implements \IteratorAggregate<non-negative-int, PhoneNumber>
+ * @template-implements CollectionInterface<PhoneNumber>
  *
  * @immutable
  */
-final readonly class PhoneNumberCollection implements \IteratorAggregate, CollectionInterface
+final readonly class PhoneNumberCollection implements CollectionInterface
 {
     /**
      * @var list<PhoneNumber>

@@ -8,11 +8,11 @@ use FGTCLB\HisClientFacade\Iterator\ContactDetailsCollectionIterator;
 use FGTCLB\HisClientFacade\Model\ContactDetails;
 
 /**
- * @template-implements \IteratorAggregate<non-negative-int, ContactDetails>
+ * @template-implements CollectionInterface<ContactDetails>
  *
  * @immutable
  */
-final readonly class ContactDetailsCollection implements \IteratorAggregate, CollectionInterface
+final readonly class ContactDetailsCollection implements CollectionInterface
 {
     /**
      * @var list<ContactDetails>

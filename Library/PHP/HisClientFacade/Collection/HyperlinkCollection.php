@@ -8,11 +8,11 @@ use FGTCLB\HisClientFacade\Iterator\HyperlinkCollectionIterator;
 use FGTCLB\HisClientFacade\Model\Hyperlink;
 
 /**
- * @template-implements \IteratorAggregate<non-negative-int, Hyperlink>
+ * @template-implements CollectionInterface<Hyperlink>
  *
  * @immutable
  */
-final readonly class HyperlinkCollection implements \IteratorAggregate, CollectionInterface
+final readonly class HyperlinkCollection implements CollectionInterface
 {
     /**
      * @var list<Hyperlink>

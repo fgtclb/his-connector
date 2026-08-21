@@ -8,11 +8,12 @@ use FGTCLB\HisClientFacade\Iterator\AccountCollectionIterator;
 use FGTCLB\HisClientFacade\Model\Account;
 
 /**
- * @template-implements \IteratorAggregate<non-negative-int, Account>
+ * @template-implements CollectionInterface<Account>
+ * @template-implements ValidityAwareCollectionInterface<Account>
  *
  * @immutable
  */
-final readonly class AccountCollection implements \IteratorAggregate, CollectionInterface, ValidityAwareCollectionInterface
+final readonly class AccountCollection implements CollectionInterface, ValidityAwareCollectionInterface
 {
     /**
      * @var list<Account>
