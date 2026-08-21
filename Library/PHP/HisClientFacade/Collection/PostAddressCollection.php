@@ -8,11 +8,12 @@ use FGTCLB\HisClientFacade\Iterator\PostAddressCollectionIterator;
 use FGTCLB\HisClientFacade\Model\PostAddress;
 
 /**
- * @template-implements \IteratorAggregate<non-negative-int, PostAddress>
+ * @template-implements CollectionInterface<PostAddress>
+ * @template-implements ValidityAwareCollectionInterface<PostAddress>
  *
  * @immutable
  */
-final readonly class PostAddressCollection implements \IteratorAggregate, CollectionInterface, ValidityAwareCollectionInterface
+final readonly class PostAddressCollection implements CollectionInterface, ValidityAwareCollectionInterface
 {
     /**
      * @var list<PostAddress>
