@@ -232,6 +232,23 @@ final class CollectionTest extends UnitTestCase
      */
     #[Test]
     #[DataProvider('collectionDataProvider')]
+    public function collectionCanBeSliced(CollectionInterface $collection, array $expectedItems): void
+    {
+        $this->assertSame($expectedItems, $collection->slice(0)->asArray());
+        $this->assertSame([$expectedItems[0]], $collection->slice(0, 1)->asArray());
+        $this->assertSame([$expectedItems[0], $expectedItems[1]], $collection->slice(0, 2)->asArray());
+        $this->assertSame([$expectedItems[1], $expectedItems[2]], $collection->slice(1, 2)->asArray());
+        $this->assertSame([$expectedItems[2]], $collection->slice(-1, 1)->asArray());
+        $this->assertSame([$expectedItems[1]], $collection->slice(-2, -1)->asArray());
+        $this->assertSame([], $collection->slice(5, 7)->asArray());
+    }
+
+    /**
+     * @param CollectionInterface<object> $collection
+     * @param object[] $expectedItems
+     */
+    #[Test]
+    #[DataProvider('collectionDataProvider')]
     public function firstElementCanBeFetched(CollectionInterface $collection, array $expectedItems): void
     {
         $this->assertSame($expectedItems[0], $collection->first());

@@ -62,6 +62,11 @@ final readonly class PostAddressCollection implements CollectionInterface, Valid
         return array_last($this->items);
     }
 
+    public function slice(int $offset, ?int $length = null): self
+    {
+        return self::fromArray(array_slice($this->items, $offset, $length));
+    }
+
     public function onlyValidAt(\DateTimeInterface $at): self
     {
         return self::fromArray(array_values(array_filter(

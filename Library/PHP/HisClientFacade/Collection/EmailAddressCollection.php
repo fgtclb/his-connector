@@ -61,6 +61,11 @@ final readonly class EmailAddressCollection implements CollectionInterface
         return array_last($this->items);
     }
 
+    public function slice(int $offset, ?int $length = null): self
+    {
+        return self::fromArray(array_slice($this->items, $offset, $length));
+    }
+
     public function onlyInDomain(string $domain): self
     {
         return self::fromArray(array_values(array_filter(

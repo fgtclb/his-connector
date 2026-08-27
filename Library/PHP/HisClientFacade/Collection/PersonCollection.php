@@ -65,4 +65,9 @@ final readonly class PersonCollection implements CollectionInterface
     {
         return Person::class;
     }
+
+    public function slice(int $offset, ?int $length = null): self
+    {
+        return self::fromArray(array_slice($this->items, $offset, $length));
+    }
 }

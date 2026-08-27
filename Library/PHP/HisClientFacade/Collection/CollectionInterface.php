@@ -27,6 +27,11 @@ interface CollectionInterface extends \IteratorAggregate, \Countable
     public function asArray(): array;
 
     /**
+     * @return self<TValue>
+     */
+    public function slice(int $offset, ?int $length = null): self;
+
+    /**
      * @return ?TValue
      */
     public function first(): ?object;
