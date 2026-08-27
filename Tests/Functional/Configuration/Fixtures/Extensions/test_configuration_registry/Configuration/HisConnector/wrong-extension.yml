@@ -1,0 +1,5 @@
+file:
+  should:
+    not:
+      get:
+        picked: up

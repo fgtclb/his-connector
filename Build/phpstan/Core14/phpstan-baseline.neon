@@ -1,2 +1,7 @@
 parameters:
-	ignoreErrors: []
+	ignoreErrors:
+		-
+			message: '#^Variable \$_EXTKEY might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: ../../../Tests/Functional/Configuration/Fixtures/Extensions/test_configuration_registry/ext_emconf.php
