@@ -16,8 +16,15 @@ final readonly class SoapClientFactory implements SoapClientFactoryInterface
 {
     private const WSS_NAMESPACE_PREFIX = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss';
 
-    public function createForService(string $serviceClassName, string $urlPrefix, string $wssUsername, string $wssPassword, int $timeout): \SoapClient
-    {
+    public function createForService(
+        string $serviceClassName,
+        string $urlPrefix,
+        #[\SensitiveParameter]
+        string $wssUsername,
+        #[\SensitiveParameter]
+        string $wssPassword,
+        int $timeout
+    ): \SoapClient {
         // Extract SOAP endpoint from requested PHP class
         // e. g. FGTCLB\HisClient\PersonService\Service\Service => PersonService
         $parts = explode('\\', trim($serviceClassName, '\\'));
@@ -45,8 +52,12 @@ final readonly class SoapClientFactory implements SoapClientFactoryInterface
         return $client;
     }
 
-    private function createWssSecurityHeader(string $username, string $password): \SoapHeader
-    {
+    private function createWssSecurityHeader(
+        #[\SensitiveParameter]
+        string $username,
+        #[\SensitiveParameter]
+        string $password
+    ): \SoapHeader {
         return new \SoapHeader(
             self::WSS_NAMESPACE_PREFIX . '-wssecurity-secext-1.0.xsd',
             'Security',
