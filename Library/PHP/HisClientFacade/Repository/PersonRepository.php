@@ -40,25 +40,40 @@ readonly class PersonRepository implements RepositoryInterface
                 $e->getMessage(),
             ), 1784884055, $e);
         }
-
         $persons = [];
         foreach ($findResponse->getPersonIds()->getId() ?? [] as $personId) {
-            try {
-                /** @var ReadPersonResponse */
-                $personResponse = $this->personService->readPerson(new ReadPerson($personId));
-            } catch (\SoapFault $e) {
-                throw new Exception(sprintf(
-                    'Unable to fetch person "%d" for language "%s": %s',
-                    $personId,
-                    $language,
-                    $e->getMessage(),
-                ), 1784884056, $e);
-            }
-            if ($personResponse->getPerson() !== null) {
-                $persons[] = $this->personFactory->create($personResponse->getPerson(), $language);
-            }
+            $persons[] = function () use ($personId, $language) {
+                $person = $this->findByIdForLanguage($personId, $language);
+                // If an item in the collection is null, this is a fatal error
+                if ($person === null) {
+                    throw new Exception(sprintf(
+                        'Unable to fetch person "%d" for language "%s"',
+                        $personId,
+                        $language
+                    ), 1784884057);
+                }
+                return $person;
+            };
         }
         return PersonCollection::fromArray($persons);
+    }
+
+    public function findByIdForLanguage(int $id, string $language): ?Person
+    {
+        try {
+            /** @var ReadPersonResponse */
+            $personResponse = $this->personService->readPerson(new ReadPerson($id));
+        } catch (\SoapFault $e) {
+            throw new Exception(sprintf(
+                'Unable to fetch person "%d" for language "%s": %s',
+                $id,
+                $language,
+                $e->getMessage(),
+            ), 1784884056, $e);
+        }
+        return $personResponse->getPerson() !== null
+            ? $this->personFactory->create($personResponse->getPerson(), $language)
+            : null;
     }
 
     public function getObjectType(): string
