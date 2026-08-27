@@ -1,0 +1,8 @@
+name: test
+source:
+  repository: 'personRepository'
+  fetch: 'findByRolesForLanguage(filter["roles"], filter["language"])'
+  filter:
+    language: 'de'
+    roles: [3, 69]
+mapping: []
