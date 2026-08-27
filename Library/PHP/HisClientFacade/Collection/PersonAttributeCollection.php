@@ -61,6 +61,11 @@ final readonly class PersonAttributeCollection implements CollectionInterface
         return array_last($this->items);
     }
 
+    public function slice(int $offset, ?int $length = null): self
+    {
+        return self::fromArray(array_slice($this->items, $offset, $length));
+    }
+
     public static function getItemType(): string
     {
         return PersonAttribute::class;
