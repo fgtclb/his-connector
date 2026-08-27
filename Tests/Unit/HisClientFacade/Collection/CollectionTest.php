@@ -324,7 +324,7 @@ final class CollectionTest extends UnitTestCase
     }
 
     #[Test]
-    public function AccountCollectionCanBeFiltered(): void
+    public function accountCollectionCanBeFiltered(): void
     {
         $items = [
             new Account(
@@ -501,5 +501,156 @@ final class CollectionTest extends UnitTestCase
     ): void {
         $this->assertSame($expectedValidItems, $collection->onlyValidAt(new \DateTimeImmutable('2026-01-07'))->asArray());
         $this->assertSame($expectedNotValidItems, $collection->notValidAt(new \DateTimeImmutable('2026-01-07'))->asArray());
+    }
+
+    /**
+     * @return array{person: Person}[]
+     */
+    public static function lazyPersonCollectionDataProvider(): array
+    {
+        $person = new Person(
+            id: 123,
+            firstname: 'Max',
+            surname: 'Mustermann',
+            gender: null,
+            dateofbirth: null,
+            allfirstnames: null,
+            birthname: null,
+            artistname: null,
+            nameprefix: null,
+            namesuffix: null,
+            academicdegreesuffix: null,
+            academicdegree: null,
+            title: null,
+            birthcity: null,
+            country: null,
+            personInfo: null,
+            createdAt: null,
+            updatedAt: null,
+            fetchContactDetailsClosure: fn() => ContactDetailsCollection::fromArray([]),
+            fetchPersonalDataClosure: fn() => new PersonalData(123, null, null, null, null, null, null, null),
+            fetchPicturesClosure: fn() => [],
+            fetchFunctionsClosure: fn() => PersonFunctionCollection::fromArray([]),
+            fetchAccountsClosure: fn() => AccountCollection::fromArray([]),
+            fetchAttributesClosure: fn() => PersonAttributeCollection::fromArray([]),
+        );
+
+        return [
+            ['person' => $person],
+        ];
+    }
+
+    #[Test]
+    #[DataProvider('lazyPersonCollectionDataProvider')]
+    public function personCollectionCanBeLazy(Person $person): void
+    {
+        $person1 = clone $person;
+        $person2 = clone $person;
+        $person3 = clone $person;
+        $subject = PersonCollection::fromArray([
+            fn() => $person1,
+            fn() => $person2,
+            fn() => $person3,
+        ]);
+        $this->assertSame(3, $subject->count());
+        $this->assertSame($person1, $subject->first());
+        $this->assertSame($person3, $subject->last());
+        $this->assertSame([$person1, $person2, $person3], $subject->asArray());
+    }
+
+    #[Test]
+    #[DataProvider('lazyPersonCollectionDataProvider')]
+    public function personCollectionFetchesFirstOnce(Person $person): void
+    {
+        $counterFirst = $counterLast = 0;
+        $lazyFirst = function () use ($person, &$counterFirst) {
+            $counterFirst++;
+            return $person;
+        };
+        $lazyLast = function () use ($person, &$counterLast) {
+            $counterLast++;
+            return $person;
+        };
+        $subject = PersonCollection::fromArray([$lazyFirst, $lazyLast]);
+        $this->assertSame(0, $counterFirst);
+        $subject->first();
+        $subject->first();
+        /** @phpstan-ignore method.impossibleType */
+        $this->assertSame(1, $counterFirst);
+        $this->assertSame(0, $counterLast);
+    }
+
+    #[Test]
+    #[DataProvider('lazyPersonCollectionDataProvider')]
+    public function personCollectionFetchesLastOnce(Person $person): void
+    {
+        $counterFirst = $counterLast = 0;
+        $lazyFirst = function () use ($person, &$counterFirst) {
+            $counterFirst++;
+            return $person;
+        };
+        $lazyLast = function () use ($person, &$counterLast) {
+            $counterLast++;
+            return $person;
+        };
+        $subject = PersonCollection::fromArray([$lazyFirst, $lazyLast]);
+        $this->assertSame(0, $counterLast);
+        $subject->last();
+        $subject->last();
+        /** @phpstan-ignore method.impossibleType */
+        $this->assertSame(1, $counterLast);
+        $this->assertSame(0, $counterFirst);
+    }
+
+    #[Test]
+    #[DataProvider('lazyPersonCollectionDataProvider')]
+    public function personCollectionFetchesArrayOnce(Person $person): void
+    {
+        $counterFirst = $counterLast = 0;
+        $lazyFirst = function () use ($person, &$counterFirst) {
+            $counterFirst++;
+            return $person;
+        };
+        $lazyLast = function () use ($person, &$counterLast) {
+            $counterLast++;
+            return $person;
+        };
+        $subject = PersonCollection::fromArray([$lazyFirst, $lazyLast]);
+        $this->assertSame(0, $counterFirst);
+        $this->assertSame(0, $counterLast);
+        $subject->asArray();
+        $subject->asArray();
+        /** @phpstan-ignore method.impossibleType */
+        $this->assertSame(1, $counterFirst);
+        /** @phpstan-ignore method.impossibleType */
+        $this->assertSame(1, $counterLast);
+    }
+
+    #[Test]
+    #[DataProvider('lazyPersonCollectionDataProvider')]
+    public function personCollectionCountDoesNotFetch(Person $person): void
+    {
+        $counter = 0;
+        $lazy = function () use ($person, &$counter) {
+            $counter++;
+            return $person;
+        };
+        $subject = PersonCollection::fromArray([$lazy]);
+        $this->assertSame(1, $subject->count());
+        $this->assertSame(0, $counter);
+    }
+
+    #[Test]
+    #[DataProvider('lazyPersonCollectionDataProvider')]
+    public function personCollectionSliceDoesNotFetch(Person $person): void
+    {
+        $counter = 0;
+        $lazy = function () use ($person, &$counter) {
+            $counter++;
+            return $person;
+        };
+        $subject = PersonCollection::fromArray([$lazy]);
+        $subject->slice(0, 1);
+        $this->assertSame(0, $counter);
     }
 }
