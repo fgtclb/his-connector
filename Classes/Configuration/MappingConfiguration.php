@@ -15,6 +15,7 @@ final readonly class MappingConfiguration
         public string $entityClassName,
         public string $tableName,
         public string $identifierField,
+        public ?string $skipField,
         public array $fields,
     ) {}
 
@@ -39,6 +40,7 @@ final readonly class MappingConfiguration
             entityClassName: $entityClassName,
             tableName: $tableName,
             identifierField: (string)$config['identifierField'],
+            skipField: isset($config['skipField']) ? (string)$config['skipField'] : null,
             fields: $fieldMappings,
         );
     }

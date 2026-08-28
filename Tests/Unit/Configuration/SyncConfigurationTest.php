@@ -210,7 +210,7 @@ final class SyncConfigurationTest extends UnitTestCase
     }
 
     /**
-     * @return array{config: mixed[], expectedEntityClassName: string, expectedTableName: string, expectedIdentityField: string, expectedFields: array<string, FieldMapping>}[]
+     * @return array{config: mixed[], expectedEntityClassName: string, expectedTableName: string, expectedIdentityField: string, expectedSkipField: ?string, expectedFields: array<string, FieldMapping>}[]
      */
     public static function createMappingConfigurationFromConfigDataProvider(): array
     {
@@ -220,6 +220,7 @@ final class SyncConfigurationTest extends UnitTestCase
                 'expectedEntityClassName' => 'entity',
                 'expectedTableName' => 'table',
                 'expectedIdentityField' => 'identity',
+                'expectedSkipField' => null,
                 'expectedFields' => [],
             ],
             [
@@ -227,6 +228,7 @@ final class SyncConfigurationTest extends UnitTestCase
                     'entityClassName' => 'entity',
                     'tableName' => 'table',
                     'identifierField' => 'identity',
+                    'skipField' => 'skip',
                     'fields' => [
                         'field' => [
                             'sourceField' => 'foo.bar',
@@ -236,6 +238,7 @@ final class SyncConfigurationTest extends UnitTestCase
                 'expectedEntityClassName' => 'entity',
                 'expectedTableName' => 'table',
                 'expectedIdentityField' => 'identity',
+                'expectedSkipField' => 'skip',
                 'expectedFields' => ['field' => FieldMapping::fromConfig(['sourceField' => 'foo.bar'], 'table', 'field')],
             ],
         ];
@@ -252,12 +255,14 @@ final class SyncConfigurationTest extends UnitTestCase
         string $expectedEntityClassName,
         string $expectedTableName,
         string $expectedIdentityField,
+        ?string $expectedSkipField,
         array $expectedFields,
     ): void {
         $subject = MappingConfiguration::fromConfig($config);
         $this->assertSame($expectedEntityClassName, $subject->entityClassName);
         $this->assertSame($expectedTableName, $subject->tableName);
         $this->assertSame($expectedIdentityField, $subject->identifierField);
+        $this->assertSame($expectedSkipField, $subject->skipField);
         $this->assertEquals($expectedFields, $subject->fields);
     }
 
