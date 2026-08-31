@@ -6,6 +6,7 @@ namespace FGTCLB\HisConnector\Tests\Unit\Configuration;
 
 use FGTCLB\HisClient\OrgUnitService\Struct\OrgUnit;
 use FGTCLB\HisClientFacade\Model\Account;
+use FGTCLB\HisClientFacade\Model\Person;
 use FGTCLB\HisConnector\Configuration\DataSource;
 use FGTCLB\HisConnector\Configuration\FieldMapping;
 use FGTCLB\HisConnector\Configuration\MappingConfiguration;
@@ -216,8 +217,8 @@ final class SyncConfigurationTest extends UnitTestCase
     {
         return [
             [
-                'config' => ['entityClassName' => 'entity', 'tableName' => 'table', 'identifierField' => 'identity'],
-                'expectedEntityClassName' => 'entity',
+                'config' => ['entityClassName' => Person::class, 'tableName' => 'table', 'identifierField' => 'identity'],
+                'expectedEntityClassName' => Person::class,
                 'expectedTableName' => 'table',
                 'expectedIdentityField' => 'identity',
                 'expectedSkipField' => null,
@@ -225,7 +226,7 @@ final class SyncConfigurationTest extends UnitTestCase
             ],
             [
                 'config' => [
-                    'entityClassName' => 'entity',
+                    'entityClassName' => Person::class,
                     'tableName' => 'table',
                     'identifierField' => 'identity',
                     'skipField' => 'skip',
@@ -235,7 +236,7 @@ final class SyncConfigurationTest extends UnitTestCase
                         ],
                     ],
                 ],
-                'expectedEntityClassName' => 'entity',
+                'expectedEntityClassName' => Person::class,
                 'expectedTableName' => 'table',
                 'expectedIdentityField' => 'identity',
                 'expectedSkipField' => 'skip',
@@ -267,14 +268,15 @@ final class SyncConfigurationTest extends UnitTestCase
     }
 
     /**
-     * @return array{config: mixed[]}[]
+     * @return array{config: mixed[], expectedExceptionCode: int}[]
      */
     public static function createMappingConfigurationFromInvalidConfigDataProvider(): array
     {
         return [
-            'without identifierField' => ['config' => ['entityClassName' => 'foo', 'tableName' => 'bar']],
-            'without entityClassName' => ['config' => ['tableName' => 'foo', 'identifierField' => 'bar']],
-            'without tableName' => ['config' => ['entityClassName' => 'foo', 'identifierField' => 'bar']],
+            'without identifierField' => ['config' => ['entityClassName' => Person::class, 'tableName' => 'bar'], 'expectedExceptionCode' => 1786904651],
+            'without entityClassName' => ['config' => ['tableName' => 'foo', 'identifierField' => 'bar'], 'expectedExceptionCode' => 1786904651],
+            'without tableName' => ['config' => ['entityClassName' => Person::class, 'identifierField' => 'bar'], 'expectedExceptionCode' => 1786904651],
+            'with invalid entityClassName' => ['config' => ['entityClassName' => 'InvalidClass', 'tableName' => 'foo', 'identifierField' => 'bar'], 'expectedExceptionCode' => 1788198253],
         ];
     }
 
@@ -283,10 +285,10 @@ final class SyncConfigurationTest extends UnitTestCase
      */
     #[Test]
     #[DataProvider('createMappingConfigurationFromInvalidConfigDataProvider')]
-    public function createMappingConfigurationFromInvalidConfig(array $config): void
+    public function createMappingConfigurationFromInvalidConfig(array $config, int $expectedExceptionCode): void
     {
         $this->expectException(InvalidConfigurationException::class);
-        $this->expectExceptionCode(1786904651);
+        $this->expectExceptionCode($expectedExceptionCode);
         MappingConfiguration::fromConfig($config);
     }
 
@@ -304,7 +306,7 @@ final class SyncConfigurationTest extends UnitTestCase
                     'schema' => 'https://example.com/schema.json',
                     'source' => ['repository' => 'foo', 'fetch' => 'bar()'],
                     'mapping' => [
-                        ['entityClassName' => 'entity', 'tableName' => 'table', 'identifierField' => 'identity'],
+                        ['entityClassName' => Person::class, 'tableName' => 'table', 'identifierField' => 'identity'],
                     ],
                 ],
                 'originalFile' => null,
@@ -314,7 +316,7 @@ final class SyncConfigurationTest extends UnitTestCase
                 'expectedSchema' => 'https://example.com/schema.json',
                 'expectedSource' => DataSource::fromConfig(['repository' => 'foo', 'fetch' => 'bar()']),
                 'expectedMapping' => [
-                    MappingConfiguration::fromConfig(['entityClassName' => 'entity', 'tableName' => 'table', 'identifierField' => 'identity']),
+                    MappingConfiguration::fromConfig(['entityClassName' => Person::class, 'tableName' => 'table', 'identifierField' => 'identity']),
                 ],
             ],
             'minimal' => [

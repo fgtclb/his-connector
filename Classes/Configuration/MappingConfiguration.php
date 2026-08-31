@@ -9,6 +9,7 @@ use FGTCLB\HisConnector\Exception\InvalidConfigurationException;
 final readonly class MappingConfiguration
 {
     /**
+     * @param class-string $entityClassName
      * @param array<string, FieldMapping> $fields
      */
     private function __construct(
@@ -30,8 +31,11 @@ final readonly class MappingConfiguration
                 1786904651
             );
         }
-        $tableName = (string)$config['tableName'];
         $entityClassName = (string)$config['entityClassName'];
+        if (!class_exists($entityClassName)) {
+            throw new InvalidConfigurationException('Specified entityClassName does not exist: ' . $entityClassName, 1788198253);
+        }
+        $tableName = (string)$config['tableName'];
         $fieldMappings = [];
         foreach ($config['fields'] ?? [] as $fieldName => $fieldMapping) {
             $fieldMappings[$fieldName] = FieldMapping::fromConfig($fieldMapping, $tableName, (string)$fieldName);
