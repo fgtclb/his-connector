@@ -95,9 +95,9 @@ final class CollectionTest extends UnitTestCase
         ];
 
         $items = [
-            new PersonAttribute('foo', 'bar'),
-            new PersonAttribute('foo2', 'bar2'),
-            new PersonAttribute('foo3', 'bar3'),
+            new PersonAttribute(123, 'foo', 'bar'),
+            new PersonAttribute(456, 'foo2', 'bar2'),
+            new PersonAttribute(789, 'foo3', 'bar3'),
         ];
         $collection = PersonAttributeCollection::fromArray($items);
         yield 'PersonAttributeCollection' => [
