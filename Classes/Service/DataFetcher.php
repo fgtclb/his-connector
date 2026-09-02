@@ -24,7 +24,7 @@ final readonly class DataFetcher
     }
 
     /**
-     * @return CollectionInterface<object>|EntityInterface|null
+     * @return CollectionInterface<EntityInterface>|EntityInterface|null
      */
     public function fetchSource(DataSource $source): CollectionInterface|EntityInterface|null
     {

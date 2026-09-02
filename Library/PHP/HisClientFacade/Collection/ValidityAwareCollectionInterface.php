@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace FGTCLB\HisClientFacade\Collection;
 
+use FGTCLB\HisClientFacade\Model\EntityInterface;
+
 /**
  * Collection that contains items with a specific date-based validity
  *
- * @template TValue of object
+ * @template TValue of EntityInterface
  */
 interface ValidityAwareCollectionInterface
 {

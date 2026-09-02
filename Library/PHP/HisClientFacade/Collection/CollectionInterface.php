@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace FGTCLB\HisClientFacade\Collection;
 
+use FGTCLB\HisClientFacade\Model\EntityInterface;
+
 /**
- * @template TValue of object
+ * @template TValue of EntityInterface
  * @template-extends \IteratorAggregate<non-negative-int, TValue>
  */
 interface CollectionInterface extends \IteratorAggregate, \Countable
@@ -34,12 +36,12 @@ interface CollectionInterface extends \IteratorAggregate, \Countable
     /**
      * @return ?TValue
      */
-    public function first(): ?object;
+    public function first(): ?EntityInterface;
 
     /**
      * @return ?TValue
      */
-    public function last(): ?object;
+    public function last(): ?EntityInterface;
 
     /**
      * @return class-string<TValue>
