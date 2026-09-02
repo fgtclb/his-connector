@@ -19,6 +19,7 @@ use FGTCLB\HisClientFacade\Collection\ValidityAwareCollectionInterface;
 use FGTCLB\HisClientFacade\Model\Account;
 use FGTCLB\HisClientFacade\Model\ContactDetails;
 use FGTCLB\HisClientFacade\Model\EmailAddress;
+use FGTCLB\HisClientFacade\Model\EntityInterface;
 use FGTCLB\HisClientFacade\Model\FunctionType;
 use FGTCLB\HisClientFacade\Model\Hyperlink;
 use FGTCLB\HisClientFacade\Model\Messenger;
@@ -192,8 +193,8 @@ final class CollectionTest extends UnitTestCase
     }
 
     /**
-     * @param CollectionInterface<object> $collection
-     * @param object[] $expectedItems
+     * @param CollectionInterface<EntityInterface> $collection
+     * @param EntityInterface[] $expectedItems
      */
     #[Test]
     #[DataProvider('collectionDataProvider')]
@@ -205,8 +206,8 @@ final class CollectionTest extends UnitTestCase
     }
 
     /**
-     * @param CollectionInterface<object> $collection
-     * @param object[] $expectedItems
+     * @param CollectionInterface<EntityInterface> $collection
+     * @param EntityInterface[] $expectedItems
      */
     #[Test]
     #[DataProvider('collectionDataProvider')]
@@ -216,8 +217,8 @@ final class CollectionTest extends UnitTestCase
     }
 
     /**
-     * @param CollectionInterface<object> $collection
-     * @param object[] $expectedItems
+     * @param CollectionInterface<EntityInterface> $collection
+     * @param EntityInterface[] $expectedItems
      */
     #[Test]
     #[DataProvider('collectionDataProvider')]
@@ -227,8 +228,8 @@ final class CollectionTest extends UnitTestCase
     }
 
     /**
-     * @param CollectionInterface<object> $collection
-     * @param object[] $expectedItems
+     * @param CollectionInterface<EntityInterface> $collection
+     * @param EntityInterface[] $expectedItems
      */
     #[Test]
     #[DataProvider('collectionDataProvider')]
@@ -244,8 +245,8 @@ final class CollectionTest extends UnitTestCase
     }
 
     /**
-     * @param CollectionInterface<object> $collection
-     * @param object[] $expectedItems
+     * @param CollectionInterface<EntityInterface> $collection
+     * @param EntityInterface[] $expectedItems
      */
     #[Test]
     #[DataProvider('collectionDataProvider')]
@@ -255,8 +256,8 @@ final class CollectionTest extends UnitTestCase
     }
 
     /**
-     * @param CollectionInterface<object> $collection
-     * @param object[] $expectedItems
+     * @param CollectionInterface<EntityInterface> $collection
+     * @param EntityInterface[] $expectedItems
      */
     #[Test]
     #[DataProvider('collectionDataProvider')]
@@ -266,8 +267,8 @@ final class CollectionTest extends UnitTestCase
     }
 
     /**
-     * @param CollectionInterface<object> $collection
-     * @param object[] $expectedItems
+     * @param CollectionInterface<EntityInterface> $collection
+     * @param EntityInterface[] $expectedItems
      */
     #[Test]
     #[DataProvider('collectionDataProvider')]
@@ -488,9 +489,9 @@ final class CollectionTest extends UnitTestCase
     }
 
     /**
-     * @param CollectionInterface<object>&ValidityAwareCollectionInterface<object> $collection
-     * @param object[] $expectedValidItems
-     * @param object[] $expectedNotValidItems
+     * @param CollectionInterface<EntityInterface>&ValidityAwareCollectionInterface<EntityInterface> $collection
+     * @param EntityInterface[] $expectedValidItems
+     * @param EntityInterface[] $expectedNotValidItems
      */
     #[Test]
     #[DataProvider('validityAwareCollectionsCanBeFilteredDataProvider')]
