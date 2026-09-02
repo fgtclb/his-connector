@@ -13,6 +13,7 @@ readonly class PersonAttributeFactory
     public function create(PersonAttributeDto $attribute, PersonAttributeTypeDto $attributeType): PersonAttribute
     {
         return new PersonAttribute(
+            personId: $attribute->getPersonId(),
             name: $attributeType->getFieldName(),
             value: $attribute->getAttributeValue(),
         );

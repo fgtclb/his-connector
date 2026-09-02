@@ -23,7 +23,7 @@ final class PersonAttributeFactoryTest extends UnitTestCase
             [
                 'attribute' => new PersonAttributeDto('fooValue', 123, 456),
                 'attributeType' => new PersonAttributeTypeDto('fooField', false),
-                'expectedResult' => new PersonAttribute('fooField', 'fooValue'),
+                'expectedResult' => new PersonAttribute(123, 'fooField', 'fooValue'),
             ],
         ];
     }
@@ -37,6 +37,7 @@ final class PersonAttributeFactoryTest extends UnitTestCase
     ): void {
         $subject = new PersonAttributeFactory();
         $result = $subject->create($attribute, $attributeType);
+        $this->assertSame($expectedResult->personId, $result->personId);
         $this->assertSame($expectedResult->name, $result->name);
         $this->assertSame($expectedResult->value, $result->value);
     }
