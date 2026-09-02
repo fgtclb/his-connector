@@ -115,7 +115,7 @@ final class SyncConfigurationTest extends UnitTestCase
     }
 
     /**
-     * @return array{config: mixed[], tableName: string, fieldName: string, expectedSourceField: SourceField|SourceExpression, expectedDefaultValue: mixed, expectedValueMapping: ValueMapping[]|null}[]
+     * @return array{config: mixed[], tableName: string, fieldName: string, expectedSourceField: SourceField|SourceExpression, expectedFallbackValue: mixed, expectedValueMapping: ValueMapping[]|null, expectedValueMappingDefault: mixed}[]
      */
     public static function createFieldMappingFromConfigDataProvider(): array
     {
@@ -125,42 +125,47 @@ final class SyncConfigurationTest extends UnitTestCase
                 'tableName' => 'fe_users',
                 'fieldName' => 'username',
                 'expectedSourceField' => new SourceField('foo.bar'),
-                'expectedDefaultValue' => null,
+                'expectedFallbackValue' => null,
                 'expectedValueMapping' => null,
+                'expectedValueMappingDefault' => null,
             ],
             [
                 'config' => ['sourceExpression' => 'foo.bar'],
                 'tableName' => 'fe_users',
                 'fieldName' => 'username',
                 'expectedSourceField' => new SourceExpression('foo.bar'),
-                'expectedDefaultValue' => null,
+                'expectedFallbackValue' => null,
                 'expectedValueMapping' => null,
+                'expectedValueMappingDefault' => null,
             ],
             [
-                'config' => ['sourceExpression' => 'foo.bar', 'defaultValue' => 'baz'],
+                'config' => ['sourceExpression' => 'foo.bar', 'fallbackValue' => 'baz'],
                 'tableName' => 'fe_users',
                 'fieldName' => 'username',
                 'expectedSourceField' => new SourceExpression('foo.bar'),
-                'expectedDefaultValue' => 'baz',
+                'expectedFallbackValue' => 'baz',
                 'expectedValueMapping' => null,
+                'expectedValueMappingDefault' => null,
             ],
             [
                 'config' => [
                     'sourceExpression' => 'foo.bar',
-                    'defaultValue' => 'baz',
+                    'fallbackValue' => 'baz',
                     'valueMapping' => [
                         ['source' => 'from1', 'target' => 'to1'],
                         ['source' => 'from2', 'target' => 'to2'],
                     ],
+                    'valueMappingDefault' => 'toDefault',
                 ],
                 'tableName' => 'fe_users',
                 'fieldName' => 'username',
                 'expectedSourceField' => new SourceExpression('foo.bar'),
-                'expectedDefaultValue' => 'baz',
+                'expectedFallbackValue' => 'baz',
                 'expectedValueMapping' => [
                     ValueMapping::fromConfig(['source' => 'from1', 'target' => 'to1']),
                     ValueMapping::fromConfig(['source' => 'from2', 'target' => 'to2']),
                 ],
+                'expectedValueMappingDefault' => 'toDefault',
             ],
         ];
     }
@@ -176,15 +181,17 @@ final class SyncConfigurationTest extends UnitTestCase
         string $tableName,
         string $fieldName,
         SourceField|SourceExpression $expectedSourceField,
-        mixed $expectedDefaultValue,
+        mixed $expectedFallbackValue,
         ?array $expectedValueMapping,
+        mixed $expectedValueMappingDefault,
     ): void {
         $subject = FieldMapping::fromConfig($config, $tableName, $fieldName);
         $this->assertSame($tableName, $subject->tableName);
         $this->assertSame($fieldName, $subject->fieldName);
         $this->assertEquals($expectedSourceField, $subject->sourceField);
-        $this->assertSame($expectedDefaultValue, $subject->defaultValue);
+        $this->assertSame($expectedFallbackValue, $subject->fallbackValue);
         $this->assertEquals($expectedValueMapping, $subject->valueMapping);
+        $this->assertEquals($expectedValueMappingDefault, $subject->valueMappingDefault);
     }
 
     /**

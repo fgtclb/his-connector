@@ -9,14 +9,17 @@ use FGTCLB\HisConnector\Exception\InvalidConfigurationException;
 final readonly class FieldMapping
 {
     /**
+     * @param mixed $fallbackValue Can be used to set a default if the result of the mapping process leads to "null"
      * @param ValueMapping[]|null $valueMapping
+     * @param mixed $valueMappingDefault Will be used if none of the value mapping options match the source value
      */
     private function __construct(
         public string $tableName,
         public string $fieldName,
         public SourceField|SourceExpression $sourceField,
-        public ?string $defaultValue,
+        public mixed $fallbackValue,
         public ?array $valueMapping,
+        public mixed $valueMappingDefault,
     ) {}
 
     /**
@@ -42,10 +45,11 @@ final readonly class FieldMapping
             sourceField: isset($config['sourceExpression'])
                 ? new SourceExpression((string)$config['sourceExpression'])
                 : new SourceField((string)$config['sourceField']),
-            defaultValue: $config['defaultValue'] ?? null,
+            fallbackValue: $config['fallbackValue'] ?? null,
             valueMapping: isset($config['valueMapping']) && is_array($config['valueMapping'])
                 ? array_map(ValueMapping::fromConfig(...), $config['valueMapping'])
                 : null,
+            valueMappingDefault: $config['valueMappingDefault'] ?? null,
         );
     }
 }
