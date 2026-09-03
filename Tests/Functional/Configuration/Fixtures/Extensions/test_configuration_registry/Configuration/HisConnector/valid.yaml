@@ -5,4 +5,11 @@ source:
   filter:
     language: 'de'
     roles: [3, 69]
-mapping: []
+mapping:
+  -
+    entityClassName: FGTCLB\HisClientFacade\Model\Person
+    tableName: fe_users
+
+  - entityClassName: FGTCLB\HisClientFacade\Model\Person
+    tableName: be_users
+    identifierField: description
