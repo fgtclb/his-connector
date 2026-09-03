@@ -223,7 +223,15 @@ final class SyncConfigurationTest extends UnitTestCase
     public static function createMappingConfigurationFromConfigDataProvider(): array
     {
         return [
-            [
+            'without identifier field' => [
+                'config' => ['entityClassName' => Person::class, 'tableName' => 'table'],
+                'expectedEntityClassName' => Person::class,
+                'expectedTableName' => 'table',
+                'expectedIdentityField' => 'hisconnector_identifier',
+                'expectedSkipField' => null,
+                'expectedFields' => [],
+            ],
+            'with identifier field' => [
                 'config' => ['entityClassName' => Person::class, 'tableName' => 'table', 'identifierField' => 'identity'],
                 'expectedEntityClassName' => Person::class,
                 'expectedTableName' => 'table',
@@ -231,7 +239,7 @@ final class SyncConfigurationTest extends UnitTestCase
                 'expectedSkipField' => null,
                 'expectedFields' => [],
             ],
-            [
+            'with fields' => [
                 'config' => [
                     'entityClassName' => Person::class,
                     'tableName' => 'table',
@@ -280,10 +288,9 @@ final class SyncConfigurationTest extends UnitTestCase
     public static function createMappingConfigurationFromInvalidConfigDataProvider(): array
     {
         return [
-            'without identifierField' => ['config' => ['entityClassName' => Person::class, 'tableName' => 'bar'], 'expectedExceptionCode' => 1786904651],
-            'without entityClassName' => ['config' => ['tableName' => 'foo', 'identifierField' => 'bar'], 'expectedExceptionCode' => 1786904651],
-            'without tableName' => ['config' => ['entityClassName' => Person::class, 'identifierField' => 'bar'], 'expectedExceptionCode' => 1786904651],
-            'with invalid entityClassName' => ['config' => ['entityClassName' => 'InvalidClass', 'tableName' => 'foo', 'identifierField' => 'bar'], 'expectedExceptionCode' => 1788198253],
+            'without entityClassName' => ['config' => ['tableName' => 'foo'], 'expectedExceptionCode' => 1786904651],
+            'without tableName' => ['config' => ['entityClassName' => Person::class], 'expectedExceptionCode' => 1786904651],
+            'with invalid entityClassName' => ['config' => ['entityClassName' => 'InvalidClass', 'tableName' => 'foo'], 'expectedExceptionCode' => 1788198253],
         ];
     }
 
