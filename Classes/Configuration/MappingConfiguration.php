@@ -8,6 +8,8 @@ use FGTCLB\HisConnector\Exception\InvalidConfigurationException;
 
 final readonly class MappingConfiguration
 {
+    public const DEFAULT_IDENTIFIER_FIELD = 'hisconnector_identifier';
+
     /**
      * @param class-string $entityClassName
      * @param array<string, FieldMapping> $fields
@@ -25,7 +27,7 @@ final readonly class MappingConfiguration
      */
     public static function fromConfig(array $config): self
     {
-        if (!isset($config['entityClassName']) || !isset($config['tableName']) || !isset($config['identifierField'])) {
+        if (!isset($config['entityClassName']) || !isset($config['tableName'])) {
             throw new InvalidConfigurationException(
                 'Invalid mapping configuration supplied, "entityClassName", "tableName" and "identifierField" need to be supplied.',
                 1786904651
@@ -43,9 +45,14 @@ final readonly class MappingConfiguration
         return new self(
             entityClassName: $entityClassName,
             tableName: $tableName,
-            identifierField: (string)$config['identifierField'],
+            identifierField: (string)($config['identifierField'] ?? self::DEFAULT_IDENTIFIER_FIELD),
             skipField: isset($config['skipField']) ? (string)$config['skipField'] : null,
             fields: $fieldMappings,
         );
+    }
+
+    public function usesDefaultIdentifierField(): bool
+    {
+        return $this->identifierField === self::DEFAULT_IDENTIFIER_FIELD;
     }
 }
