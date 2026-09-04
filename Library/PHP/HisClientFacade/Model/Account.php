@@ -18,6 +18,6 @@ final readonly class Account implements EntityInterface, ValidityAwareEntityInte
 
     public function getIdentifier(): string
     {
-        return (string)$this->id;
+        return sprintf('account-%d', $this->id);
     }
 }

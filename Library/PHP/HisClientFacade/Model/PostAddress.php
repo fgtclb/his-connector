@@ -27,6 +27,6 @@ final readonly class PostAddress implements EntityInterface, ValidityAwareEntity
 
     public function getIdentifier(): string
     {
-        return (string)$this->id;
+        return sprintf('postAddress-%d', $this->id);
     }
 }
