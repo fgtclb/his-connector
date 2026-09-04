@@ -15,6 +15,6 @@ final readonly class Building implements EntityInterface
 
     public function getIdentifier(): string
     {
-        return (string)$this->id;
+        return sprintf('building-%d', $this->id);
     }
 }

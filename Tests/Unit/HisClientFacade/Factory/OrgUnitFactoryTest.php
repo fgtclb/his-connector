@@ -28,6 +28,7 @@ final class OrgUnitFactoryTest extends UnitTestCase
                 'validFrom' => '2026-01-01',
                 'validTo' => '2026-02-01',
                 'parent' => null,
+                'expectedIdentifier' => 'orgUnit-123',
                 'expectedValidFrom' => new \DateTimeImmutable('2026-01-01'),
                 'expectedValidTo' => new \DateTimeImmutable('2026-02-01'),
             ],
@@ -40,6 +41,7 @@ final class OrgUnitFactoryTest extends UnitTestCase
                 'validFrom' => '2026-01-01',
                 'validTo' => '2026-02-01',
                 'parent' => new OrgUnit(123, 'foo', 'bar', 'baz', 'bar', null, null, null),
+                'expectedIdentifier' => 'orgUnit-123',
                 'expectedValidFrom' => new \DateTimeImmutable('2026-01-01'),
                 'expectedValidTo' => new \DateTimeImmutable('2026-02-01'),
             ],
@@ -52,6 +54,7 @@ final class OrgUnitFactoryTest extends UnitTestCase
                 'validFrom' => null,
                 'validTo' => null,
                 'parent' => null,
+                'expectedIdentifier' => 'orgUnit-123',
                 'expectedValidFrom' => null,
                 'expectedValidTo' => null,
             ],
@@ -60,7 +63,7 @@ final class OrgUnitFactoryTest extends UnitTestCase
 
     #[Test]
     #[DataProvider('createOrgUnitDataProvider')]
-    public function createOrgUnit(int $lid, string $displayText, string $shortText, string $longText, string $uniquename, ?string $validFrom, ?string $validTo, ?OrgUnit $parent, ?\DateTimeInterface $expectedValidFrom, ?\DateTimeInterface $expectedValidTo): void
+    public function createOrgUnit(int $lid, string $displayText, string $shortText, string $longText, string $uniquename, ?string $validFrom, ?string $validTo, ?OrgUnit $parent, string $expectedIdentifier, ?\DateTimeInterface $expectedValidFrom, ?\DateTimeInterface $expectedValidTo): void
     {
         $subject = new OrgUnitFactory(new DateTimeConverter());
         $result = $subject->create(
@@ -80,7 +83,7 @@ final class OrgUnitFactoryTest extends UnitTestCase
             ),
             $parent,
         );
-        $this->assertSame((string)$lid, $result->getIdentifier());
+        $this->assertSame($expectedIdentifier, $result->getIdentifier());
         $this->assertSame($lid, $result->lid);
         $this->assertSame($displayText, $result->displayText);
         $this->assertSame($shortText, $result->shortText);

@@ -15,6 +15,6 @@ final readonly class Hyperlink implements EntityInterface
 
     public function getIdentifier(): string
     {
-        return (string)$this->id;
+        return sprintf('hyperlink-%d', $this->id);
     }
 }

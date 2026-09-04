@@ -21,6 +21,6 @@ final readonly class OrgUnit implements EntityInterface, ValidityAwareEntityInte
 
     public function getIdentifier(): string
     {
-        return (string)$this->lid;
+        return sprintf('orgUnit-%d', $this->lid);
     }
 }

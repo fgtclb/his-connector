@@ -15,6 +15,6 @@ final readonly class EmailAddress implements EntityInterface
 
     public function getIdentifier(): string
     {
-        return (string)$this->id;
+        return sprintf('emailAddress-%d', $this->id);
     }
 }

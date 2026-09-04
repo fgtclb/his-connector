@@ -25,6 +25,7 @@ final class AccountFactoryTest extends UnitTestCase
                 'isLdapAccount' => true,
                 'validFrom' => '2026-01-01',
                 'validTo' => '2026-02-01',
+                'expectedIdentifier' => 'account-123',
                 'expectedIsLdapAccount' => true,
                 'expectedValidFrom' => new \DateTimeImmutable('2026-01-01'),
                 'expectedValidTo' => new \DateTimeImmutable('2026-02-01'),
@@ -35,6 +36,7 @@ final class AccountFactoryTest extends UnitTestCase
                 'isLdapAccount' => null,
                 'validFrom' => '1900-01-01',
                 'validTo' => '2100-12-31',
+                'expectedIdentifier' => 'account-123',
                 'expectedIsLdapAccount' => false,
                 'expectedValidFrom' => null,
                 'expectedValidTo' => null,
@@ -50,6 +52,7 @@ final class AccountFactoryTest extends UnitTestCase
         ?bool $isLdapAccount,
         string $validFrom,
         string $validTo,
+        string $expectedIdentifier,
         bool $expectedIsLdapAccount,
         ?\DateTimeInterface $expectedValidFrom,
         ?\DateTimeInterface $expectedValidTo,
@@ -71,7 +74,7 @@ final class AccountFactoryTest extends UnitTestCase
                 $isLdapAccount,
             ),
         );
-        $this->assertSame((string)$id, $result->getIdentifier());
+        $this->assertSame($expectedIdentifier, $result->getIdentifier());
         $this->assertSame($id, $result->id);
         $this->assertSame($username, $result->username);
         $this->assertSame($expectedIsLdapAccount, $result->isLdapAccount);
