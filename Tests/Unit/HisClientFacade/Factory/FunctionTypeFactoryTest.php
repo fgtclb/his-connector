@@ -18,13 +18,13 @@ final class FunctionTypeFactoryTest extends UnitTestCase
     public static function createFunctionTypeDataProvider(): array
     {
         return [
-            ['id' => 123, 'defaultText' => 'default', 'shortText' => 'short', 'longText' => 'long', 'uniquename' => 'unique'],
+            ['id' => 123, 'defaultText' => 'default', 'shortText' => 'short', 'longText' => 'long', 'uniquename' => 'unique', 'expectedIdentifier' => 'functionType-123'],
         ];
     }
 
     #[Test]
     #[DataProvider('createFunctionTypeDataProvider')]
-    public function createFunctionType(int $id, string $defaultText, string $shortText, string $longText, string $uniquename): void
+    public function createFunctionType(int $id, string $defaultText, string $shortText, string $longText, string $uniquename, string $expectedIdentifier): void
     {
         $subject = new FunctionTypeFactory();
         $result = $subject->create(
@@ -38,7 +38,7 @@ final class FunctionTypeFactoryTest extends UnitTestCase
                 $longText,
             ),
         );
-        $this->assertSame((string)$id, $result->getIdentifier());
+        $this->assertSame($expectedIdentifier, $result->getIdentifier());
         $this->assertSame($id, $result->id);
         $this->assertSame($defaultText, $result->defaultText);
         $this->assertSame($shortText, $result->shortText);

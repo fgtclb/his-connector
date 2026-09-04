@@ -52,7 +52,7 @@ final readonly class Person implements EntityInterface
 
     public function getIdentifier(): string
     {
-        return (string)$this->id;
+        return sprintf('person-%d', $this->id);
     }
 
     public function getPersonalData(): PersonalData

@@ -16,6 +16,6 @@ final readonly class FunctionType implements EntityInterface
 
     public function getIdentifier(): string
     {
-        return (string)$this->id;
+        return sprintf('functionType-%d', $this->id);
     }
 }

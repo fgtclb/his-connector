@@ -15,6 +15,6 @@ final readonly class Messenger implements EntityInterface
 
     public function getIdentifier(): string
     {
-        return (string)$this->id;
+        return sprintf('messenger-%d', $this->id);
     }
 }

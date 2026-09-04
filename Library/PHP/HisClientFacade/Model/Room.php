@@ -17,6 +17,6 @@ final readonly class Room implements EntityInterface
 
     public function getIdentifier(): string
     {
-        return (string)$this->id;
+        return sprintf('room-%d', $this->id);
     }
 }
