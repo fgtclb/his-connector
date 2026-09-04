@@ -29,6 +29,6 @@ final readonly class PersonFunction implements EntityInterface, ValidityAwareEnt
 
     public function getIdentifier(): string
     {
-        return (string)$this->id;
+        return sprintf('personFunction-%d', $this->id);
     }
 }
