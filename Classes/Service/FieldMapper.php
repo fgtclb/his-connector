@@ -8,6 +8,7 @@ use FGTCLB\HisConnector\Configuration\FieldMapping;
 use FGTCLB\HisConnector\Configuration\SourceExpression;
 use FGTCLB\HisConnector\Configuration\ValueMapping;
 use FGTCLB\HisConnector\Exception\FieldMappingException;
+use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use Symfony\Component\ExpressionLanguage\SyntaxError;
 use Symfony\Component\PropertyAccess\Exception\ExceptionInterface as PropertyAccessExceptionInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -22,6 +23,7 @@ use TYPO3\CMS\Core\ExpressionLanguage\Resolver;
  * Within Symfony expressions, the (rather strict) expression rules apply, which means that access
  * to subproperties of nullable values need the ? operator.
  */
+#[Autoconfigure(public: true)]
 final readonly class FieldMapper
 {
     private Resolver $expressionLanguage;
