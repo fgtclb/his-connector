@@ -14,6 +14,7 @@ final readonly class SyncConfiguration
         public string $description,
         public string $version,
         public string $schema,
+        public ?int $storagePage,
         public DataSource $source,
         public array $mapping,
         public ?string $originalFile,
@@ -30,9 +31,24 @@ final readonly class SyncConfiguration
             description: (string)($config['description'] ?? ''),
             version: (string)($config['version'] ?? ''),
             schema: (string)($config['schema'] ?? ''),
+            storagePage: isset($config['storagePage']) ? (int)$config['storagePage'] : null,
             source: DataSource::fromConfig($config['source'] ?? []),
             mapping: array_map(MappingConfiguration::fromConfig(...), $config['mapping'] ?? []),
             originalFile: $originalFile,
+        );
+    }
+
+    public function withStoragePage(int $storagePage): self
+    {
+        return new self(
+            name: $this->name,
+            description: $this->description,
+            version: $this->version,
+            schema: $this->schema,
+            storagePage: $storagePage,
+            source: $this->source,
+            mapping: $this->mapping,
+            originalFile: $this->originalFile,
         );
     }
 
