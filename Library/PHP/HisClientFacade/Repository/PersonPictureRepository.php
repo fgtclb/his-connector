@@ -5,24 +5,26 @@ declare(strict_types=1);
 namespace FGTCLB\HisClientFacade\Repository;
 
 use FGTCLB\HisClient\MimedataService\Service\Service as MimedataService;
-use FGTCLB\HisClient\MimedataService\Struct\Mimedata;
 use FGTCLB\HisClient\MimedataService\Struct\ReadMimedata201912;
 use FGTCLB\HisClient\MimedataService\Struct\ReadMimedata201912Response;
 use FGTCLB\HisClient\MimedataService\Struct\SearchPersonPictureDtoList;
 use FGTCLB\HisClient\MimedataService\Struct\SearchPersonPictureDtoListResponse;
+use FGTCLB\HisClientFacade\Collection\PersonPictureCollection;
 use FGTCLB\HisClientFacade\Exception\Exception;
+use FGTCLB\HisClientFacade\Factory\PersonPictureFactory;
+use FGTCLB\HisClientFacade\Model\PersonPicture;
 
 /**
- * @implements RepositoryInterface<Mimedata>
+ * @implements RepositoryInterface<PersonPicture>
  */
 readonly class PersonPictureRepository implements RepositoryInterface
 {
-    public function __construct(private MimedataService $mimedataService) {}
+    public function __construct(
+        private MimedataService $mimedataService,
+        private PersonPictureFactory $personPictureFactory,
+    ) {}
 
-    /**
-     * @return Mimedata[]
-     */
-    public function findByPersonIdAndHisKey(int $personId, int $hisKey): array
+    public function findByPersonIdAndHisKey(int $personId, int $hisKey): PersonPictureCollection
     {
         try {
             /** @var SearchPersonPictureDtoListResponse */
@@ -34,7 +36,7 @@ readonly class PersonPictureRepository implements RepositoryInterface
                 $e->getMessage(),
             ), 1785244138, $e);
         }
-        $picturesMimeData = [];
+        $pictures = [];
         foreach ($personPictureResponse->getPersonPictures()->getPersonPicture() ?? [] as $personPicture) {
             try {
                 /** @var ReadMimedata201912Response */
@@ -47,14 +49,14 @@ readonly class PersonPictureRepository implements RepositoryInterface
                 ), 1785244139, $e);
             }
             if ($mimeDataResponse->getMimedata() !== null) {
-                $picturesMimeData[] = $mimeDataResponse->getMimedata();
+                $pictures[] = $this->personPictureFactory->create($mimeDataResponse->getMimedata());
             }
         }
-        return $picturesMimeData;
+        return PersonPictureCollection::fromArray($pictures);
     }
 
     public function getObjectType(): string
     {
-        return Mimedata::class;
+        return PersonPicture::class;
     }
 }

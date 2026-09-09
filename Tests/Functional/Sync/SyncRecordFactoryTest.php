@@ -12,20 +12,24 @@ use FGTCLB\HisClientFacade\Collection\HyperlinkCollection;
 use FGTCLB\HisClientFacade\Collection\MessengerCollection;
 use FGTCLB\HisClientFacade\Collection\PersonAttributeCollection;
 use FGTCLB\HisClientFacade\Collection\PersonFunctionCollection;
+use FGTCLB\HisClientFacade\Collection\PersonPictureCollection;
 use FGTCLB\HisClientFacade\Collection\PhoneNumberCollection;
 use FGTCLB\HisClientFacade\Model\EntityInterface;
 use FGTCLB\HisClientFacade\Model\FunctionType;
 use FGTCLB\HisClientFacade\Model\Person;
 use FGTCLB\HisClientFacade\Model\PersonalData;
 use FGTCLB\HisClientFacade\Model\PersonFunction;
+use FGTCLB\HisClientFacade\Model\PersonPicture;
 use FGTCLB\HisConnector\Configuration\MappingConfiguration;
 use FGTCLB\HisConnector\Configuration\SyncConfiguration;
 use FGTCLB\HisConnector\Exception\SyncException;
 use FGTCLB\HisConnector\Service\FieldMapper;
 use FGTCLB\HisConnector\Sync\SyncField;
+use FGTCLB\HisConnector\Sync\SyncFile;
 use FGTCLB\HisConnector\Sync\SyncRecord;
 use FGTCLB\HisConnector\Sync\SyncRecordFactory;
 use FGTCLB\HisConnector\Sync\SyncRecordStatusCheckerInterface;
+use FGTCLB\HisConnector\Sync\SyncRelatedFiles;
 use FGTCLB\HisConnector\Sync\SyncRelatedRecords;
 use FGTCLB\HisConnector\Tests\Functional\AbstractHisConnectorTestCase;
 use FGTCLB\HisConnector\Utility\MappingUtility;
@@ -60,6 +64,13 @@ final class SyncRecordFactoryTest extends AbstractHisConnectorTestCase
             validFrom: null,
             validTo: null,
         );
+        $personPicture = new PersonPicture(
+            id: 678,
+            fileContents: 'blob',
+            mimeType: 'image/png',
+            description: 'image description',
+            originalFileName: 'original.png',
+        );
         $title = new Title();
         $title->setId(567)->setDefaulttext('title default');
         $person = new Person(
@@ -83,7 +94,7 @@ final class SyncRecordFactoryTest extends AbstractHisConnectorTestCase
             updatedAt: null,
             fetchContactDetailsClosure: fn() => ContactDetailsCollection::fromArray([]),
             fetchPersonalDataClosure: fn() => new PersonalData(456, 'workplace', 'academic career', null, null, null, null, null),
-            fetchPicturesClosure: fn(int $hisKey) => [],
+            fetchPicturesClosure: fn(int $hisKey) => PersonPictureCollection::fromArray([$personPicture]),
             fetchFunctionsClosure: fn() => PersonFunctionCollection::fromArray([$personFunction]),
             fetchAccountsClosure: fn() => AccountCollection::fromArray([]),
             fetchAttributesClosure: fn() => PersonAttributeCollection::fromArray([]),
@@ -391,6 +402,58 @@ final class SyncRecordFactoryTest extends AbstractHisConnectorTestCase
                 ],
             ],
         ];
+
+        //
+        // Sync record with file reference
+        //
+        $expectedRecord = new SyncRecord(
+            tableName: 'fe_users',
+            storagePage: 123,
+            syncIdentifier: new SyncField('hisconnector_identifier', 'person-456'),
+            insertUpdateId: -456,
+            fields: [
+                new SyncField('first_name', 'first name'),
+                new SyncRelatedFiles('image', [
+                    new SyncFile(
+                        fileStorageFolder: '1:/user_upload/',
+                        syncIdentifier: 'personPicture-678',
+                        fileContents: 'blob',
+                        mimeType: 'image/png',
+                        originalFileName: 'original.png',
+                        description: 'image description',
+                        insertUpdateId: null,
+                    ),
+                ]),
+            ],
+        );
+
+        yield 'with file relation' => [
+            'source' => $person,
+            'config' => [
+                'source' => ['repository' => 'personRepository', 'fetch' => 'fetchById(123)'],
+                'storagePage' => 123,
+                'fileStorageFolder' => '1:/user_upload/',
+                'mapping' => [
+                    [
+                        'entityClassName' => Person::class,
+                        'tableName' => 'fe_users',
+                        'fields' => [
+                            'first_name' => ['sourceField' => 'person.firstname'],
+                            'image' => ['sourceExpression' => 'person.getPictures(1).first()'],
+                        ],
+                    ],
+                ],
+            ],
+            'tableName' => 'fe_users',
+            'recordShouldBeSkipped' => false,
+            'initialInsertUpdateIds' => [],
+            'expectedRecord' => $expectedRecord,
+            'expectedInsertUpdateIds' => [
+                123 => [
+                    'fe_users' => ['hisconnector_identifier' => ['person-456' => -456]],
+                ],
+            ],
+        ];
     }
 
     /**
@@ -428,6 +491,13 @@ final class SyncRecordFactoryTest extends AbstractHisConnectorTestCase
      */
     public static function createThrowsExceptionDataProvider(): iterable
     {
+        $personPicture = new PersonPicture(
+            id: 678,
+            fileContents: 'blob',
+            mimeType: 'image/png',
+            description: 'image description',
+            originalFileName: 'original.png',
+        );
         $person = new Person(
             id: 456,
             firstname: 'first name',
@@ -449,7 +519,7 @@ final class SyncRecordFactoryTest extends AbstractHisConnectorTestCase
             updatedAt: null,
             fetchContactDetailsClosure: fn() => ContactDetailsCollection::fromArray([]),
             fetchPersonalDataClosure: fn() => new PersonalData(456, 'workplace', 'academic career', null, null, null, null, null),
-            fetchPicturesClosure: fn(int $hisKey) => [],
+            fetchPicturesClosure: fn(int $hisKey) => PersonPictureCollection::fromArray([$personPicture]),
             fetchFunctionsClosure: fn() => PersonFunctionCollection::fromArray([]),
             fetchAccountsClosure: fn() => AccountCollection::fromArray([]),
             fetchAttributesClosure: fn() => PersonAttributeCollection::fromArray([]),
@@ -488,6 +558,66 @@ final class SyncRecordFactoryTest extends AbstractHisConnectorTestCase
             ],
             'tableName' => 'fe_users',
             'expectedExceptionCode' => 1788609450,
+        ];
+        yield 'missing file storage folder' => [
+            'source' => $person,
+            'config' => [
+                'source' => ['repository' => 'personRepository', 'fetch' => 'fetchById(123)'],
+                'storagePage' => 123,
+                'mapping' => [
+                    [
+                        'entityClassName' => Person::class,
+                        'tableName' =>  'fe_users',
+                        'fields' => [
+                            'image' => [
+                                'sourceExpression' => 'person.getPictures(1).first()',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'tableName' => 'fe_users',
+            'expectedExceptionCode' => 1788965433,
+        ];
+        yield 'file mapped to non-relation field' => [
+            'source' => $person,
+            'config' => [
+                'source' => ['repository' => 'personRepository', 'fetch' => 'fetchById(123)'],
+                'storagePage' => 123,
+                'mapping' => [
+                    [
+                        'entityClassName' => Person::class,
+                        'tableName' =>  'fe_users',
+                        'fields' => [
+                            'first_name' => [
+                                'sourceExpression' => 'person.getPictures(1).first()',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'tableName' => 'fe_users',
+            'expectedExceptionCode' => 1788965249,
+        ];
+        yield 'file mapped to non-file field' => [
+            'source' => $person,
+            'config' => [
+                'source' => ['repository' => 'personRepository', 'fetch' => 'fetchById(123)'],
+                'storagePage' => 123,
+                'mapping' => [
+                    [
+                        'entityClassName' => Person::class,
+                        'tableName' =>  'fe_users',
+                        'fields' => [
+                            'usergroup' => [
+                                'sourceExpression' => 'person.getPictures(1).first()',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'tableName' => 'fe_users',
+            'expectedExceptionCode' => 1788965249,
         ];
     }
 
