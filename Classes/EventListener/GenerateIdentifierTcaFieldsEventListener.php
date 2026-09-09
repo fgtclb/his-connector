@@ -23,7 +23,7 @@ final readonly class GenerateIdentifierTcaFieldsEventListener
 
     public function __invoke(BeforeTcaOverridesEvent $event): void
     {
-        $tables = [];
+        $tables = ['sys_file_metadata' => true];
         foreach ($this->configurationRegistry->getValid() as $config) {
             foreach ($config->mapping as $mappingConfig) {
                 if ($mappingConfig->usesDefaultIdentifierField()) {

@@ -15,6 +15,7 @@ final readonly class SyncConfiguration
         public string $version,
         public string $schema,
         public ?int $storagePage,
+        public ?string $fileStorageFolder,
         public DataSource $source,
         public array $mapping,
         public ?string $originalFile,
@@ -32,6 +33,7 @@ final readonly class SyncConfiguration
             version: (string)($config['version'] ?? ''),
             schema: (string)($config['schema'] ?? ''),
             storagePage: isset($config['storagePage']) ? (int)$config['storagePage'] : null,
+            fileStorageFolder: isset($config['fileStorageFolder']) ? (string)$config['fileStorageFolder'] : null,
             source: DataSource::fromConfig($config['source'] ?? []),
             mapping: array_map(MappingConfiguration::fromConfig(...), $config['mapping'] ?? []),
             originalFile: $originalFile,
@@ -46,6 +48,22 @@ final readonly class SyncConfiguration
             version: $this->version,
             schema: $this->schema,
             storagePage: $storagePage,
+            fileStorageFolder: $this->fileStorageFolder,
+            source: $this->source,
+            mapping: $this->mapping,
+            originalFile: $this->originalFile,
+        );
+    }
+
+    public function withFileStorageFolder(string $fileStorageFolder): self
+    {
+        return new self(
+            name: $this->name,
+            description: $this->description,
+            version: $this->version,
+            schema: $this->schema,
+            storagePage: $this->storagePage,
+            fileStorageFolder: $fileStorageFolder,
             source: $this->source,
             mapping: $this->mapping,
             originalFile: $this->originalFile,

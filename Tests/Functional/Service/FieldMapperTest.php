@@ -8,6 +8,7 @@ use FGTCLB\HisClientFacade\Collection\AccountCollection;
 use FGTCLB\HisClientFacade\Collection\ContactDetailsCollection;
 use FGTCLB\HisClientFacade\Collection\PersonAttributeCollection;
 use FGTCLB\HisClientFacade\Collection\PersonFunctionCollection;
+use FGTCLB\HisClientFacade\Collection\PersonPictureCollection;
 use FGTCLB\HisClientFacade\Model\Person;
 use FGTCLB\HisClientFacade\Model\PersonalData;
 use FGTCLB\HisConnector\Configuration\FieldMapping;
@@ -117,7 +118,7 @@ final class FieldMapperTest extends AbstractHisConnectorTestCase
                 updatedAt: null,
                 fetchContactDetailsClosure: fn() => ContactDetailsCollection::fromArray([]),
                 fetchPersonalDataClosure: fn() => new PersonalData(123, 'workplace', 'academic career', null, null, null, null, null),
-                fetchPicturesClosure: fn(int $hisKey) => [],
+                fetchPicturesClosure: fn(int $hisKey) => PersonPictureCollection::fromArray([]),
                 fetchFunctionsClosure: fn() => PersonFunctionCollection::fromArray([]),
                 fetchAccountsClosure: fn() => AccountCollection::fromArray([]),
                 fetchAttributesClosure: fn() => PersonAttributeCollection::fromArray([]),
@@ -182,7 +183,7 @@ final class FieldMapperTest extends AbstractHisConnectorTestCase
                 updatedAt: null,
                 fetchContactDetailsClosure: fn() => ContactDetailsCollection::fromArray([]),
                 fetchPersonalDataClosure: fn() => new PersonalData(123, 'workplace', 'academic career', null, null, null, null, null),
-                fetchPicturesClosure: fn(int $hisKey) => [],
+                fetchPicturesClosure: fn(int $hisKey) => PersonPictureCollection::fromArray([]),
                 fetchFunctionsClosure: fn() => PersonFunctionCollection::fromArray([]),
                 fetchAccountsClosure: fn() => AccountCollection::fromArray([]),
                 fetchAttributesClosure: fn() => PersonAttributeCollection::fromArray([]),
