@@ -6,6 +6,7 @@ namespace FGTCLB\HisConnector\Sync;
 
 use FGTCLB\HisClientFacade\Collection\CollectionInterface;
 use FGTCLB\HisClientFacade\Model\EntityInterface;
+use FGTCLB\HisClientFacade\Model\FileEntityInterface;
 use FGTCLB\HisConnector\Configuration\FieldMapping;
 use FGTCLB\HisConnector\Configuration\MappingConfiguration;
 use FGTCLB\HisConnector\Configuration\SyncConfiguration;
@@ -98,6 +99,41 @@ final readonly class SyncRecordFactory
         $subType = $sourceValue instanceof CollectionInterface ? $sourceValue::getItemType() : get_class($sourceValue);
         $schema = $this->tcaSchemaFactory->get($fieldMapping->tableName);
         [$fieldRelation, $subMapping] = $this->determineRelationMapping($schema->getField($fieldMapping->fieldName), $subType, $config);
+        // Special treatment for file references
+        if (is_a($subType, FileEntityInterface::class, true)) {
+            if ($fieldRelation === null) {
+                throw new SyncException(sprintf(
+                    'Cannot map file collection/entity "%s" to field "%s.%s" because it cannot contain file references.',
+                    get_class($sourceValue),
+                    $fieldMapping->tableName,
+                    $fieldMapping->fieldName,
+                ), 1788965249);
+            }
+            if ($config->fileStorageFolder === null) {
+                // We only validate the file storage if it's actually used, in contrast to the storagePage,
+                // which is a strict requirement
+                throw new SyncException(sprintf(
+                    'File storage folder needs to be specified to map file collection/entity "%s" to field "%s.%s".',
+                    get_class($sourceValue),
+                    $fieldMapping->tableName,
+                    $fieldMapping->fieldName,
+                ), 1788965433);
+            }
+            /** @var (EntityInterface&FileEntityInterface)[] */
+            $fileCollection = $sourceValue instanceof EntityInterface ? [$sourceValue] : $sourceValue;
+            $relatedFiles = [];
+            foreach ($fileCollection as $item) {
+                $relatedFiles[] = new SyncFile(
+                    fileStorageFolder: $config->fileStorageFolder,
+                    syncIdentifier: $item->getIdentifier(),
+                    fileContents: $item->getFileContents(),
+                    mimeType: $item->getMimeType(),
+                    originalFileName: $item->getOriginalFileName(),
+                    description: $item->getDescription(),
+                );
+            }
+            return new SyncRelatedFiles($fieldMapping->fieldName, $relatedFiles);
+        }
         if ($fieldRelation === null || $subMapping === null) {
             throw new SyncException(sprintf(
                 'Cannot map collection/entity "%s" to non-relation field "%s.%s".',
@@ -159,6 +195,14 @@ final readonly class SyncRecordFactory
         SyncConfiguration $syncConfig
     ): array {
         if (!$field instanceof RelationalFieldTypeInterface) {
+            return [null, null];
+        }
+        if (is_a($entityClassName, FileEntityInterface::class, true)) {
+            foreach ($field->getRelations() as $relation) {
+                if ($relation->toTable() === 'sys_file_reference') {
+                    return [$relation, null];
+                }
+            }
             return [null, null];
         }
         foreach ($field->getRelations() as $relation) {

@@ -13,6 +13,7 @@ use FGTCLB\HisClientFacade\Collection\MessengerCollection;
 use FGTCLB\HisClientFacade\Collection\PersonAttributeCollection;
 use FGTCLB\HisClientFacade\Collection\PersonCollection;
 use FGTCLB\HisClientFacade\Collection\PersonFunctionCollection;
+use FGTCLB\HisClientFacade\Collection\PersonPictureCollection;
 use FGTCLB\HisClientFacade\Collection\PhoneNumberCollection;
 use FGTCLB\HisClientFacade\Collection\PostAddressCollection;
 use FGTCLB\HisClientFacade\Collection\ValidityAwareCollectionInterface;
@@ -27,6 +28,7 @@ use FGTCLB\HisClientFacade\Model\Person;
 use FGTCLB\HisClientFacade\Model\PersonalData;
 use FGTCLB\HisClientFacade\Model\PersonAttribute;
 use FGTCLB\HisClientFacade\Model\PersonFunction;
+use FGTCLB\HisClientFacade\Model\PersonPicture;
 use FGTCLB\HisClientFacade\Model\PhoneNumber;
 use FGTCLB\HisClientFacade\Model\PostAddress;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -148,7 +150,7 @@ final class CollectionTest extends UnitTestCase
             updatedAt: null,
             fetchContactDetailsClosure: fn() => ContactDetailsCollection::fromArray([]),
             fetchPersonalDataClosure: fn() => new PersonalData(123, null, null, null, null, null, null, null),
-            fetchPicturesClosure: fn() => [],
+            fetchPicturesClosure: fn() => PersonPictureCollection::fromArray([]),
             fetchFunctionsClosure: fn() => PersonFunctionCollection::fromArray([]),
             fetchAccountsClosure: fn() => AccountCollection::fromArray([]),
             fetchAttributesClosure: fn() => PersonAttributeCollection::fromArray([]),
@@ -187,6 +189,17 @@ final class CollectionTest extends UnitTestCase
         ];
         $collection = AccountCollection::fromArray($items);
         yield 'AccountCollection' => [
+            'collection' => $collection,
+            'expectedItems' => $items,
+        ];
+
+        $items = [
+            new PersonPicture(123, 'blob1', 'image/png', null, null),
+            new PersonPicture(456, 'blob2', 'image/png', null, null),
+            new PersonPicture(789, 'blob3', 'image/png', null, null),
+        ];
+        $collection = PersonPictureCollection::fromArray($items);
+        yield 'PersonPictureCollection' => [
             'collection' => $collection,
             'expectedItems' => $items,
         ];
@@ -530,7 +543,7 @@ final class CollectionTest extends UnitTestCase
             updatedAt: null,
             fetchContactDetailsClosure: fn() => ContactDetailsCollection::fromArray([]),
             fetchPersonalDataClosure: fn() => new PersonalData(123, null, null, null, null, null, null, null),
-            fetchPicturesClosure: fn() => [],
+            fetchPicturesClosure: fn() => PersonPictureCollection::fromArray([]),
             fetchFunctionsClosure: fn() => PersonFunctionCollection::fromArray([]),
             fetchAccountsClosure: fn() => AccountCollection::fromArray([]),
             fetchAttributesClosure: fn() => PersonAttributeCollection::fromArray([]),

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace FGTCLB\HisClientFacade\Model;
 
 use FGTCLB\HisClient\KeyvalueService\Struct\CountryValue;
-use FGTCLB\HisClient\MimedataService\Struct\Mimedata;
 use FGTCLB\HisClient\PersonService\Struct\AcademicDegree;
 use FGTCLB\HisClient\PersonService\Struct\Gender;
 use FGTCLB\HisClient\PersonService\Struct\PersoninfoDto;
@@ -14,6 +13,7 @@ use FGTCLB\HisClientFacade\Collection\AccountCollection;
 use FGTCLB\HisClientFacade\Collection\ContactDetailsCollection;
 use FGTCLB\HisClientFacade\Collection\PersonAttributeCollection;
 use FGTCLB\HisClientFacade\Collection\PersonFunctionCollection;
+use FGTCLB\HisClientFacade\Collection\PersonPictureCollection;
 
 final readonly class Person implements EntityInterface
 {
@@ -40,7 +40,7 @@ final readonly class Person implements EntityInterface
         private \Closure $fetchContactDetailsClosure,
         /** @var \Closure(): PersonalData */
         private \Closure $fetchPersonalDataClosure,
-        /** @var \Closure(int): Mimedata[] */
+        /** @var \Closure(int): PersonPictureCollection */
         private \Closure $fetchPicturesClosure,
         /** @var \Closure(): PersonFunctionCollection */
         private \Closure $fetchFunctionsClosure,
@@ -67,10 +67,7 @@ final readonly class Person implements EntityInterface
         return ($this->fetchContactDetailsClosure)();
     }
 
-    /**
-     * @return Mimedata[]
-     */
-    public function getPictures(int $hisKey): array
+    public function getPictures(int $hisKey): PersonPictureCollection
     {
         // TODO cache result? Use proper lazy object?
         return ($this->fetchPicturesClosure)($hisKey);
