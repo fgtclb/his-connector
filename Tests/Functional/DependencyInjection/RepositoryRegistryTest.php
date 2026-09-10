@@ -12,6 +12,8 @@ use PHPUnit\Framework\Attributes\Test;
 
 final class RepositoryRegistryTest extends AbstractHisConnectorTestCase
 {
+    protected bool $initializeDatabase = false;
+
     #[Test]
     public function repositoryRegistryContainsRepositories(): void
     {
