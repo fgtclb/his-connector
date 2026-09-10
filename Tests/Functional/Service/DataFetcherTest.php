@@ -18,6 +18,8 @@ use PHPUnit\Framework\Attributes\Test;
 
 final class DataFetcherTest extends AbstractHisConnectorTestCase
 {
+    protected bool $initializeDatabase = false;
+
     /**
      * @return array{repositories: RepositoryInterface<*>[], config: mixed[], expectedResult: mixed}[]
      */

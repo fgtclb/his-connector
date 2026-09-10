@@ -19,6 +19,8 @@ use PHPUnit\Framework\Attributes\Test;
 
 final class FieldMapperTest extends AbstractHisConnectorTestCase
 {
+    protected bool $initializeDatabase = false;
+
     /**
      * @return array{config: mixed[], expectedResult: mixed}[]
      */

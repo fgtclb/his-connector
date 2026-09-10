@@ -34,6 +34,8 @@ final class HisClientTest extends AbstractHisConnectorTestCase
         ],
     ];
 
+    protected bool $initializeDatabase = false;
+
     public static function expectedAvailableHisClasses(): \Generator
     {
         yield 'AccountService' => ['className' => AccountService::class];

@@ -10,6 +10,8 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 final class ExtensionLoadedTest extends AbstractHisConnectorTestCase
 {
+    protected bool $initializeDatabase = false;
+
     public static function expectedLoadedExtensionIdentifiers(): \Generator
     {
         yield 'composer package name: fgtclb/his-connector' => ['identifier' => 'fgtclb/his-connector'];

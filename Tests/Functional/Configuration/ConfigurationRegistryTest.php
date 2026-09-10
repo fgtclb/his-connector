@@ -20,6 +20,8 @@ final class ConfigurationRegistryTest extends AbstractHisConnectorTestCase
         'typo3conf/ext/his_connector/Tests/Functional/Configuration/Fixtures/Extensions/test_configuration_registry',
     ];
 
+    protected bool $initializeDatabase = false;
+
     #[Test]
     public function registryFindsFiles(): void
     {
