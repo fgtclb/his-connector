@@ -1,0 +1,29 @@
+source:
+  repository: personRepository
+  fetch: 'findById(123)'
+storagePage: 1
+fileStorageFolder: '1:/user_upload/his_connector/'
+mapping:
+  -
+    entityClassName: FGTCLB\HisClientFacade\Model\Person
+    tableName: fe_users
+    skipField: disable
+    fields:
+      title:
+        sourceField: person.title.defaulttext
+      first_name:
+        sourceField: person.firstname
+      last_name:
+        sourceField: person.surname
+      usergroup:
+        sourceField: person.functions
+      image:
+        sourceExpression: 'person.getPictures(1)'
+  -
+    entityClassName: FGTCLB\HisClientFacade\Model\PersonFunction
+    tableName: fe_groups
+    fields:
+      title:
+        sourceField: personFunction.type.defaultText
+      description:
+        sourceField: person.identifier

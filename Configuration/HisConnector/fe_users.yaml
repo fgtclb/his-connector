@@ -1,0 +1,48 @@
+name: fe_users
+description: 'Imports relevant fields from HIS to fe_users'
+version: 1
+source:
+  repository: 'personRepository'
+  fetch: 'findByRolesForLanguage(filter["roles"], filter["language"])'
+  filter:
+    language: 'de'
+    roles: [3, 69]
+mapping:
+  -
+    entityClassName: FGTCLB\HisClientFacade\Model\Person
+    tableName: fe_users
+    fields:
+      username:
+        sourceExpression: 'person.getAccounts().first()?.username'
+      starttime:
+        sourceExpression: 'person.getAccounts().first()?.validFrom'
+      endtime:
+        sourceExpression: 'person.getAccounts().first()?.validTo'
+      name:
+        sourceExpression: 'person.firstname~" "~person.surname'
+      usergroup:
+        sourceExpression: '1'
+      first_name:
+        sourceField: 'person.firstname'
+      last_name:
+        sourceField: 'person.surname'
+      title:
+        sourceField: 'person.title.shorttext'
+      company:
+        sourceExpression: 'person.getFunctions().first()?.postAddress?.company ?? person.getFunctions().first()?.orgUnit?.displayText'
+      address:
+        sourceExpression: 'person.getFunctions().first()?.postAddress?.street'
+      city:
+        sourceExpression: 'person.getFunctions().first()?.postAddress?.city'
+      zip:
+        sourceExpression: 'person.getFunctions().first()?.postAddress?.postcode'
+      country:
+        sourceExpression: 'person.getFunctions().first()?.postAddress?.country?.getDefaulttext()'
+      email:
+        sourceExpression: 'person.getContactDetails().first()?.emailAddresses.onlyInDomain("business").first()?.email'
+      telephone:
+        sourceExpression: 'person.getContactDetails().first()?.phoneNumbers.onlyInDomain("business").onlyOfType("phone").first()?.phoneNumber'
+      www:
+        sourceExpression: 'person.getContactDetails().first()?.hyperlinks.onlyInDomain("business").onlyOfType("www").first()?.hyperlink'
+      image:
+        sourceExpression: 'person.getPictures(1).first()'
