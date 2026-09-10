@@ -1,0 +1,133 @@
+<f:layout name="Module" />
+
+<f:section name="Content">
+		<f:comment> <f:debug maxDepth="15" title="config">{config}</f:debug>
+		<f:debug maxDepth="15" title="analysis">{analysis}</f:debug> </f:comment>
+	<h1>Mapping Preview — {config.name}</h1>
+	<p>{config.description}</p>
+	<f:if condition="{analysis.usesDefaultIdentifierFields}">
+		<f:be.infobox title="Check Database Structure">
+			This mapping configuration relies on default HIS sync fields in the database. Make sure that your database structure is up-to-date.
+		</f:be.infobox>
+	</f:if>
+	<f:render section="Entity" arguments="{analysis: analysis, expanded: true}" />
+</f:section>
+
+<f:section name="Entity">
+	<f:variable name="unique" value="{analysis.tableName}" />
+	<div class="panel panel-default">
+		<div class="panel-heading" role="tab">
+			<div class="panel-heading-row">
+				<button class="panel-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsible-panel-table-{unique}" aria-controls="collapsible-panel-table-{unique}" aria-expanded="{f:if(condition: expanded, then: 'true', else: 'false')}">
+					<div class="panel-title">
+						<b>
+							<f:if condition="{analysis.title}">
+								<f:translate key="{analysis.title}" default=" " />
+							</f:if>
+							<code>[{analysis.tableName}]</code>
+						</b>
+					</div>
+					<span class="caret"></span>
+				</button>
+			</div>
+		</div>
+		<div id="collapsible-panel-table-{unique}" class="panel-collapse collapse {f:if(condition: expanded, then: 'show')}" data-persist-collapse-state="true" role="tabpanel">
+			<div class="table-fit table-fit-wrap">
+				<table class="table table-hover">
+					<tbody>
+						<f:for each="{analysis.fields}" as="mapping">
+							<tr>
+								<th class="col-fieldname" style="vertical-align: top">
+									<f:if condition="{mapping.tcaField.label}">
+										<f:translate key="{mapping.tcaField.label}" default=" " /><br />
+									</f:if>
+									<code>[{mapping.tcaField.name}]</code>
+								</th>
+								<td class="col-word-break" style="vertical-align: top">
+									<f:if condition="{mapping.example} && !{mapping.subFields}">
+										<i>{mapping.example}</i><br /><br />
+									</f:if>
+									<f:if condition="{mapping.tcaField.name} == {analysis.identifierField}">
+										<f:then><span class="badge badge-info">identifier</span></f:then>
+										<f:else if="{mapping.tcaField.name} == {analysis.skipField}"><span class="badge badge-info">skip flag</span></f:else>
+										<f:else if="!{mapping.fieldMapping}"><span class="badge badge-notice">not mapped</span></f:else>
+										<f:else if="{mapping.fieldMapping.sourceField.isExpression}">
+											<f:render section="Expression" arguments="{fieldName: mapping.tcaField.name, expression: mapping.fieldMapping.sourceField, expanded: false}" />
+										</f:else>
+										<f:else if="{mapping.subFields}">
+											<f:render section="Entity" arguments="{analysis: mapping.subFields, expanded: false}" />
+										</f:else>
+										<f:else>
+											<span class="badge badge-success">{mapping.fieldMapping.sourceField}</span>
+										</f:else>
+									</f:if>
+
+									<f:if condition="{mapping.fieldMapping.valueMapping}">
+										<br /><br /><f:render section="ValueMapping" arguments="{fieldName: mapping.tcaField.name, valueMapping: mapping.fieldMapping.valueMapping, expanded: false}" />
+									</f:if>
+								</td>
+							</tr>
+						</f:for>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</f:section>
+
+<f:section name="ValueMapping">
+	<f:variable name="unique" value="{fieldName}_valuemapping" />
+	<div class="panel panel-default">
+		<div class="panel-heading" role="tab">
+			<div class="panel-heading-row">
+				<button class="panel-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsible-panel-table-{unique}" aria-controls="collapsible-panel-table-{unique}" aria-expanded="{f:if(condition: expanded, then: 'true', else: 'false')}">
+					<div class="panel-title">
+						<b>Value Mapping</b>
+					</div>
+					<span class="caret"></span>
+				</button>
+			</div>
+		</div>
+		<div id="collapsible-panel-table-{unique}" class="panel-collapse collapse {f:if(condition: expanded, then: 'show')}" data-persist-collapse-state="true" role="tabpanel">
+			<div class="table-fit table-fit-wrap">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>from</th>
+							<th>to</th>
+						</tr>
+					</thead>
+					<f:for each="{valueMapping}" as="mapping">
+						<tbody>
+							<tr>
+								<td class="col-fieldname">{mapping.source}</td>
+								<td class="col-word-break">{mapping.target}</td>
+							</tr>
+						</tbody>
+					</f:for>
+				</table>
+			</div>
+		</div>
+	</div>
+</f:section>
+
+<f:section name="Expression">
+	<f:variable name="unique" value="{fieldName}_expression" />
+	<div class="panel panel-default">
+		<div class="panel-heading" role="tab">
+			<div class="panel-heading-row">
+				<button class="panel-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsible-panel-table-{unique}" aria-controls="collapsible-panel-table-{unique}" aria-expanded="{f:if(condition: expanded, then: 'true', else: 'false')}">
+					<div class="panel-title">
+						<b>Expression</b>
+					</div>
+					<span class="caret"></span>
+				</button>
+			</div>
+		</div>
+		<div id="collapsible-panel-table-{unique}" class="panel-collapse collapse {f:if(condition: expanded, then: 'show')}" data-persist-collapse-state="true" role="tabpanel">
+			<div class="panel-body">
+				{expression}
+			</div>
+		</div>
+	</div>
+</f:section>

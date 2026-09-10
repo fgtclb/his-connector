@@ -36,6 +36,7 @@ final class ConfigurationRegistryTest extends AbstractHisConnectorTestCase
             'EXT:test_configuration_registry/Configuration/HisConnector/valid.yaml',
         ], $validFiles, 'valid files');
         $this->assertEquals([
+            'EXT:his_connector/Configuration/HisConnector/invalid.yaml',
             'EXT:test_configuration_registry/Configuration/HisConnector/invalid_config.yaml',
             'EXT:test_configuration_registry/Configuration/HisConnector/invalid_yaml.yaml',
         ], $invalidFiles, 'invalid files');
