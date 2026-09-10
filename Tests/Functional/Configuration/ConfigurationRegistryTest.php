@@ -28,6 +28,9 @@ final class ConfigurationRegistryTest extends AbstractHisConnectorTestCase
         $validFiles = array_map(fn($config) => $config->originalFile, $subject->getValid());
         $invalidFiles = array_map(fn($config) => $config->originalFile, $subject->getInvalid());
         $this->assertEquals([
+            'EXT:his_connector/Configuration/HisConnector/academic_persons.yaml',
+            'EXT:his_connector/Configuration/HisConnector/fe_users.yaml',
+            'EXT:his_connector/Configuration/HisConnector/tt_address.yaml',
             'EXT:test_configuration_registry/Configuration/HisConnector/valid.yaml',
         ], $validFiles, 'valid files');
         $this->assertEquals([

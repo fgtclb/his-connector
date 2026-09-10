@@ -10,4 +10,10 @@ parameters:
 			message: '#^Variable \$_EXTKEY might not be defined\.$#'
 			identifier: variable.undefined
 			count: 1
+			path: ../../../Tests/Functional/Service/Fixtures/Extensions/test_synchronizer/ext_emconf.php
+
+		-
+			message: '#^Variable \$_EXTKEY might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
 			path: ../../../Tests/Functional/Sync/Fixtures/Extensions/test_sync/ext_emconf.php

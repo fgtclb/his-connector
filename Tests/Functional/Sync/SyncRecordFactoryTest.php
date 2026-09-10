@@ -117,7 +117,7 @@ final class SyncRecordFactoryTest extends AbstractHisConnectorTestCase
         yield 'sync record' => [
             'source' => $person,
             'config' => [
-                'source' => ['repository' => 'personRepository', 'fetch' => 'fetchById(123)'],
+                'source' => ['repository' => 'personRepository', 'fetch' => 'findById(123)'],
                 'storagePage' => 123,
                 'mapping' => [
                     [
@@ -144,7 +144,7 @@ final class SyncRecordFactoryTest extends AbstractHisConnectorTestCase
         yield 'skip sync' => [
             'source' => $person,
             'config' => [
-                'source' => ['repository' => 'personRepository', 'fetch' => 'fetchById(123)'],
+                'source' => ['repository' => 'personRepository', 'fetch' => 'findById(123)'],
                 'storagePage' => 123,
                 'mapping' => [
                     [
@@ -187,7 +187,7 @@ final class SyncRecordFactoryTest extends AbstractHisConnectorTestCase
         yield 'with 1:n subrecord' => [
             'source' => $person,
             'config' => [
-                'source' => ['repository' => 'personRepository', 'fetch' => 'fetchById(123)'],
+                'source' => ['repository' => 'personRepository', 'fetch' => 'findById(123)'],
                 'storagePage' => 123,
                 'mapping' => [
                     [
@@ -247,7 +247,7 @@ final class SyncRecordFactoryTest extends AbstractHisConnectorTestCase
         yield 'with 1:n subrecord to table with relation field' => [
             'source' => $person,
             'config' => [
-                'source' => ['repository' => 'personRepository', 'fetch' => 'fetchById(123)'],
+                'source' => ['repository' => 'personRepository', 'fetch' => 'findById(123)'],
                 'storagePage' => 123,
                 'mapping' => [
                     [
@@ -306,7 +306,7 @@ final class SyncRecordFactoryTest extends AbstractHisConnectorTestCase
         yield 'with 1:n subrecord with existing id' => [
             'source' => $person,
             'config' => [
-                'source' => ['repository' => 'personRepository', 'fetch' => 'fetchById(123)'],
+                'source' => ['repository' => 'personRepository', 'fetch' => 'findById(123)'],
                 'storagePage' => 123,
                 'mapping' => [
                     [
@@ -370,7 +370,7 @@ final class SyncRecordFactoryTest extends AbstractHisConnectorTestCase
         yield 'with 1:1 subrecord' => [
             'source' => $person,
             'config' => [
-                'source' => ['repository' => 'personRepository', 'fetch' => 'fetchById(123)'],
+                'source' => ['repository' => 'personRepository', 'fetch' => 'findById(123)'],
                 'storagePage' => 123,
                 'mapping' => [
                     [
@@ -430,7 +430,7 @@ final class SyncRecordFactoryTest extends AbstractHisConnectorTestCase
         yield 'with file relation' => [
             'source' => $person,
             'config' => [
-                'source' => ['repository' => 'personRepository', 'fetch' => 'fetchById(123)'],
+                'source' => ['repository' => 'personRepository', 'fetch' => 'findById(123)'],
                 'storagePage' => 123,
                 'fileStorageFolder' => '1:/user_upload/',
                 'mapping' => [
@@ -528,7 +528,7 @@ final class SyncRecordFactoryTest extends AbstractHisConnectorTestCase
         yield 'missing storage page' => [
             'source' => $person,
             'config' => [
-                'source' => ['repository' => 'personRepository', 'fetch' => 'fetchById(123)'],
+                'source' => ['repository' => 'personRepository', 'fetch' => 'findById(123)'],
                 'mapping' => [
                     [
                         'entityClassName' => Person::class,
@@ -542,7 +542,7 @@ final class SyncRecordFactoryTest extends AbstractHisConnectorTestCase
         yield 'mapping object to non-relation field' => [
             'source' => $person,
             'config' => [
-                'source' => ['repository' => 'personRepository', 'fetch' => 'fetchById(123)'],
+                'source' => ['repository' => 'personRepository', 'fetch' => 'findById(123)'],
                 'storagePage' => 123,
                 'mapping' => [
                     [
@@ -562,7 +562,7 @@ final class SyncRecordFactoryTest extends AbstractHisConnectorTestCase
         yield 'missing file storage folder' => [
             'source' => $person,
             'config' => [
-                'source' => ['repository' => 'personRepository', 'fetch' => 'fetchById(123)'],
+                'source' => ['repository' => 'personRepository', 'fetch' => 'findById(123)'],
                 'storagePage' => 123,
                 'mapping' => [
                     [
@@ -582,7 +582,7 @@ final class SyncRecordFactoryTest extends AbstractHisConnectorTestCase
         yield 'file mapped to non-relation field' => [
             'source' => $person,
             'config' => [
-                'source' => ['repository' => 'personRepository', 'fetch' => 'fetchById(123)'],
+                'source' => ['repository' => 'personRepository', 'fetch' => 'findById(123)'],
                 'storagePage' => 123,
                 'mapping' => [
                     [
@@ -602,7 +602,7 @@ final class SyncRecordFactoryTest extends AbstractHisConnectorTestCase
         yield 'file mapped to non-file field' => [
             'source' => $person,
             'config' => [
-                'source' => ['repository' => 'personRepository', 'fetch' => 'fetchById(123)'],
+                'source' => ['repository' => 'personRepository', 'fetch' => 'findById(123)'],
                 'storagePage' => 123,
                 'mapping' => [
                     [

@@ -12,7 +12,7 @@ use Symfony\Component\ExpressionLanguage\SyntaxError;
 use TYPO3\CMS\Core\ExpressionLanguage\Resolver;
 
 /**
- * Fetches source data based on the provided import/sync configuration.
+ * Fetches source data based on the provided sync configuration.
  */
 final readonly class DataFetcher
 {

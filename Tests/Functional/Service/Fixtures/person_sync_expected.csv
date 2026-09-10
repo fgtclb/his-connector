@@ -1,0 +1,15 @@
+"fe_users"
+,"uid","pid","title","first_name","last_name","usergroup","image","hisconnector_identifier","deleted","disable"
+,1,1,"title default","first name","last name","1",1,"person-456",0,0
+"fe_groups"
+,"uid","pid","title","description","hisconnector_identifier","deleted","hidden"
+,1,1,"function default","person-456","personFunction-789",0,0
+"sys_file"
+,"uid","pid","identifier","extension","name","mime_type","storage","missing"
+,1,0,"/user_upload/his_connector/personPicture-678.png","png","personPicture-678.png","image/png",1,0
+"sys_file_metadata"
+,"uid","pid","file","description","width","height","hisconnector_identifier"
+,1,0,1,"image description",8,8,"personPicture-678"
+"sys_file_reference"
+,"uid","pid","uid_foreign","tablenames","fieldname"
+,1,1,1,"fe_users","image"

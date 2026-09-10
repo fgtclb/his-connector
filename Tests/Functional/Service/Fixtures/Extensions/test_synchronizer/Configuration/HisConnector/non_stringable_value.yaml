@@ -1,0 +1,11 @@
+source:
+  repository: personRepository
+  fetch: 'findById(123)'
+storagePage: 1
+mapping:
+  -
+    entityClassName: FGTCLB\HisConnector\Tests\Functional\Service\Fixtures\EntityWithNonStringableProperty
+    tableName: fe_users
+    fields:
+      first_name:
+        sourceField: entityWithNonStringableProperty.nonStringable

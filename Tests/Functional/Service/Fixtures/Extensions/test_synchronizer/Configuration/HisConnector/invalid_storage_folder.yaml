@@ -1,0 +1,12 @@
+source:
+  repository: personRepository
+  fetch: 'findById(123)'
+storagePage: 1
+fileStorageFolder: '1:/user_upload/invalid/'
+mapping:
+  -
+    entityClassName: FGTCLB\HisClientFacade\Model\Person
+    tableName: fe_users
+    fields:
+      image:
+        sourceExpression: 'person.getPictures(1)'
