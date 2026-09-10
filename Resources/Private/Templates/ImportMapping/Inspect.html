@@ -1,0 +1,90 @@
+{namespace his=FGTCLB\HisConnector\ViewHelpers}
+
+<f:layout name="Module" />
+
+<f:section name="Content">
+	<h1>HIS Data Inspector — {config.name}</h1>
+	<f:render section="Entity" arguments="{schema: schema, labels: {0: 'entity'}, example: example, collection: false, expanded: true}" />
+</f:section>
+
+<f:section name="Entity">
+	<f:variable name="unique" value="{schema.className -> f:split(separator: '\\') -> f:join(separator: '-')}" />
+	<div class="panel panel-default">
+		<div class="panel-heading" role="tab">
+			<div class="panel-heading-row">
+				<button class="panel-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsible-panel-table-{unique}" aria-controls="collapsible-panel-table-{unique}" aria-expanded="{f:if(condition: expanded, then: 'true', else: 'false')}">
+					<div class="panel-title">
+						<b>
+							{schema.className -> his:expressionVariableName()}<f:if condition="{collection}">[]</f:if>
+							<code>[{schema.className}]</code>
+						</b>
+
+							<f:for each="{labels}" as="label">
+								<span class="badge badge-notice">{label}</span>
+							</f:for>
+					</div>
+					<span class="caret"></span>
+				</button>
+			</div>
+		</div>
+		<div id="collapsible-panel-table-{unique}" class="panel-collapse collapse {f:if(condition: expanded, then: 'show')}" data-persist-collapse-state="true" role="tabpanel">
+			<div class="table-fit table-fit-wrap">
+				<table class="table table-hover">
+					<tbody>
+						<f:for each="{schema.properties}" as="property">
+							<tr>
+								<th class="col-fieldname" style="vertical-align: top">{property.propertyName}</th>
+								<td class="col-word-break" style="vertical-align: top">
+									<f:render section="PropertyType" arguments="{
+										property: property,
+										example: '{example.{property.propertyName}}',
+									}" />
+								</td>
+							</tr>
+						</f:for>
+						<f:for each="{schema.getters}" as="getter">
+							<tr>
+								<th class="col-fieldname" style="vertical-align: top">{getter.methodName}()</th>
+								<td class="col-word-break" style="vertical-align: top">
+									<f:render section="PropertyType" arguments="{
+										property: getter,
+										example: '{example.{getter.propertyName}}',
+									}" />
+								</td>
+							</tr>
+						</f:for>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</f:section>
+
+<f:section name="PropertyType">
+	<f:if condition="{property.type.itemType}">
+		<f:then>
+			<f:variable name="labels" value="{f:if(condition: property.isNullable, then: {0: 'collection', 1: 'null'}, else: {0: 'collection'})}" />
+			<f:render section="Entity" arguments="{
+				schema: property.type.itemType,
+				labels: labels,
+				example: '{f:if(condition: example, then: \'{example -> f:first()}\')}',
+				collection: true,
+				expanded: false,
+			}" />
+		</f:then>
+		<f:else if="{property.type.className}">
+			<f:variable name="labels" value="{f:if(condition: property.isNullable, then: {0: 'entity', 1: 'null'}, else: {0: 'entity'})}" />
+			<f:render section="Entity" arguments="{
+				schema: property.type,
+				labels: labels,
+				example: example,
+				collection: false,
+				expanded: false,
+			}" />
+		</f:else>
+		<f:else>
+			<i><f:debug inline="{true}" plainText="{true}" title="">{example}</f:debug></i><br /><br />
+			<span class="badge badge-notice">{property.type.type}</span>
+		</f:else>
+	</f:if>
+</f:section>

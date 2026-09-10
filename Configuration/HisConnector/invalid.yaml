@@ -1,0 +1,10 @@
+name: invalid
+$schema: 'https://www.fgtclb.com/schemas/his-connector/v1.json'
+version: 1
+mapping:
+  FGTCLB\HisClientFacade\Model\Person:
+    tableName: tt_address
+    identifierField: description
+    fields:
+      first_name:
+        sourceField: 'person.firstname'
