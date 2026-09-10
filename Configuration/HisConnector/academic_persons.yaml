@@ -1,0 +1,180 @@
+name: academic_persons
+description: 'Imports relevant fields from HIS to academic_persons'
+version: 1
+source:
+  repository: 'personRepository'
+  fetch: 'findByRolesForLanguage(filter["roles"], filter["language"])'
+  filter:
+    language: 'de'
+    roles: [3, 69]
+mapping:
+  -
+    entityClassName: FGTCLB\HisClientFacade\Model\Person
+    tableName: tx_academicpersons_domain_model_profile
+    identifierField: import_identifier
+    skipField: skip_sync
+    fields:
+      gender:
+        sourceField: 'person.gender.uniquename'
+        valueMappingDefault: ''
+        valueMapping:
+          - source: 'M'
+            target: 'mr'
+          - source: 'W'
+            target: 'ms'
+          - source: 'D'
+            target: 'diverse'
+      first_name:
+        sourceField: 'person.firstname'
+      last_name:
+        sourceField: 'person.surname'
+      title:
+        sourceField: 'person.title.shorttext'
+      website:
+        sourceExpression: 'person.getContactDetails().first()?.hyperlinks.onlyInDomain("business").onlyOfType("www").first()?.hyperlink'
+      contracts:
+        sourceField: 'person.functions'
+      core_competences:
+        sourceField: 'person.personalData.workplaceDescription'
+      image:
+        sourceExpression: 'person.getPictures(1).first()'
+      frontend_users:
+        sourceField: 'person.accounts'
+
+  -
+    entityClassName: FGTCLB\HisClientFacade\Model\PersonFunction
+    tableName: tx_academicpersons_domain_model_contract
+    identifierField: import_identifier
+    fields:
+      position:
+        sourceField: 'personFunction.type.defaultText'
+      organisational_unit:
+        sourceField: 'personFunction.orgUnit'
+      location:
+        sourceField: 'personFunction.room.building'
+      room:
+        sourceField: 'personFunction.room.defaultText'
+      function_type:
+        sourceField: 'personFunction.type'
+      email_addresses:
+        sourceField: 'personFunction.emailAddresses'
+      phone_numbers:
+        sourceField: 'personFunction.phoneNumbers'
+      physical_addresses:
+        sourceField: 'personFunction.postAddress'
+      valid_from:
+        sourceField: 'personFunction.validFrom'
+      valid_to:
+        sourceField: 'personFunction.validTo'
+
+  -
+    entityClassName: FGTCLB\HisClientFacade\Model\OrgUnit
+    tableName: tx_academicpersons_domain_model_organisational_unit
+    identifierField: import_identifier
+    fields:
+      unit_name:
+        sourceField: 'orgUnit.shortText'
+      display_text:
+        sourceField: 'orgUnit.displayText'
+      long_text:
+        sourceField: 'orgUnit.longText'
+      unique_name:
+        sourceField: 'orgUnit.uniquename'
+      parent:
+        sourceField: 'orgUnit.parent'
+      valid_from:
+        sourceField: 'orgUnit.validFrom'
+      valid_to:
+        sourceField: 'orgUnit.validTo'
+
+  -
+    entityClassName: FGTCLB\HisClientFacade\Model\FunctionType
+    tableName: tx_academicpersons_domain_model_function_type
+    identifierField: import_identifier
+    fields:
+      function_name:
+        sourceField: 'functionType.defaultText'
+
+  -
+    entityClassName: FGTCLB\HisClientFacade\Model\EmailAddress
+    tableName: tx_academicpersons_domain_model_email
+    identifierField: import_identifier
+    fields:
+      email:
+        sourceField: 'emailAddress.email'
+      type:
+        sourceField: 'emailAddress.domain'
+        valueMappingDefault: ''
+        valueMapping:
+          - source: 'business'
+            target: 'business'
+          - source: 'privat'
+            target: 'private'
+
+  -
+    entityClassName: FGTCLB\HisClientFacade\Model\PhoneNumber
+    tableName: tx_academicpersons_domain_model_phone_number
+    identifierField: import_identifier
+    fields:
+      phone_number:
+        sourceField: 'phoneNumber.phoneNumber'
+      type:
+        sourceExpression: 'phoneNumber.type == "mobile" ? "mobile" : phoneNumber.domain'
+        valueMappingDefault: ''
+        valueMapping:
+          - source: 'mobile'
+            target: 'mobile'
+          - source: 'business'
+            target: 'business'
+          - source: 'privat'
+            target: 'private'
+
+  -
+    entityClassName: FGTCLB\HisClientFacade\Model\PostAddress
+    tableName: tx_academicpersons_domain_model_address
+    identifierField: import_identifier
+    fields:
+      type:
+        sourceField: 'postAddress.domain'
+        defaultValue: ''
+        valueMapping:
+          - source: 'business'
+            target: 'business'
+          - source: 'privat'
+            target: 'private'
+      street:
+        sourceField: 'postAddress.street'
+      additional:
+        sourceField: 'postAddress.addressaddition'
+      zip:
+        sourceField: 'postAddress.postcode'
+      city:
+        sourceField: 'postAddress.city'
+      state:
+        sourceField: 'postAddress.state'
+      country:
+        sourceField: 'postAddress.country.defaulttext'
+
+  -
+    entityClassName: FGTCLB\HisClientFacade\Model\Building
+    tableName: tx_academicpersons_domain_model_location
+    identifierField: import_identifier
+    fields:
+      title:
+        sourceExpression: 'building.building~" ("~building.campus~")"'
+
+  -
+    entityClassName: FGTCLB\HisClientFacade\Model\Account
+    tableName: fe_users
+    identifierField: description
+    fields:
+      username:
+        sourceField: 'account.username'
+      starttime:
+        sourceField: 'account.validFrom'
+      endtime:
+        sourceField: 'account.validTo'
+      first_name:
+        sourceField: 'person.firstname'
+      last_name:
+        sourceField: 'person.surname'

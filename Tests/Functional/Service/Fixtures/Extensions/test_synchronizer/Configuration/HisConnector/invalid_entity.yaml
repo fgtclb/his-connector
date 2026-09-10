@@ -1,0 +1,5 @@
+source:
+  repository: personRepository
+  fetch: 'findById(123)'
+storagePage: 1
+mapping: []
