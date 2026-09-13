@@ -98,7 +98,7 @@ final readonly class SyncRecordFactory
         // Determine if collection or entity is compatible with the mapped TCA schema
         $subType = $sourceValue instanceof CollectionInterface ? $sourceValue::getItemType() : get_class($sourceValue);
         $schema = $this->tcaSchemaFactory->get($fieldMapping->tableName);
-        [$fieldRelation, $subMapping] = $this->determineRelationMapping($schema->getField($fieldMapping->fieldName), $subType, $config);
+        [$fieldRelation, $subMapping] = $this->determineRelationMapping($schema->getField($fieldMapping->fieldName), $subType, $config, $fieldMapping->tableName);
         // Special treatment for file references
         if (is_a($subType, FileEntityInterface::class, true)) {
             if ($fieldRelation === null) {
@@ -192,7 +192,8 @@ final readonly class SyncRecordFactory
     private function determineRelationMapping(
         FieldTypeInterface $field,
         string $entityClassName,
-        SyncConfiguration $syncConfig
+        SyncConfiguration $syncConfig,
+        string $fromTable,
     ): array {
         if (!$field instanceof RelationalFieldTypeInterface) {
             return [null, null];
@@ -209,6 +210,16 @@ final readonly class SyncRecordFactory
             $mappingConfig = $syncConfig->getMappingForClassNameAndTableName($entityClassName, $relation->toTable());
             if ($mappingConfig instanceof MappingConfiguration) {
                 return [$relation, $mappingConfig];
+            }
+        }
+        // Because https://review.typo3.org/c/Packages/TYPO3.CMS/+/94976 hasn't been backported to 13.4,
+        // we try to determine a relation from the other direction to resolve mm table relations correctly.
+        foreach ($syncConfig->getMappingsForClassName($entityClassName) as $mappingCandidate) {
+            $targetSchema = $this->tcaSchemaFactory->get($mappingCandidate->tableName);
+            foreach ($targetSchema->getPassiveRelations() as $relation) {
+                if ($relation->fromField() === $field->getName() && $relation->fromTable() === $fromTable) {
+                    return [new ActiveRelation($fromTable, null), $mappingCandidate];
+                }
             }
         }
         return [null, null];
