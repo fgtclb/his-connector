@@ -19,3 +19,7 @@
 
 /tailor-version-artefact/
 /tailor-version-upload/
+
+# Third-party libraries bundled into the TER release, see contrib/composer.json
+/contrib/.Build/
+/contrib/Libraries/

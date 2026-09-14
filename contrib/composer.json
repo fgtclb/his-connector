@@ -1,0 +1,21 @@
+{
+    "name": "fgtclb/his-connector-lib",
+    "description": "Third-party libraries bundled with the his_connector TER release",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": "^8.2 || ^8.3 || ^8.4 || ^8.5",
+        "ext-soap": "*",
+        "wsdltophp/packagebase": "5.0.5"
+    },
+    "config": {
+        "vendor-dir": "Libraries",
+        "preferred-install": {
+            "*": "dist"
+        },
+        "classmap-authoritative": true,
+        "sort-packages": true,
+        "platform": {
+            "php": "8.2.0"
+        }
+    }
+}

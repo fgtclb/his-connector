@@ -6,6 +6,7 @@
 /Tests export-ignore
 /.github export-ignore
 /CONTRIBUTING.md export-ignore
+/contrib/Libraries/ export-ignore
 
 # Enforce checkout with linux lf consistent over all platforms
 *.css text eol=lf

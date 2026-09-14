@@ -47,11 +47,16 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.2
-          extensions: intl, mbstring, json, zip, curl
+          extensions: intl, mbstring, json, zip, curl, dom, soap
           tools: composer:v2
 
       - name: Install tailor
         run: composer global require typo3/tailor --prefer-dist --no-progress --no-suggest
+
+      # Third-party libraries are shipped within the TER artefact for classic
+      # mode installations, see `contrib/composer.json` and `ext_emconf.php`.
+      - name: Install bundled contrib libraries
+        run: composer install -d contrib --no-dev --no-progress --prefer-dist
 
       # Note that step will fail when `env.version` does not match the `ext_emconf.php` version.
       - name: Create local TER package upload artifact
