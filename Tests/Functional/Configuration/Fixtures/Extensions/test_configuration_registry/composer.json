@@ -3,7 +3,7 @@
     "type": "typo3-cms-extension",
     "require": {
         "typo3/cms-core": "~13.4.0@dev || ~14.3.6@dev",
-        "fgtclb/his-connector": "1.0.0@dev"
+        "fgtclb/his-connector": "~1.0.1@dev"
     },
     "extra": {
         "typo3/cms": {
