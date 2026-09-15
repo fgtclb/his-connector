@@ -78,10 +78,9 @@ jobs:
             LICENSE
           fail_on_unmatched_files: true
 
-      # @todo Enable the TER publishing as soon as the extension is public and the
-      #       extension key "his_connector" is registered in the TER. The
-      #       `TYPO3_API_TOKEN` repository secret must be set up for it.
-      #- name: Publish to TER
-      #  run: |
-      #    php ~/.composer/vendor/bin/tailor ter:publish --comment "${{ env.terReleaseNotes }}" ${{ env.version }} \
-      #      --artefact=tailor-version-artefact/${{ env.DETECTED_EXTENSION_KEY }}_${{ env.version }}.zip
+      # Uploads the artefact to the TER, authenticated with the `TYPO3_API_TOKEN`
+      # repository secret. The extension key is read from `composer.json`.
+      - name: Publish to TER
+        run: |
+          php ~/.composer/vendor/bin/tailor ter:publish --comment "${{ env.terReleaseNotes }}" ${{ env.version }} \
+            --artefact=tailor-version-artefact/${{ env.DETECTED_EXTENSION_KEY }}_${{ env.version }}.zip
