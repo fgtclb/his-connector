@@ -15,6 +15,7 @@ Source code and issue tracker are hosted on GitHub:
 - [Documentation](#documentation)
 - [Commit messages](#commit-messages)
 - [Pull request workflow](#pull-request-workflow)
+- [Releasing](#releasing)
 
 ## Development environment
 
@@ -217,3 +218,11 @@ Explain what breaks and how to migrate.
    The GitHub Actions workflows run the full matrix for TYPO3 v13 and v14.
 5. Address review feedback by amending or adding commits; keep the history
    readable — squash fixup commits before the pull request is merged.
+
+## Releasing
+
+Releases are created by the maintainers with
+[`Build/Scripts/release.sh`](Build/Scripts/release.sh), which applies the
+version through [`Build/Scripts/setVersion.sh`](Build/Scripts/setVersion.sh).
+The release process, the safety gates of the scripts and the checks before a
+release are described in [`docs/Releasing.md`](docs/Releasing.md).

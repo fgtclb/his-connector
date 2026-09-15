@@ -76,6 +76,13 @@ Build/Scripts/runTests.sh -h
 See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full development setup, the
 quality gates and the commit message rules.
 
+## Releasing
+
+Releases are created with [`Build/Scripts/release.sh`](Build/Scripts/release.sh),
+which applies the version with [`Build/Scripts/setVersion.sh`](Build/Scripts/setVersion.sh),
+merges the release pull request and pushes the tag triggering the publish
+workflow. See [`docs/Releasing.md`](docs/Releasing.md) for the release process.
+
 ## Bundled libraries (TER release)
 
 Composer mode installations resolve third-party dependencies with composer.

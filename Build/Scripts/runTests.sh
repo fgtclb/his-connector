@@ -206,6 +206,7 @@ Options:
             - phpstan: phpstan analyze
             - phpstanGenerateBaseline: regenerate phpstan baseline, handy after phpstan updates
             - renderDocumentation: render the extension documentation into Documentation-GENERATED-temp
+            - setVersion: apply a version across the repository, "-- <version> <type>"
             - generateClientFromWsdl: (re-)generate PHP client based on WSDL
             - unit (default): PHP unit tests
             - unitRandom: PHP unit tests in random order, "-o <number>" to use a specific seed
@@ -329,6 +330,9 @@ Examples:
 
     # Check the coding guidelines without changing files, as CI does
     ./Build/Scripts/runTests.sh -s cgl -n
+
+    # Apply a version across the repository, without needing PHP on the host
+    ./Build/Scripts/runTests.sh -s setVersion -- 1.2.0 release --dry-run
 EOF
 }
 
@@ -664,6 +668,13 @@ case ${TEST_SUITE} in
     renderDocumentation)
         cleanRenderedDocumentationFiles
         ${CONTAINER_BIN} run ${DOCUMENTATION_COMMON_PARAMS} --name render-documentation-${SUFFIX} ${IMAGE_DOCS} --no-progress --fail-on-error --config=Documentation Documentation
+        SUITE_EXIT_CODE=$?
+        ;;
+    setVersion)
+        # Arguments are the ones of the script itself, for instance:
+        #   ./Build/Scripts/runTests.sh -s setVersion -- 1.2.0 release
+        COMMAND=(Build/Scripts/setVersion.sh "$@")
+        ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name set-version-${SUFFIX} ${IMAGE_PHP} "${COMMAND[@]}"
         SUITE_EXIT_CODE=$?
         ;;
     generateClientFromWsdl)
