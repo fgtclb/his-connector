@@ -73,7 +73,7 @@
         "typo3/cms": {
             "extension-key": "his_connector",
             "web-dir": ".Build/Web",
-            "version": "1.0.0-dev",
+            "version": "1.0.0",
             "Package": {
                 "providesPackages": {
                     "wsdltophp/packagebase": "contrib/Libraries"
