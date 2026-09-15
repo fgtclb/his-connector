@@ -58,6 +58,11 @@ websites.
 
         Install the extension in your TYPO3 installation.
 
+    ..  card:: :ref:`Command line <command-line>`
+
+        Run synchronizations from HIS with the ``hisconnector:sync`` console
+        command.
+
     ..  card:: :ref:`Changelog <changelog>`
 
         Overview of the changes per released version.
@@ -69,4 +74,5 @@ websites.
 
     Introduction/Index
     Installation/Index
+    CommandLine/Index
     Changelog/Index
