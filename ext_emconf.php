@@ -3,7 +3,7 @@
 $EM_CONF[$_EXTKEY] = [
     'title' => 'FGTCLB: HIS Connector',
     'description' => 'HIS connector for TYPO3 CMS.',
-    'version' => '1.0.0',
+    'version' => '1.0.1',
     'category' => 'misc',
     'state' => 'alpha',
     'author' => 'FGTCLB',

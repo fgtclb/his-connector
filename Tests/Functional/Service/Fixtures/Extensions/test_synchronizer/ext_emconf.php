@@ -3,7 +3,7 @@
 $EM_CONF[$_EXTKEY] = [
     'title' => 'TESTS: Synchronizer',
     'description' => '',
-    'version' => '1.0.0',
+    'version' => '1.0.1',
     'category' => 'plugin',
     'state' => 'beta',
     'author' => '',
