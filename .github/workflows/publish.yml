@@ -50,8 +50,10 @@ jobs:
           extensions: intl, mbstring, json, zip, curl, dom, soap
           tools: composer:v2
 
+      # Pinned to the 1.x release line, so a new major version of tailor is not
+      # picked up unnoticed by a release.
       - name: Install tailor
-        run: composer global require typo3/tailor --prefer-dist --no-progress --no-suggest
+        run: composer global require "typo3/tailor:^1.7" --prefer-dist --no-progress --no-suggest
 
       # Third-party libraries are shipped within the TER artefact for classic
       # mode installations, see `contrib/composer.json` and `ext_emconf.php`.
