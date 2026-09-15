@@ -100,16 +100,16 @@ a maintenance branch.
 Pushing the tag triggers the [`publish`](../.github/workflows/publish.yml)
 workflow. It verifies the tag is a bare `MAJOR.MINOR.PATCH` version without a
 `v` prefix, installs the [bundled libraries](../README.md#bundled-libraries-ter-release)
-into `contrib/Libraries/`, builds the TER artefact with `tailor` and creates the
-GitHub release with the artefact attached.
+into `contrib/Libraries/`, builds the TER artefact with `tailor`, creates the
+GitHub release with the artefact attached and finally uploads the artefact to
+the TYPO3 Extension Repository (TER) with `tailor ter:publish`.
 
 `tailor create-artefact` fails if the tag does not match the `version` in
 `ext_emconf.php`. Releasing through `release.sh` guarantees they match.
 
-> **Note**
-> Publishing to the TYPO3 Extension Repository is not enabled yet. The step is
-> prepared in the workflow and needs the extension key registered in the TER
-> and the `TYPO3_API_TOKEN` repository secret.
+The TER upload authenticates with the `TYPO3_API_TOKEN` repository secret, a
+TER access token allowed to publish versions of the extension key
+`his_connector`. The TER upload comment links to the GitHub release of the tag.
 
 ## Before releasing
 
