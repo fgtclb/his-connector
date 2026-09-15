@@ -1,6 +1,6 @@
 {
     "name": "fgtclb/his-connector",
-    "description": "HIS connector for TYPO3 CMS",
+    "description": "FGTCLB: HIS Connector - HIS connector for TYPO3 CMS.",
     "type": "typo3-cms-extension",
     "homepage": "https://www.fgtclb.com/",
     "license": "GPL-2.0-or-later",
