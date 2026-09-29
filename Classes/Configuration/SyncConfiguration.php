@@ -18,6 +18,7 @@ final readonly class SyncConfiguration
         public ?string $fileStorageFolder,
         public DataSource $source,
         public array $mapping,
+        public SyncStrategy $syncStrategy,
         public ?string $originalFile,
     ) {}
 
@@ -36,6 +37,7 @@ final readonly class SyncConfiguration
             fileStorageFolder: isset($config['fileStorageFolder']) ? (string)$config['fileStorageFolder'] : null,
             source: DataSource::fromConfig($config['source'] ?? []),
             mapping: array_map(MappingConfiguration::fromConfig(...), $config['mapping'] ?? []),
+            syncStrategy: SyncStrategy::tryFrom((string)($config['syncStrategy'] ?? '')) ?? SyncStrategy::KeepDeleted,
             originalFile: $originalFile,
         );
     }
@@ -51,6 +53,7 @@ final readonly class SyncConfiguration
             fileStorageFolder: $this->fileStorageFolder,
             source: $this->source,
             mapping: $this->mapping,
+            syncStrategy: $this->syncStrategy,
             originalFile: $this->originalFile,
         );
     }
@@ -66,6 +69,7 @@ final readonly class SyncConfiguration
             fileStorageFolder: $fileStorageFolder,
             source: $this->source,
             mapping: $this->mapping,
+            syncStrategy: $this->syncStrategy,
             originalFile: $this->originalFile,
         );
     }

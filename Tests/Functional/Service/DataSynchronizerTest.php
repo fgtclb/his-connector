@@ -127,6 +127,36 @@ final class DataSynchronizerTest extends AbstractHisConnectorTestCase
                 self::getInstancePath() . '/fileadmin/user_upload/his_connector/personPicture-678.png' => $personPicture1->getFileContents(),
             ],
         ];
+        yield 'keep left-over data' => [
+            'baseDataSet' => __DIR__ . '/Fixtures/person_import_cleanup_keep_base.csv',
+            'syncEntity' => $person,
+            'syncConfig' => 'EXT:test_synchronizer/Configuration/HisConnector/person_import_cleanup_keep.yaml',
+            'expectedDataSet' => __DIR__ . '/Fixtures/person_import_cleanup_keep_expected.csv',
+            'expectedFiles' => [
+                self::getInstancePath() . '/fileadmin/user_upload/his_connector/personPicture-678.png' => $personPicture1->getFileContents(),
+                self::getInstancePath() . '/fileadmin/user_upload/his_connector/personPicture-567.png' => $personPicture2->getFileContents(),
+            ],
+        ];
+        yield 'disable left-over data' => [
+            'baseDataSet' => __DIR__ . '/Fixtures/person_import_cleanup_disable_base.csv',
+            'syncEntity' => $person,
+            'syncConfig' => 'EXT:test_synchronizer/Configuration/HisConnector/person_import_cleanup_disable.yaml',
+            'expectedDataSet' => __DIR__ . '/Fixtures/person_import_cleanup_disable_expected.csv',
+            'expectedFiles' => [
+                self::getInstancePath() . '/fileadmin/user_upload/his_connector/personPicture-678.png' => $personPicture1->getFileContents(),
+                self::getInstancePath() . '/fileadmin/user_upload/his_connector/personPicture-567.png' => $personPicture2->getFileContents(),
+            ],
+        ];
+        yield 'remove left-over data' => [
+            'baseDataSet' => __DIR__ . '/Fixtures/person_import_cleanup_remove_base.csv',
+            'syncEntity' => $person,
+            'syncConfig' => 'EXT:test_synchronizer/Configuration/HisConnector/person_import_cleanup_remove.yaml',
+            'expectedDataSet' => __DIR__ . '/Fixtures/person_import_cleanup_remove_expected.csv',
+            'expectedFiles' => [
+                self::getInstancePath() . '/fileadmin/user_upload/his_connector/personPicture-678.png' => $personPicture1->getFileContents(),
+                self::getInstancePath() . '/fileadmin/user_upload/his_connector/personPicture-567.png' => $personPicture2->getFileContents(),
+            ],
+        ];
     }
 
     /**
@@ -140,9 +170,11 @@ final class DataSynchronizerTest extends AbstractHisConnectorTestCase
         $yamlFileLoader = $this->get(YamlFileLoader::class);
         $this->importCSVDataSet($baseDataSet);
         $this->setUpBackendUser(1);
+        $config = SyncConfiguration::fromConfig($yamlFileLoader->load($syncConfig));
         /** @var DataSynchronizer */
         $subject = $this->get(DataSynchronizer::class);
-        $subject->processEntity($syncEntity, SyncConfiguration::fromConfig($yamlFileLoader->load($syncConfig)));
+        $syncedRecords = $subject->processEntity($syncEntity, $config);
+        $subject->performPostProcessing($syncedRecords, $config);
         $this->assertCSVDataSet($expectedDataSet);
         foreach ($expectedFiles as $fileName => $fileContent) {
             $this->assertFileExists($fileName);

@@ -6,6 +6,7 @@ namespace FGTCLB\HisConnector\Service;
 
 use FGTCLB\HisClientFacade\Model\EntityInterface;
 use FGTCLB\HisConnector\Configuration\SyncConfiguration;
+use FGTCLB\HisConnector\Event\AfterSyncRecordsProcessedEvent;
 use FGTCLB\HisConnector\Event\ProcessSyncRecordEvent;
 use FGTCLB\HisConnector\Exception\SyncException;
 use FGTCLB\HisConnector\Sync\SyncRecord;
@@ -51,5 +52,13 @@ final readonly class DataSynchronizer
             }
         }
         return $syncedRecords;
+    }
+
+    /**
+     * @param SyncRecord[] $syncedRecords
+     */
+    public function performPostProcessing(array $syncedRecords, SyncConfiguration $config): void
+    {
+        $this->eventDispatcher->dispatch(new AfterSyncRecordsProcessedEvent($syncedRecords, $config));
     }
 }
