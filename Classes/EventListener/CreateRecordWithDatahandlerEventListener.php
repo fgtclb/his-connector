@@ -39,11 +39,45 @@ final readonly class CreateRecordWithDatahandlerEventListener
                 implode('; ', $dataHandler->errorLog),
             ), 1786380024);
         }
-        if (is_string($event->syncRecord->insertUpdateId)) {
-            $event->syncRecord = $event->syncRecord->withInsertUpdateId(
-                $dataHandler->substNEWwithIDs[$event->syncRecord->insertUpdateId]
+        $event->syncRecord = $this->replaceNewIds($event->syncRecord, $dataHandler);
+
+    }
+
+    /**
+     * Replaces NEW markers recursively within SyncRecord object
+     */
+    private function replaceNewIds(SyncRecord $syncRecord, DataHandler $dataHandler): SyncRecord
+    {
+        if (is_string($syncRecord->insertUpdateId)) {
+            $syncRecord = $syncRecord->withInsertUpdateId(
+                $dataHandler->substNEWwithIDs[$syncRecord->insertUpdateId]
             );
         }
+        $fields = [];
+        foreach ($syncRecord->getFields() as $field) {
+            if ($field instanceof SyncRelatedRecords) {
+                $relatedRecords = [];
+                foreach ($field->getValue() as $relatedRecord) {
+                    $relatedRecords[] = $this->replaceNewIds($relatedRecord, $dataHandler);
+                }
+                $fields[] = new SyncRelatedRecords($field->getName(), $relatedRecords);
+            } elseif ($field instanceof SyncRelatedFiles) {
+                $relatedFiles = [];
+                foreach ($field->getValue() as $relatedFile) {
+                    if (is_string($relatedFile->insertUpdateId)) {
+                        $relatedFiles[] = $relatedFile->withInsertUpdateId(
+                            $dataHandler->substNEWwithIDs[$relatedFile->insertUpdateId]
+                        );
+                    } else {
+                        $relatedFiles[] = $relatedFile;
+                    }
+                }
+                $fields[] = new SyncRelatedFiles($field->getName(), $relatedFiles);
+            } else {
+                $fields[] = $field;
+            }
+        }
+        return $syncRecord->withFields(...$fields);
     }
 
     /**

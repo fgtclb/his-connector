@@ -150,6 +150,82 @@ final class DataSynchronizerTest extends AbstractHisConnectorTestCase
         }
     }
 
+    #[Test]
+    public function processEntitySetsIdsInSyncRecord(): void
+    {
+        $personFunction = new PersonFunction(
+            id: 789,
+            orgUnit: null,
+            type: new FunctionType(234, 'function unique', 'function short', 'function default', 'function long'),
+            room: null,
+            postAddress: null,
+            emailAddresses: EmailAddressCollection::fromArray([]),
+            phoneNumbers: PhoneNumberCollection::fromArray([]),
+            hyperlinks: HyperlinkCollection::fromArray([]),
+            messengers: MessengerCollection::fromArray([]),
+            validFrom: new \DateTimeImmutable('2026-01-01 10:00:00'),
+            validTo: null,
+        );
+        $personPicture1 = new PersonPicture(
+            id: 678,
+            fileContents: base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII'),
+            mimeType: 'image/png',
+            description: 'image description',
+            originalFileName: 'original.png',
+        );
+        $personPicture2 = new PersonPicture(
+            id: 567,
+            fileContents: base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII'),
+            mimeType: 'image/png',
+            description: 'image description 2',
+            originalFileName: 'original2.png',
+        );
+        $title = new Title();
+        $title->setId(567)->setDefaulttext('title default');
+        $person = new Person(
+            id: 456,
+            firstname: 'first name',
+            surname: 'last name',
+            gender: null,
+            dateofbirth: '1990-01-01',
+            allfirstnames: null,
+            birthname: null,
+            artistname: null,
+            nameprefix: null,
+            namesuffix: null,
+            academicdegreesuffix: null,
+            academicdegree: null,
+            title: $title,
+            birthcity: null,
+            country: null,
+            personInfo: null,
+            createdAt: null,
+            updatedAt: null,
+            fetchContactDetailsClosure: fn() => ContactDetailsCollection::fromArray([]),
+            fetchPersonalDataClosure: fn() => new PersonalData(456, 'workplace', 'academic career', null, null, null, null, null),
+            fetchPicturesClosure: fn(int $hisKey) => PersonPictureCollection::fromArray([$personPicture1, $personPicture2]),
+            fetchFunctionsClosure: fn() => PersonFunctionCollection::fromArray([$personFunction]),
+            fetchAccountsClosure: fn() => AccountCollection::fromArray([]),
+            fetchAttributesClosure: fn() => PersonAttributeCollection::fromArray([]),
+        );
+
+        /** @var YamlFileLoader */
+        $yamlFileLoader = $this->get(YamlFileLoader::class);
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/person_import_base.csv');
+        $this->setUpBackendUser(1);
+        $config = SyncConfiguration::fromConfig($yamlFileLoader->load('EXT:test_synchronizer/Configuration/HisConnector/person_import.yaml'));
+        /** @var DataSynchronizer */
+        $subject = $this->get(DataSynchronizer::class);
+        $syncedRecords = $subject->processEntity($person, $config);
+        $this->assertCount(1, $syncedRecords);
+        $this->assertSame(1, $syncedRecords[0]->insertUpdateId);
+        $this->assertSame('usergroup', $syncedRecords[0]->getFields()[3]->getName());
+        $this->assertSame(1, $syncedRecords[0]->getFields()[3]->getValue()[0]->insertUpdateId);
+        $this->assertSame('image', $syncedRecords[0]->getFields()[4]->getName());
+        $this->assertSame(1, $syncedRecords[0]->getFields()[4]->getValue()[0]->insertUpdateId);
+        $this->assertSame(2, $syncedRecords[0]->getFields()[4]->getValue()[1]->insertUpdateId);
+    }
+
     /**
      * @return array{syncEntity: EntityInterface, syncConfig: string, expectedExceptionCode: int}[]
      */
