@@ -117,6 +117,7 @@ final class SyncCommand extends Command
         }
         $output->writeln('');
         $errors = 0;
+        $allSyncedRecords = [];
         foreach ($syncItems as $item) {
             $output->write(sprintf(
                 '%s:%s (processing...)',
@@ -131,6 +132,7 @@ final class SyncCommand extends Command
                     $item->getIdentifier(),
                     count($syncedRecords),
                 ));
+                $allSyncedRecords = array_merge($allSyncedRecords, $syncedRecords);
             } catch (\FGTCLB\HisClientFacade\Exception\Exception $e) {
                 $output->write(sprintf(
                     "\r%s:%s (error while fetching details: %s (%d))",
@@ -152,6 +154,7 @@ final class SyncCommand extends Command
             }
             $output->writeln('');
         }
+        $this->dataSynchronizer->performPostProcessing($allSyncedRecords, $config);
         if ($errors > 0) {
             $output->writeln(['', sprintf('Processed: %d (%d with errors)', count($syncItems), $errors)]);
         } else {

@@ -13,6 +13,7 @@ use FGTCLB\HisConnector\Configuration\MappingConfiguration;
 use FGTCLB\HisConnector\Configuration\SourceExpression;
 use FGTCLB\HisConnector\Configuration\SourceField;
 use FGTCLB\HisConnector\Configuration\SyncConfiguration;
+use FGTCLB\HisConnector\Configuration\SyncStrategy;
 use FGTCLB\HisConnector\Configuration\ValueMapping;
 use FGTCLB\HisConnector\Exception\InvalidConfigurationException;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -319,6 +320,7 @@ final class SyncConfigurationTest extends UnitTestCase
                     'version' => 1,
                     'schema' => 'https://example.com/schema.json',
                     'source' => ['repository' => 'foo', 'fetch' => 'bar()'],
+                    'syncStrategy' => 'removeDeleted',
                     'mapping' => [
                         ['entityClassName' => Person::class, 'tableName' => 'table', 'identifierField' => 'identity'],
                     ],
@@ -329,6 +331,7 @@ final class SyncConfigurationTest extends UnitTestCase
                 'expectedVersion' => '1',
                 'expectedSchema' => 'https://example.com/schema.json',
                 'expectedSource' => DataSource::fromConfig(['repository' => 'foo', 'fetch' => 'bar()']),
+                'expectedSyncStrategy' => SyncStrategy::RemoveDeleted,
                 'expectedMapping' => [
                     MappingConfiguration::fromConfig(['entityClassName' => Person::class, 'tableName' => 'table', 'identifierField' => 'identity']),
                 ],
@@ -343,6 +346,7 @@ final class SyncConfigurationTest extends UnitTestCase
                 'expectedVersion' => '',
                 'expectedSchema' => '',
                 'expectedSource' => DataSource::fromConfig(['repository' => 'foo', 'fetch' => 'bar()']),
+                'expectedSyncStrategy' => SyncStrategy::KeepDeleted,
                 'expectedMapping' => [],
             ],
             'fallback to filename' => [
@@ -355,6 +359,7 @@ final class SyncConfigurationTest extends UnitTestCase
                 'expectedVersion' => '',
                 'expectedSchema' => '',
                 'expectedSource' => DataSource::fromConfig(['repository' => 'foo', 'fetch' => 'bar()']),
+                'expectedSyncStrategy' => SyncStrategy::KeepDeleted,
                 'expectedMapping' => [],
             ],
         ];
@@ -374,6 +379,7 @@ final class SyncConfigurationTest extends UnitTestCase
         string $expectedVersion,
         string $expectedSchema,
         DataSource $expectedSource,
+        SyncStrategy $expectedSyncStrategy,
         array $expectedMapping,
     ): void {
         $subject = SyncConfiguration::fromConfig($config, $originalFile);
@@ -383,6 +389,7 @@ final class SyncConfigurationTest extends UnitTestCase
         $this->assertSame($expectedVersion, $subject->version);
         $this->assertSame($expectedSchema, $subject->schema);
         $this->assertEquals($expectedSource, $subject->source);
+        $this->assertSame($expectedSyncStrategy, $subject->syncStrategy);
         $this->assertEquals($expectedMapping, $subject->mapping);
     }
 
